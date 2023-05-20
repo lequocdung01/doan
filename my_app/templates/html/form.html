@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/project/assets/form.css">
+    <title>Đăng Nhập</title>
+</head>
+<body>
+    <div class="form">
+        <div class="form-content" id="form">
+            <!-- login -->
+            <div class="form-login login-regester">
+                <h1>Đăng Nhập</h1>
+                <div class="input-form input-content">
+                    <input type="text" placeholder=" " class="input-text" required id="username">
+                    <label for="username" class="input-label">Tên Đăng Nhập</label>
+                </div>
+                <div class="input-form input-content">
+                    <input type="password" placeholder=" " class="input-text" required id="password">
+                    <label for="password" class="input-label">Mật Khẩu</label>
+                </div>
+                <div class="input-content">
+                    <input type="checkbox" id="saveme">
+                    <label for="saveme">Nhớ mật khẩu</label>
+                </div>
+                <button>Đăng Nhập</button>
+            </div>
+            <!-- regester -->
+            <div class="form-regester login-regester">
+                <h1>Đăng Ký</h1>
+                <div class="input-form input-content">
+                    <input type="text" placeholder=" " class="input-text" required id="username">
+                    <label for="username" class="input-label">Tên Đăng Nhập</label>
+                </div>
+                <div class="input-form input-content">
+                    <input type="password" placeholder=" " class="input-text" required id="password">
+                    <label for="password" class="input-label">Mật Khẩu</label>
+                </div>
+                <div class="input-content">
+                    <input type="checkbox" id="saveme">
+                    <label for="saveme">Tôi đồng ý với Điều khoản dịch vụ & Chính sách bảo mật</label>
+                </div>  
+                <div class="or">
+                    <div class="hr"></div>
+                    <div class="p">hoặc</div>
+                    <div class="hr"></div>
+                </div>
+                <div class="regester-other">
+                    <div class="regester-other-content">
+                        <img class="google" src="/project/images/logo/Google__G__Logo.svg.webp" alt="">
+                        <a href="">Google</a>
+                    </div>
+                    <div class="regester-other-content">
+                        <img class="facebook" src="/project/images/logo/Facebook-logo.png" alt="">
+                        <a href="">Facebook</a>
+                    </div>
+                </div>
+                <button>Đăng Ký</button>
+            </div>
+            <div class="option">
+                <div class="option-background" id="option-background"></div>
+                <div class="option-content active" id="login">Đăng Nhập</div>
+                <div class="option-content active" id="regester">Đăng Ký</div>
+            </div>
+        </div>
+    </div>
+    <script src="/project/js/form.js"></script>
+</body>
+</html>

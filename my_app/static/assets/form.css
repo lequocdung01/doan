@@ -1,0 +1,178 @@
+body{
+    overflow: hidden;   
+    color: white;
+    font-family: roboto;
+}
+a{
+    text-decoration: none;
+    color: red;
+    margin: auto;
+}
+@font-face {
+    font-family: roboto;
+    src: url(/project/fonts/RobotoCondensed-Regular.ttf);
+}
+input[type="checkbox"] {
+    accent-color: red;
+}
+.input-form input{
+    outline: none;
+}
+.form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 500px;
+    height: 70vh;
+    overflow: hidden; /* giấu phần dư của outcontent */
+}
+.form-content{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    background-color: #fd2424;
+}
+.login-regester{
+    width: 80%;
+    padding: 10%;
+    height: 60%;
+    position: absolute;
+}
+.form-regester{
+   display: none;
+}
+.form-content.regester .form-regester{
+    display: block;
+}
+.login-regester > h1{
+    margin-bottom: 3.125rem;
+}
+.login-regester > button{
+    width: 100%;
+    margin-top: 2.5rem;
+    padding: 0.625rem 0;
+    color: red;
+    bottom: 0rem;
+}
+.input-content{
+    height: 3.75rem;
+    margin-bottom: 0.625rem;
+    position: relative;
+}
+.input-text{
+    width: 80%;
+    padding: 0 10%;
+    height: 1.875rem;
+    border: none;
+}
+.input-content .input-label{
+    position: absolute;
+    top: 0.4rem;
+    color: red;
+    left: 10%;
+    transition: 0.5s; 
+}
+.regester-other{
+    position: absolute;
+    top: 22.1675rem;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+.regester-other-content {
+    background-color: white;
+    width: 40%;
+    padding: 2% ;
+    text-align: center;
+    display: flex;
+    border-radius:1.25rem;
+    height: 100%;
+}
+.regester-other-content .google{
+    max-width: 20%;
+    margin: auto;
+}
+.regester-other-content .facebook{
+    max-width: 32%;
+    margin: auto;
+}
+.or{
+    position: absolute;
+    top: 20.4375rem;
+    display: flex;
+    width: 80%;
+    height: 0.9375rem;
+}
+.p{
+    text-transform: uppercase;
+}
+.hr{
+    height: 0.0625rem;
+    width: 40%;
+    background-color: white;
+    margin: auto;
+}
+.input-text:focus + label,
+.input-text:not(:placeholder-shown) + label{
+    top: -1.2rem;
+    left: 10%;
+    color: white;
+}
+.input-text:valid{
+    border-bottom: 0.125rem solid #8b0000;
+}
+.option{
+    position: absolute;
+    bottom: 0.625rem;
+    width: 70%;
+    left: 15%;
+    z-index: 1;
+}
+.option-content{
+    width: 50%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5rem;
+}
+.option-background{
+    width: 50%;
+    background-color: #ff7373;
+    height: 2.5rem ;
+    position: absolute;
+    transition: 1s;
+    z-index: -1;
+}
+.form-content.login .form-login{
+    z-index: 1;
+    animation: comecontent 1s ease-in-out 1 forwards
+}
+.form-content.login .form-regester{
+    z-index: 1;
+    animation: outcontent 1s ease-in-out 1 forwards
+}
+
+@keyframes comecontent{
+    from{
+        transform: translate(100%,0);
+    }to{
+        transform: translate(0,0);
+    }
+}
+@keyframes outcontent{
+    from{
+        transform: translate(0,0);
+    }to{
+        transform: translate(-100%,0);
+    }
+}
+.form-content.regester .form-regester{
+    z-index: 1;
+    animation: comecontent 1s ease-in-out 1 forwards
+}
+.form-content.regester .form-login{
+    z-index: 1;
+    animation: outcontent 1s ease-in-out 1 forwards
+}
