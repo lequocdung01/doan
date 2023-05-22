@@ -1,30 +1,46 @@
+{% extends 'html/base.html' %}
+{% load static %}
+{% block banner_slider %}
 
-<p>dnasfafiioaf</p><br>
+   <div class="ads">
+      <section>
+         <img class="slides" src="{% static 'images/IMPREA.jpg' %}">
+         <img class="slides" src="{% static 'images/4mypham.jpg' %}">
+         <img class="slides" src="{% static 'images/valentine.jpg' %}">
+      </section>
+      <img class="gundam" src="{% static 'images/hr.png' %}">
+      <section>
+         <img class="clads" src="{% static 'images/JOGGER.png' %}">
+         <img class="clads" src="{% static 'images/collection.png' %}">
+      </section>
+   </div>
 {% endblock banner_slider %}
-
-
 {% block main-content %}
 <div class="hot">
       <p class="topsold">SẢN PHẨM BÁN CHẠY</p>
       <div class="overflow-hot">
+      {% for product in product %}
+       {% if product.sell > 1000 %}
          <div class="hot-div hot-fujina">
             <img class="hot-img" src="{% static 'topsale/08110927_61131988a19f7-removebg-preview.png' %}">
-            <p class="hot-content">FUJINA GEL</p>
+            <p class="hot-content">{{product.name}}</p>
             <div class="submit">
                <a href="html/Chi tiet home/gel.html" target="_blank"><input type="submit"
                      value="xem chi tiết"></a>
             </div>
             <div class="note note-a">
-               <p>Đã bán 1k</p>
+               <p>Đã bán {{product.sell}}</p>
             </div>
          </div>
+       {% endif %}
+      {% endfor %}
       </div>
    </div>
    <div class="sale-now">
       <p class="sale-now-word">ĐANG KHUYẾN MÃI</p>
       <div class="sale-now-content">
          <div class="sale-playlist hot-div">
-            <img class="hot-img" src="salenow/playlist.png">
+            <img class="hot-img" src="{% static 'salenow/playlist.png' %}">
             <p class="hot-content">MỸ PHẨM PLAYLIST</p>
             <div class="submit">
                <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
@@ -64,7 +80,7 @@
             </div>
          </div>
          <div class="sale-myphamnhat hot-div">
-            <img class="hot-img" src="salenow/myphamnhat.png">
+            <img class="hot-img" src="{% static 'salenow/myphamnhat.png' %}">
             <p class="hot-content">CLINICAL</p>
             <div class="submit">
                <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
@@ -74,7 +90,7 @@
             </div>
          </div>
          <div class="sale-led hot-div">
-            <img class="hot-img" src="salenow/led01-removebg-preview.png">
+            <img class="hot-img" src="{% static 'salenow/led01-removebg-preview.png' %}">
             <p class="hot-content led-content">ĐÈN LED</p>
             <div class="submit">
                <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
@@ -85,7 +101,7 @@
          </div>
          <!-- lll -->
          <div class="sale-playlist hot-div sale-playlist-next">
-            <img class="hot-img" src="salenow/playlist.png">
+            <img class="hot-img" src="{% static 'salenow/playlist.png' %}">
             <p class="hot-content">MỸ PHẨM PLAYLIST</p>
             <div class="submit">
                <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
@@ -125,7 +141,7 @@
             </div>
          </div>
          <div class="sale-myphamnhat hot-div">
-            <img class="hot-img" src="salenow/myphamnhat.png">
+            <img class="hot-img" src="{% static 'salenow/myphamnhat.png' %}">
             <p class="hot-content">CLINICAL</p>
             <div class="submit">
                <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
@@ -135,7 +151,7 @@
             </div>
          </div>
          <div class="sale-led hot-div">
-            <img class="hot-img" src="salenow/led01-removebg-preview.png">
+            <img class="hot-img" src="{% static 'salenow/led01-removebg-preview.png' %}">
             <p class="hot-content led-content">ĐÈN LED</p>
             <div class="submit">
                <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
@@ -150,21 +166,21 @@
       <p class="new-come-word">SẢN PHẨM MỚI</p>
       <div class="new-come-content">
          <div class="hot-div new-come-lavie">
-            <img class="hot-img" src="newcome/61lLDs6C6RL._AC_SL1280_-removebg-preview.png">
+            <img class="hot-img" src="{% static 'newcome/61lLDs6C6RL._AC_SL1280_-removebg-preview.png' %}">
             <p class="hot-content">LAPTOP LAVIE</p>
             <div class="new-come-submit">
                <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
             </div>
          </div>
          <div class="hot-div new-come-fujistu">
-            <img class="hot-img" src="newcome/laptop-nhat-ban-Fujitsu-LifeBook-NH570-removebg-preview.png">
+            <img class="hot-img" src="{% static 'newcome/laptop-nhat-ban-Fujitsu-LifeBook-NH570-removebg-preview.png' %}">
             <p class="hot-content">LAPTOP FUJITSU</p>
             <div class="new-come-submit">
                <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
             </div>
          </div>
          <div class="hot-div new-come-toshiba">
-            <img class="hot-img" src="newcome/laptop_toshiba_satellite_s55-c5274-removebg-preview.png">
+            <img class="hot-img" src="{% static 'newcome/laptop_toshiba_satellite_s55-c5274-removebg-preview.png' %}">
             <p class="hot-content">LAPTOP TOSHIBA</p>
             <div class="new-come-submit">
                <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
@@ -172,7 +188,7 @@
          </div>
          <div class="hot-div new-come-asus">
             <img class="hot-img"
-               src="newcome/637991810727336456_asus-vivobook-pro-n7600-bac-dd-removebg-preview.png">
+               src="{% static 'newcome/637991810727336456_asus-vivobook-pro-n7600-bac-dd-removebg-preview.png' %}">
             <p class="hot-content">LAPTOP ASUS</p>
             <div class="new-come-submit">
                <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
