@@ -1,8 +1,9 @@
 from django.shortcuts import render
-
+from .models import *
 # Create your views here.
 def get_my_app(request):
-    context = {}
+    product = Product.objects.all()
+    context = {'product': product}
     return render(request,'home.html',context)
 
 def detail(request):
@@ -12,3 +13,4 @@ def detail(request):
 def cart(request):
     context={}
     return render(request, 'html/cart.html', context)
+
