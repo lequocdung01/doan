@@ -165,35 +165,17 @@
    <div class="new-come">
       <p class="new-come-word">SẢN PHẨM MỚI</p>
       <div class="new-come-content">
-         <div class="hot-div new-come-lavie">
-            <img class="hot-img" src="{% static 'newcome/61lLDs6C6RL._AC_SL1280_-removebg-preview.png' %}">
-            <p class="hot-content">LAPTOP LAVIE</p>
-            <div class="new-come-submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
+         {% for product in product %}
+            {% if product.categy == "Khác" %}
+            <div class="hot-div new-come-lavie">
+               <img class="hot-img" src="{% static 'newcome/61lLDs6C6RL._AC_SL1280_-removebg-preview.png' %}">
+               <p class="hot-content">{{product.name}}</p>
+             <div class="new-come-submit">
+                  <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
+               </div>
             </div>
-         </div>
-         <div class="hot-div new-come-fujistu">
-            <img class="hot-img" src="{% static 'newcome/laptop-nhat-ban-Fujitsu-LifeBook-NH570-removebg-preview.png' %}">
-            <p class="hot-content">LAPTOP FUJITSU</p>
-            <div class="new-come-submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-         </div>
-         <div class="hot-div new-come-toshiba">
-            <img class="hot-img" src="{% static 'newcome/laptop_toshiba_satellite_s55-c5274-removebg-preview.png' %}">
-            <p class="hot-content">LAPTOP TOSHIBA</p>
-            <div class="new-come-submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-         </div>
-         <div class="hot-div new-come-asus">
-            <img class="hot-img"
-               src="{% static 'newcome/637991810727336456_asus-vivobook-pro-n7600-bac-dd-removebg-preview.png' %}">
-            <p class="hot-content">LAPTOP ASUS</p>
-            <div class="new-come-submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-         </div>
+            {% endif %}
+         {% endfor %}
       </div>
    </div>
    <div class="why-choose-us">
