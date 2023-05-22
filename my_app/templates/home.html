@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="vi">
 {% load static %}
@@ -71,10 +72,16 @@
          <img id="logo" src="{% static 'images/logo/logo dpb-2.png' %}" alt="logo" width="70px">
       </div>
    </header>
+=======
+{% extends 'html/base.html' %}
+{% load static %}
+>>>>>>> master
 
+{% block banner_slider %}
 
    <div class="ads">
       <section>
+<<<<<<< HEAD
          <img class="slides" src="{% static 'slideshow/IMPREA.jpg' %}">
          <img class="slides" src="{% static 'slideshow/4mypham.jpg' %}">
          <img class="slides" src="{% static 'slideshow/valentine.jpg' %}">
@@ -83,10 +90,24 @@
       <section>
          <img class="clads" src="{% static 'slideshow/JOGGER.png' %}">
          <img class="clads" src="{% static 'slideshow/collection.png' %}">
+=======
+         <img class="slides" src="{% static 'images/IMPREA.jpg' %}">
+         <img class="slides" src="{% static 'images/4mypham.jpg' %}">
+         <img class="slides" src="{% static 'images/valentine.jpg' %}">
       </section>
-
+      <img class="gundam" src="{% static 'images/hr.png' %}">
+      <section>
+         <img class="clads" src="{% static 'images/JOGGER.png' %}">
+         <img class="clads" src="{% static 'images/collection.png' %}">
+>>>>>>> master
+      </section>
    </div>
-   <div class="hot">
+<p>dnasfafiioaf</p><br>
+{% endblock banner_slider %}
+
+
+{% block main-content %}
+<div class="hot">
       <p class="topsold">SẢN PHẨM BÁN CHẠY</p>
       <div class="overflow-hot">
          <div class="hot-div hot-fujina">
@@ -292,61 +313,4 @@
          </div>
       </div>
    </div>
-   <footer id="footer">
-      <div class="footer-follow-us">
-         <p class="footer-follow-us-content">Kết nối với chúng tôi trên mạng xã hội:</p>
-         <div class="footer-follow-us-logo">
-            <a href=""><i class="fa-brands fa-facebook">&nbsp;</i></a>
-            <a href=""><i class="fa-brands fa-instagram">&nbsp;</i></a>
-            <a href=""><i class="fa-brands fa-square-twitter">&nbsp;</i></a>
-            <a href=""><i class="fa-brands fa-linkedin">&nbsp;</i></a>
-            <a href=""><i class="fa-brands fa-google">&nbsp;</i></a>
-         </div>
-      </div>
-      <div class="footer-content">
-         <div class="footer-content-all">
-            <p>CBCSHOP.VN</p>
-            <p>GPDKKD: 0123456789 do sở KH & ĐT TP.HCM cấp ngày 7/11/2022.</p>
-            <p>Địa chỉ: Đường Hàn Thuyên, khu phố 6 P, Thủ Đức, TPHCM.</p>
-            <p>Email: info@cbcshop.com.vn.</p>
-         </div>
-         <div class="footer-content-all">
-            <p>THÔNG TIN CỬA HÀNG</p>
-            <p>
-            <ul>
-               <li><a href="">Giới thiệu cửa hàng</a></li>
-               <li><a href="">Hệ thống cửa hàng</a></li>
-               <li><a href="">Phương châm bán hàng</a></li>
-               <li><a href="">Tuyển dụng</a></li>
-            </ul>
-            </p>
-         </div>
-         <div class="footer-content-all">
-            <p>CHÍNH SÁCH CHUNG</p>
-            <p>
-            <ul>
-               <li><a href="">Bảo trì - Bảo hành - Đổi trả</a></li>
-               <li><a href="">Quy định giao hàng</a></li>
-               <li><a href="">Điều khoản sử dụng</a></li>
-               <li><a href="">Thỏa thuận người dùng</a></li>
-            </ul>
-            </p>
-         </div>
-         <div class="footer-content-all">
-            <p>THẺ THÀNH VIÊN</p>
-            <p>
-            <ul>
-               <li><a href="">Quyền lợi của Thành Viên</a></li>
-               <li><a href="">Hỗ trợ thành viên</a></li>
-               <li><a href="">Điều khoản sử dụng</a></li>
-               <li><a href="">Thỏa thuận người dùng</a></li>
-            </ul>
-            </p>
-         </div>
-      </div>
-      <div class="footer-copyright">
-         <p>&copy;2022 - Công ty TNHH CBC</p>
-      </div>
-   </footer>
-</body>
-</html>
+{% endblock main-content %}
