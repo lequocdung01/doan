@@ -1,0 +1,221 @@
+{% extends 'html/base.html' %}
+{% load static %}
+{% block mypham %}
+    <div class="content">
+      <div class="content_left">
+         <div class="content_left_category">
+            <a href="" class="content_left_category_header"> <i class="fa-solid fa-list"></i> Tất Cả Danh Mục </a>
+            <a href="/project/html/My%20pham/main/category.html" class="content_left_category_main_active"><i class="fa-solid fa-caret-right"></i> Mỹ Phẩm </a>
+            <a href="/project/html/My%20pham/main/Bo.html" class="content_left_category_main">Bộ Sản Phẩm</a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Sản Phẩm Đơn Lẻ</a>
+         </div>
+      </div>
+      <div class="content_right">
+         <div class="content_right_category_item">
+            <p>
+               Sắp xếp theo
+            </p>
+            <div class="content_right_category_item_button_a popular">
+                <button>
+                    <a href="/project/html/my%20pham/category/Pho_Bien.html">Phổ Biến</a>
+                </button>
+            </div>
+            <div class="content_right_category_item_button_new">
+                <button>
+                    <a href="/project/html/my%20pham/category/Moi_Nhat.html">Mới Nhất</a>
+                </button>
+            </div>
+            <div class="content_right_category_item_button_selling">
+                <button>
+                    <a href="/project/html/my%20pham/category/Ban_Chay.html">Bán Chạy</a>
+                </button>
+            </div>
+            <div class="content_right_category_item_button_price">
+                <form action="">
+                    <select name="" id="select">
+                       <option value="gia" id="" selected="selected">Giá</option>
+                       <option value="Gia: thap den cao">Giá: từ thấp đến cao</option>
+                       <option value="Gia: cao den thap">Giá: từ cao đến thấp</option>
+                    </select>
+                 </form>
+            </div>
+         </div>
+         <div class="content_right_group_item">
+            <!--Nguyen Bo-->
+            <div class="content_right_item">
+               <div class="content_right_item_header">
+                  <img src="/project/images/cosmetic/00.jpg" alt="" class="content_right_item_header_img" >
+                  <div class="submit">
+
+                        <button onclick="Produce_1()">Xem chi tiết</button>
+
+                  </div>
+               <div class="sale">-50%</div>
+               </div>
+
+            <div class="content_right_item_information">
+
+                  <div class="name">
+                     Bộ Sản Phẩm Faith
+                  </div>
+                  <div class="price">
+                     <del >₫990.000</del>
+                     <span>₫490.000</span>
+                  </div>
+                  <div class="racting">
+                     <span>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                     </span>
+                        Đã bán 2k
+                  </div>
+            </div>
+            </div>
+            <div class="content_right_item">
+               <div class="content_right_item_header">
+                  <img src="/project/images/cosmetic/news03_MV.jpg" alt="" class="content_right_item_header_img" >
+                  <div class="submit">
+
+                     <button onclick="Produce_2()">Xem chi tiết</button>
+
+               </div>
+               <div class="sale">-20%</div>
+               </div>
+               <div class="content_right_item_information">
+                  <div class="name">
+                     Nguyên bộ sản phẩm của Imprea
+                  </div>
+                  <div class="price">
+                     <del >₫1.500.000</del>
+                     <span>₫1.200.000</span>
+                  </div>
+                  <div class="racting">
+                     <span>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                     </span>
+                        Đã bán 1,5k
+                  </div>
+               </div>
+            </div>
+            <div class="content_right_item">
+               <div class="content_right_item_header">
+                  <img src="/project/images/cosmetic/TOP_Suhadabi_sp.png" alt="" class="content_right_item_header_img" >
+                  <div class="submit">
+
+                     <button onclick="Produce_3()">Xem chi tiết</button>
+
+                  </div>
+                  <div class="sale">-50%</div>
+               </div>
+               <div class="content_right_item_information">
+                  <div class="name">
+                     Nguyên bộ sản phẩm cảu Suhadabi
+                  </div>
+                  <div class="price">
+                     <del >₫800.000</del>
+                     <span>₫400.000</span>
+                  </div>
+                  <div class="racting">
+                     <span>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        <i class="fa-regular fa-star"></i>
+                     </span>
+                        Đã bán 500
+                  </div>
+               </div>
+            </div>
+            <!--San pham don-->
+            <div class="content_right_item">
+               <div class="content_right_item_header">
+                  <img src="/project/images/cosmetic/08110927_61131988a19f7.jpg" alt="" class="content_right_item_header_img" >
+                  <div class="submit">
+
+                     <button onclick="Produce_4()">Xem chi tiết</button>
+
+                  </div>
+                  <div class="sale">-50%</div>
+               </div>
+               <div class="content_right_item_information">
+                  <div class="name">
+                     Sản phẩm của Fujina
+                  </div>
+                  <div class="price">
+                     <del >₫899.000</del>
+                     <span>₫499.000</span>
+                  </div>
+                  <div class="racting">
+                     <span>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                     </span>
+                        Đã bán 200
+                  </div>
+               </div>
+            </div>
+            <div class="content_right_item">
+               <div class="content_right_item_header">
+                  <img src="/project/images/cosmetic/topvi-sm-220805-750-750-01.jpg" alt="" class="content_right_item_header_img" >
+                  <div class="submit">
+
+                     <button onclick="Produce_5()">Xem chi tiết</button>
+
+                  </div>
+                  <div class="sale">-40%</div>
+               </div>
+               <div class="content_right_item_information">
+                  <div class="name">
+                     Sản phẩm của Kanebo
+                  </div>
+                  <div class="price">
+                     <del >₫899.000</del>
+                     <span>₫540.000</span>
+                  </div>
+                  <div class="racting">
+                     <span>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                     </span>
+                        Đã bán 1k
+                  </div>
+               </div>
+            </div>
+
+         </div>
+         <!-- content_right_page_controller -->
+         <div class="content_right_page_controller">
+            <div class="content_right_page_controller_button_left">
+                <button type="submit">
+                    <i class="fa-solid fa-angle-left"></i>
+                </button>
+            </div>
+            <div class="content_right_page_controller_button_page">
+                <button type="submit" >
+                    1
+                </button>
+            </div>
+            <div class="content_right_page_controller_button_right">
+                <button type="submit">
+                    <i class="fa-solid fa-angle-right"></i>
+                </button>
+            </div>
+        </div>
+      </div>
+   </div>
+
+{% endblock mypham %}
