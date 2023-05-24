@@ -21,7 +21,7 @@ def cart(request):
 
 def product_mypham(request):
     context = {}
-    return render(request, 'html/product.html', context)
+    return render(request, 'html/category.html', context)
 
 def event(request):
     context = {}
