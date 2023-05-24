@@ -9,6 +9,7 @@
    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
    <link rel="stylesheet" href="{% static 'assets/item.css' %}">
    <link rel="stylesheet" href="{% static 'assets/cart.css' %}" />
+<!--   <link rel="stylesheet" href="{% static 'assets/category.css' %}" />-->
    <title>CBC Mall - Siêu Thị Nhật Bản</title>
    <link rel="stylesheet" href="{% static 'assets/fontawesome-free-6.2.0-web/css/all.min.css' %}">
    <script src="{% static 'js/script.js' %}"></script>
@@ -43,10 +44,10 @@
       </div>
       <div id="nav">
          <nav class="topnav">
-            <a href="/project/html/home.html">TRANG CHỦ</a>
+            <a href="{% url 'home' %}">TRANG CHỦ</a>
             <div class="dropdownmenu"><a href="">SẢN PHẨM</a>
                <div class="dropdownmenu-content-sp dropdownmenu-content">
-                  <a href="/project/html/My pham/main/category.html">MỸ PHẨM</a>
+                  <a href="{% url 'mypham' %}">MỸ PHẨM</a>
                   <a href="/project/html/Thuc%20pham/main/category.html">THỰC PHẨM</a>
                   <a href="/project/html/Quan%20Ao/main/category.html">QUẦN ÁO</a>
                   <a href="/project/html/thiet%20bi%20gia%20dung/main/category.html">ĐỒ GIA DỤNG</a>
@@ -60,7 +61,7 @@
                   <a href="/project/html/regestermember.html" target="_blank">ĐĂNG KÝ</a>
                </div>
             </div>
-            <div class="dropdownmenu"><a href="/project/html/event.html">KHUYẾN MÃI VÀ SỰ KIỆN</a>
+            <div class="dropdownmenu"><a href="{% url 'event' %}">KHUYẾN MÃI VÀ SỰ KIỆN</a>
 
             </div>
             <div class="dropdownmenu"><a href="">VỀ CHÚNG TÔI</a>
@@ -87,6 +88,12 @@
 
    {% block cart_content %}
    {% endblock cart_content %}
+
+   {% block mypham %}
+   {% endblock mypham %}
+
+   {% block event %}
+   {% endblock event %}
 
 
    <footer id="footer">
