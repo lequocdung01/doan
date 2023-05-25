@@ -20,9 +20,9 @@
       <p class="topsold">SẢN PHẨM BÁN CHẠY</p>
       <div class="overflow-hot">
       {% for product in product %}
-       {% if product.sell > 1000 %}
+       {% if product.sell >= 2000 %}
          <div class="hot-div hot-fujina">
-            <img class="hot-img" src="{% static 'topsale/08110927_61131988a19f7-removebg-preview.png' %}">
+            <img class="hot-img" src="{{product.image.url}}">
             <p class="hot-content">{{product.name}}</p>
             <div class="submit">
                <a href="html/Chi tiet home/gel.html" target="_blank"><input type="submit"
@@ -37,129 +37,22 @@
       </div>
    </div>
    <div class="sale-now">
-      <p class="sale-now-word">ĐANG KHUYẾN MÃI</p>
-      <div class="sale-now-content">
-         <div class="sale-playlist hot-div">
-            <img class="hot-img" src="{% static 'salenow/playlist.png' %}">
-            <p class="hot-content">MỸ PHẨM PLAYLIST</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
+      <p clads="sale-now-word">ĐANG KHUYẾN MÃI</p>
+      <div class="content_right_category_item">
+         {% for product in product %}
+         {% if product.sale > 10 %}
+            <div class="content_right_item_information">
+               <img class="hot-img" src="{% static 'topsale/OP02-removebg-preview.png' %}">
+               <p class="hot-content">{{product.name}}</p>
+               <div class="submit">
+                  <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
+               </div>
+               <div class="sale sale-b">
+                <p> - {{product.sale}} % </p>
+               </div>
             </div>
-            <div class="sale sale-a">
-               <p>-10%</p>
-            </div>
-         </div>
-         <div class="hot-div sale-pokemon-komala">
-            <img class="hot-img" src="{% static 'topsale/komala.png' %}" > 
-            <p class="hot-content">GẤU BÔNG KOMALA</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-d">
-               <p>-5%</p>
-            </div>
-         </div>
-         <div class="sale-gundam-zgmf-x10a hot-div">
-            <img class="hot-img" src="{% static 'topsale/205-2058366_gundam-freedom-png-strike-freedom-action-figure.png'%}">
-            <p class="hot-content">GUNDAM ZGMF-X10A</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-d">
-               <p>-10%</p>
-            </div>
-         </div>
-         <div class="sale-teddy-chopper hot-div">
-            <img class="hot-img" src="{% static 'topsale/OP02-removebg-preview.png' %}">
-            <p class="hot-content">GẤU BÔNG CHOPPER</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-b">
-               <p>-10%</p>
-            </div>
-         </div>
-         <div class="sale-myphamnhat hot-div">
-            <img class="hot-img" src="{% static 'salenow/myphamnhat.png' %}">
-            <p class="hot-content">CLINICAL</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-c">
-               <p>-10%</p>
-            </div>
-         </div>
-         <div class="sale-led hot-div">
-            <img class="hot-img" src="{% static 'salenow/led01-removebg-preview.png' %}">
-            <p class="hot-content led-content">ĐÈN LED</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-b">
-               <p>-10%</p>
-            </div>
-         </div>
-         <!-- lll -->
-         <div class="sale-playlist hot-div sale-playlist-next">
-            <img class="hot-img" src="{% static 'salenow/playlist.png' %}">
-            <p class="hot-content">MỸ PHẨM PLAYLIST</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-a">
-               <p>-10%</p>
-            </div>
-         </div>
-         <div class="hot-div sale-pokemon-komala">
-            <img class="hot-img" src="{% static 'topsale/komala.png' %}" > 
-            <p class="hot-content">GẤU BÔNG KOMALA</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-d">
-               <p>-5%</p>
-            </div>
-         </div>
-         <div class="sale-gundam-zgmf-x10a hot-div">
-            <img class="hot-img" src="{% static 'topsale/205-2058366_gundam-freedom-png-strike-freedom-action-figure.png'%}">
-            <p class="hot-content">GUNDAM ZGMF-X10A</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-d">
-               <p>-10%</p>
-            </div>
-         </div>
-         <div class="sale-teddy-chopper hot-div">
-            <img class="hot-img" src="{% static 'topsale/OP02-removebg-preview.png' %}">
-            <p class="hot-content">GẤU BÔNG CHOPPER</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-b">
-               <p>-10%</p>
-            </div>
-         </div>
-         <div class="sale-myphamnhat hot-div">
-            <img class="hot-img" src="{% static 'salenow/myphamnhat.png' %}">
-            <p class="hot-content">CLINICAL</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-c">
-               <p>-10%</p>
-            </div>
-         </div>
-         <div class="sale-led hot-div">
-            <img class="hot-img" src="{% static 'salenow/led01-removebg-preview.png' %}">
-            <p class="hot-content led-content">ĐÈN LED</p>
-            <div class="submit">
-               <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-b">
-               <p>-10%</p>
-            </div>
-         </div>
+         {% endif %}
+         {% endfor %}
       </div>
    </div>
    <div class="new-come">
@@ -167,13 +60,13 @@
       <div class="new-come-content">
          {% for product in product %}
             {% if product.categy == "Khác" %}
-            <div class="hot-div new-come-lavie">
-               <img class="hot-img" src="{% static 'newcome/61lLDs6C6RL._AC_SL1280_-removebg-preview.png' %}">
-               <p class="hot-content">{{product.name}}</p>
-             <div class="new-come-submit">
-                  <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
+               <div class="hot-div new-come-lavie">
+                  <img class="hot-img" src="{% static 'newcome/61lLDs6C6RL._AC_SL1280_-removebg-preview.png' %}">
+                  <p class="hot-content">{{product.name}}</p>
+                  <div class="new-come-submit">
+                     <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
+                  </div>
                </div>
-            </div>
             {% endif %}
          {% endfor %}
       </div>
