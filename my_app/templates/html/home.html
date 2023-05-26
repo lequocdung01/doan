@@ -37,12 +37,12 @@
       {% endfor %}
       </div>
    </div>
-   <div class="sale-now">
+   <div class="content_right_category_item">
       <p clads="sale-now-word">ĐANG KHUYẾN MÃI</p>
-      <div class="content_right_category_item">
+      <div class="overflow-hot">
          {% for product in product %}
-         {% if product.sale > 10 %}
-            <div class="content_right_item_information">
+          {% if product.sale > 10 %}
+            <div class="hot-div hot-fujina">
                <img class="hot-img" src="{% static 'topsale/OP02-removebg-preview.png' %}">
                <p class="hot-content">{{product.name}}</p>
                <div class="submit">
@@ -52,7 +52,7 @@
                 <p> - {{product.sale}} % </p>
                </div>
             </div>
-         {% endif %}
+          {% endif %}
          {% endfor %}
       </div>
    </div>
