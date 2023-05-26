@@ -1,115 +1,44 @@
 {% extends 'html/base.html' %}
 {% load static %}
 {% block event %}
+<head>
+   <link rel="stylesheet" href="{% static 'assets/event.css' %}" />
+</head>
    <!-- content -->
    <div>
-      <img class="img" src="/project/images/event/4f3e6dba74b0e10f2e7719d10a0011b7.png">
+      <img class="img" src="{% static 'images/event/4f3e6dba74b0e10f2e7719d10a0011b7.png' %}">
    </div>
    <div>
-      <img class="img1" src="/project/images/event/b780cf872f9d2cbbec98586f4e823628.png">
+      <img class="img1" src="{% static 'images/event/b780cf872f9d2cbbec98586f4e823628.png' %}">
    </div>
 
    <div class="sale-now">
       <p class="sale-now-word">ĐANG KHUYẾN MÃI</p>
-      <div class="sale-now-content">
-         <div class="sale-playlist hot-div">
-            <img class="hot-img" src="/project/salenow/playlist.png">
-            <p class="hot-content">MỸ PHẨM PLAYLIST</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
+      <div class="content_right_group_item">
+         {% for product in product  %}
+         {% if product.sale > 0 %}
+         <div class="content_right_item">
+            <div class="content_right_item_header">
+               <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
+               <div class="submit">
+                  
+                     <button onclick="Produce_1()">Xem chi tiết</button>
+                  
+               </div>
+            <div class="sale">-{{product.sale}}%</div>
             </div>
-            <div class="sale sale-a"><p>-10%</p></div>
+         <div class="content_right_item_information">
+            
+               <div class="name">
+                  {{product.name}}
+               </div>
          </div>
-         <div class="hot-div sale-pokemon-komala">
-            <img class="hot-img" src="/project/topsale/komala.png">
-            <p class="hot-content">GẤU BÔNG KOMALA</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-d"><p>-5%</p></div>
          </div>
-         <div class="sale-gundam-zgmf-x10a hot-div">
-            <img class="hot-img" src="/project/topsale/205-2058366_gundam-freedom-png-strike-freedom-action-figure.png">
-            <p class="hot-content">GUNDAM ZGMF-X10A</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-d"><p>-10%</p></div>
-         </div>
-         <div class="sale-teddy-chopper hot-div">
-            <img class="hot-img" src="/project/topsale/OP02-removebg-preview.png">
-            <p class="hot-content">GẤU BÔNG CHOPPER</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-b"><p>-10%</p></div>
-         </div>
-         <div class="sale-myphamnhat hot-div">
-            <img class="hot-img" src="/project/salenow/myphamnhat.png">
-            <p class="hot-content">CLINICAL</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-c"><p>-10%</p></div>
-         </div>
-         <div class="sale-led hot-div">
-            <img class="hot-img" src="/project/salenow/led01-removebg-preview.png">
-            <p class="hot-content led-content">ĐÈN LED</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-b"><p>-10%</p></div>
-         </div>
-         <!-- lll -->
-         <div class="sale-playlist hot-div sale-playlist-next">
-            <img class="hot-img" src="/project/salenow/playlist.png">
-            <p class="hot-content">MỸ PHẨM PLAYLIST</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-a"><p>-10%</p></div>
-         </div>
-         <div class="hot-div sale-pokemon-komala">
-            <img class="hot-img" src="/project/topsale/komala.png">
-            <p class="hot-content">GẤU BÔNG KOMALA</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-d"><p>-5%</p></div>
-         </div>
-         <div class="sale-gundam-zgmf-x10a hot-div">
-            <img class="hot-img" src="/project/topsale/205-2058366_gundam-freedom-png-strike-freedom-action-figure.png">
-            <p class="hot-content">GUNDAM ZGMF-X10A</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-d"><p>-10%</p></div>
-         </div>
-         <div class="sale-teddy-chopper hot-div">
-            <img class="hot-img" src="/project/topsale/OP02-removebg-preview.png">
-            <p class="hot-content">GẤU BÔNG CHOPPER</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-b"><p>-10%</p></div>
-         </div>
-         <div class="sale-myphamnhat hot-div">
-            <img class="hot-img" src="/project/salenow/myphamnhat.png">
-            <p class="hot-content">CLINICAL</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-c"><p>-10%</p></div>
-         </div>
-         <div class="sale-led hot-div">
-            <img class="hot-img" src="/project/salenow/led01-removebg-preview.png">
-            <p class="hot-content led-content">ĐÈN LED</p>
-            <div class="submit">
-               <a href=""><input type="submit" value="xem chi tiết"></a>
-            </div>
-            <div class="sale sale-b"><p>-10%</p></div>
-         </div>
+         {% endif %}
+         {% endfor %}
+         
       </div>
+      
    </div>
 
 {% endblock event %}

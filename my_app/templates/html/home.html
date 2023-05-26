@@ -16,61 +16,90 @@
    </div>
 {% endblock banner_slider %}
 {% block main-content %}
-<div class="hot">
+   <div class="hot">
       <p class="topsold">SẢN PHẨM BÁN CHẠY</p>
-      <div class="overflow-hot">
-      {% for product in product %}
-       {% if product.sell >= 2000 %}
-         <div class="hot-div hot-fujina">
-            <img class="hot-img" src="{{product.image.url}}">
-            <p class="hot-content">{{product.name}}</p>
-            <div class="submit">
-               <br>
-               <a href="{% url 'detail' %}" target="_blank"><input type="submit" value="xem chi tiết"></a>
+      <div class="content_right_group_item">
+         {% for product in product  %}
+         {% if product.sell >= 2000 %}
+         
+         <div class="content_right_item">
+            <div class="content_right_item_header">
+               <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
+               <div class="submit">
+                  
+                     <button onclick="Produce_1()">Xem chi tiết</button>
+                  
+               </div>
+            <div class="sell">Đã bán {{product.sell}}</div>
             </div>
-            <div class="note note-a">
-               <p>Đã bán {{product.sell}}</p>
-            </div>
+         <div class="content_right_item_information">
+            
+               <div class="name">
+                  {{product.name}}
+               </div>
          </div>
-       {% endif %}
-      {% endfor %}
+         </div>
+         
+         {% endif %}
+         {% endfor %}
+         
       </div>
    </div>
    <div class="sale-now">
       <p class="sale-now-word">ĐANG KHUYẾN MÃI</p>
-      <div class="overflow-hot">
-         {% for product in product %}
-          {% if product.sale == 10 %}
-          <div class="hot-div hot-fujina">
-            <img class="hot-img" src="{{product.image.url}}">
-            <p class="hot-content">{{product.name}}</p>
-            <div class="submit">
-               <br>
-               <a  href="{% url 'detail' %}" target="_blank"><input type="submit" value="xem chi tiết"></a>
+      <div class="content_right_group_item">
+         {% for product in product  %}
+         {% if product.sale > 20 %}
+         
+         <div class="content_right_item">
+            <div class="content_right_item_header">
+               <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
+               <div class="submit">
+                  
+                     <button onclick="Produce_1()">Xem chi tiết</button>
+                  
+               </div>
+            <div class="sale">-{{product.sale}}%</div>
             </div>
-            <div class="note note-a">
-               <p>- {{product.sale}} %</p>
-            </div>
+         <div class="content_right_item_information">
+            
+               <div class="name">
+                  {{product.name}}
+               </div>
          </div>
-          {% endif %}
+         </div>
+         
+         {% endif %}
          {% endfor %}
+         
       </div>
    </div>
    <div class="new-come">
       <p class="new-come-word">SẢN PHẨM MỚI</p>
-      <div class="new-come-content">
-         {% for product in product %}
-            {% if product.categy == "Thực phẩm" %}
-            <div class="hot-div hot-fujina">
-               <img class="hot-img" src="{{ product.image.url }}">
-               <p class="hot-content">{{product.name}}</p>
+      <div class="content_right_group_item">
+         {% for product in product  %}
+         {% if product.categy == "Khác" %}
+         
+         <div class="content_right_item">
+            <div class="content_right_item_header">
+               <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                <div class="submit">
-                  <br>
-                  <a href="{% url 'detail' %}" target="_blank"><input type="submit" value="xem chi tiết"></a>
+                  
+                     <button onclick="Produce_1()">Xem chi tiết</button>
+                  
                </div>
             </div>
-            {% endif %}
+         <div class="content_right_item_information">
+            
+               <div class="name">
+                  {{product.name}}
+               </div>
+         </div>
+         </div>
+         
+         {% endif %}
          {% endfor %}
+         
       </div>
    </div>
    <div class="why-choose-us">

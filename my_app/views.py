@@ -20,7 +20,8 @@ def product_mypham(request):
     return render(request, 'html/category.html', context)
 
 def event(request):
-    context = {}
+    product = Product.objects.all()
+    context = {'product': product}
     return render(request, 'html/event.html', context)
 
 def contactus(request):

@@ -12,7 +12,13 @@ class Product(models.Model):
     sale = models.IntegerField(null=True)
     def __str__(self):
         return self.name
-
+    @property
+    def ImageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 class category(models.Model):
     ID = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, null=True)

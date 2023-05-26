@@ -277,7 +277,7 @@ h2{
     clip-path: polygon(0 0, 75% 0%, 80% 50%, 75% 100%, 0% 100%);
     background-color: #ff0000;
     font-size: 1.3rem;
-    width: 18rem;
+    width: 20rem;
     color: white;
     padding: 0.3125rem 0.8rem;
 }
@@ -297,6 +297,7 @@ h2{
     top: 1.2rem;
     padding-left: 20px;
     padding-right: 20px;
+    
 }
 .hot-fujina img{
     max-width: 8rem;
@@ -307,13 +308,17 @@ h2{
     position: absolute;
     left: 1.5rem;
 }
+.hot-content {
+    width: 144px;
+    height: 80px;
+}
 
 .note p{
     
     clip-path: polygon(0 28%, 79% 28%, 85% 50%, 79% 72%, 0 72%);
     background-color: red;
     color: white;
-    width: 80px;
+    width: 90px;
     padding: 10px 10px;
     font-size: 0.7rem;
     margin-left: -30px;
@@ -338,24 +343,15 @@ h2{
     color: white;
     font-size: 0.7rem;
     padding: 10px 10px;
-    max-width: 40px;
+    width: 60px;
+    margin-left: -30px;
 }
-.sale-a{
-    position: absolute;
-    top: 7rem;
-}
+
 .sale-b{
     position: absolute;
-    top: 6.3rem;
+    top: 6.8rem;
 }
-.sale-c{
-    position: absolute;
-    top: -1.9rem;
-}
-.sale-d{
-    position: absolute;
-    top: 7.3rem;
-}
+
 .submit input{
     position: absolute;
     left: 1.5625rem;
@@ -376,7 +372,7 @@ h2{
 }
 .hot-div:hover .hot-content{
     font-size: 1.1rem;
-    width: 9em;
+    width: 6em;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -401,7 +397,7 @@ h2{
     font-size: 1.3rem;
     color: white;
     padding: 0.3125rem 0.8rem;
-    width: 15.625rem;
+    width: 18.625rem;
 }
 .sale-now-content{
     display: flex;
@@ -428,13 +424,125 @@ h2{
 .new-come-content{
     display: flex;
 }
-/*-----------------------------------------------------------------------------------------------------------------*/
+
 .hot-div:hover .new-come-submit input{
     display: block;
 }
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- group item --------------------------------------------*/
+/* group item */
+.content_right_group_item {
+    display: grid;
+    grid-row: 30% 70%;
+    grid-template-columns: repeat(6, 198px);
+    padding-top: 10px;
+    
+}
+/* item */
+
+.content_right_item {
+    width: 188px;
+    height: 240px;
+    border-bottom: 2px solid rgb(212, 211, 211);
+    border-right: 2px solid rgb(212, 211, 211);
+    background-color: rgb(228, 226, 226);
+    margin-top: 20px;
+}
+
+/* header of item */
+.content_right_item_header_img {
+    width: 188px;
+    height: 188px;
+}
+/* content_right_item_header's sumbit */
+.submit {
+    margin-top: -100px;
+    margin-bottom: 70px;
+    margin-left: 50px;
+    visibility: hidden;
+}
+.submit button {
+    height: 25px;
+    background-color: rgb(255, 51, 0);
+    border: 1px solid rgb(255, 51, 0);
+    padding: 5px;
+    color: white;
+}
+
+/* content_right_item_information */
+.content_right_item_information {
+    width: 172px;
+    font-size: 18px;
+    padding-top: 10px;
+    margin-left: 10px;
+}
+/* content_right_item_information's name */ 
+.name {
+    width: 160px;
+    height: 40px;
+    font-size: 15px;
+    overflow: hidden;
+    display: block;
+    
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    overflow: hidden; /* Ẩn nội dung vượt quá kích thước của phần tử */
+     text-overflow: ellipsis;
+}
+/* content_right_item_information's price */
+.price {
+    font-size: 15px;
+    margin-top: 5px;
+}
+.price span {
+    color: rgb(255, 51, 0);
+}
+.price del {
+    color: rgb(99, 99, 99);
+}
+
+/* content_right_item_information's sale and sell */
+.sale {
+    margin-top: -30px;
+    clip-path: polygon(0 28%, 79% 28%, 85% 50%, 79% 72%, 0 72%);
+    background-color: red;
+    color: white;
+    font-size: 1rem;
+    padding: 12px 10px;
+    max-width: 60px;
+}
+.sell {
+    margin-top: -30px;
+    clip-path: polygon(0 28%, 79% 28%, 85% 50%, 79% 72%, 0 72%);
+    background-color: red;
+    color: white;
+    font-size: 1rem;
+    padding: 12px 10px;
+    width: 120px;
+}
+/* hover content_right_item_information */
+.content_right_item:hover {
+    border: 1px solid rgb(255, 51, 0) ;
+}
+.content_right_item:hover .content_right_item_header_img{
+    opacity: 0.2;
+}
+
+.content_right_item:hover .sale{
+    opacity: 0.2;
+}
+
+.content_right_item:hover .submit button{
+    
+    visibility: visible;
+    
+}
+.content_right_item:hover .content_right_item_information {
+    opacity: 0.5;
+}
+/*-------------------------------------------------------------------------------------------------------------------------*/
 hr {
     width: 30rem;
-    margin: 10px auto;
+    margin: 25px auto;
     border-style: solid;
     color: #ff0000;
 }

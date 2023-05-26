@@ -277,7 +277,7 @@ h2{
     clip-path: polygon(0 0, 75% 0%, 80% 50%, 75% 100%, 0% 100%);
     background-color: #ff0000;
     font-size: 1.3rem;
-    width: 18rem;
+    width: 20rem;
     color: white;
     padding: 0.3125rem 0.8rem;
 }
@@ -289,103 +289,24 @@ h2{
 ::-webkit-scrollbar {
     display: none;
 }
+/*---------------------------- content ------------------------------------------------------------*/
 .hot-fujina{
     position: relative;
     left: 1rem;
     top: 1.2rem;
 }
 .hot-fujina img{
-max-width: 8rem;
+    max-width: 8rem;
+    width: 128px;
+    height: 128px;
 }
 .hot-fujina p{
     position: absolute;
     left: 1.5rem;
 }
-.hot-cleaner{
-    position: relative;
-    left: 5.5rem;
-    top: 0.2rem;
-}
-.hot-cleaner img{
-    max-width: 9rem;
-}
-.hot-cleaner p{
-    position: absolute;
-    left: -0.5rem;
-    width: 10rem;
-}
-.hot-pokemon-komala{
-    position: relative;
-    left: 9rem;
-    top: 0.2rem;
-    width: 9.375rem;
-    height: 6.25rem;
-}
-.hot-pokemon-komala img{
-    max-width: 9rem;
-}
-.hot-pokemon-komala p{
-    width: 10rem;
-}
-.hot-teddy-chopper{
-    position: relative;
-    left: 12rem;
-    top: 1.2rem;
-    width: 9.375rem;
-    height: 6.25rem;
-}
-.hot-teddy-chopper img{
-    max-width: 8rem;
-}
-.hot-teddy-chopper p{
-    width: 10rem;
-}
-.hot-gundam-zgmf-x10a{
-    position: relative;
-    left: 14rem;
-    width: 9.375rem;
-    height: 6.25rem;
-}
-.hot-gundam-zgmf-x10a img{
-    max-width: 9rem;
-}
-.hot-gundam-zgmf-x10a p{
-    width: 10rem;
-}
-.hot-teddy-frieza{
-    position: relative;
-    left: 17rem;
-    top: 1.2rem;
-    height:  6.25rem;
-}
-.hot-teddy-frieza img{
-    max-width: 8rem;
-}
-.hot-teddy-frieza p{
-    width: 10rem;
-}
-.hot-fujina-next{
-    margin-left: 300px;
-}
-.note p{
-    clip-path: polygon(0 28%, 79% 28%, 85% 50%, 79% 72%, 0 72%);
-    background-color: red;
-    color: white;
-    width: 80px;
-    padding: 10px 10px;
-    font-size: 0.7rem;
-}
-.note-a{
-    position: absolute;
-    top: 5.9rem;
-}
-.note-b{
-    position: absolute;
-    top: 6.8rem;
-}
-.note-c{
-    position: absolute;
-    top: 5.6rem;
+.hot-content {
+    width: 144px;
+    height: 80px;
 }
 .sale p{
     clip-path: polygon(0 28%, 79% 28%, 85% 50%, 79% 72%, 0 72%);
@@ -393,24 +314,117 @@ max-width: 8rem;
     color: white;
     font-size: 0.7rem;
     padding: 10px 10px;
-    max-width: 40px;
+    width: 60px;
+    margin-left: -30px;
 }
-.sale-a{
-    position: absolute;
-    top: 7rem;
-}
+
 .sale-b{
     position: absolute;
-    top: 6.3rem;
+    top: 6.8rem;
 }
-.sale-c{
-    position: absolute;
-    top: -1.9rem;
+/*--------------------------------------- group item --------------------------------------------*/
+/* group item */
+.content_right_group_item {
+    display: grid;
+    grid-row: 30% 70%;
+    grid-template-columns: repeat(6, 198px);
+    padding-top: 10px;
+    
 }
-.sale-d{
-    position: absolute;
-    top: 7.3rem;
+/* item */
+
+.content_right_item {
+    width: 188px;
+    height: 240px;
+    border-bottom: 2px solid rgb(212, 211, 211);
+    border-right: 2px solid rgb(212, 211, 211);
+    background-color: rgb(228, 226, 226);
+    margin-top: 20px;
 }
+
+/* header of item */
+.content_right_item_header_img {
+    width: 188px;
+    height: 188px;
+}
+/* content_right_item_header's sumbit */
+.submit {
+    margin-top: -100px;
+    margin-bottom: 70px;
+    margin-left: 50px;
+    visibility: hidden;
+}
+.submit button {
+    height: 25px;
+    background-color: rgb(255, 51, 0);
+    border: 1px solid rgb(255, 51, 0);
+    padding: 5px;
+    color: white;
+}
+
+/* content_right_item_information */
+.content_right_item_information {
+    width: 172px;
+    font-size: 18px;
+    padding-top: 10px;
+    margin-left: 10px;
+}
+/* content_right_item_information's name */ 
+.name {
+    width: 160px;
+    height: 40px;
+    font-size: 15px;
+    overflow: hidden;
+    display: block;
+    
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    overflow: hidden; /* Ẩn nội dung vượt quá kích thước của phần tử */
+     text-overflow: ellipsis;
+}
+/* content_right_item_information's price */
+.price {
+    font-size: 15px;
+    margin-top: 5px;
+}
+.price span {
+    color: rgb(255, 51, 0);
+}
+.price del {
+    color: rgb(99, 99, 99);
+}
+
+/* content_right_item_information's sale */
+.sale {
+    margin-top: -30px;
+    clip-path: polygon(0 28%, 79% 28%, 85% 50%, 79% 72%, 0 72%);
+    background-color: red;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 10px;
+    max-width: 60px;
+}
+/* hover content_right_item_information */
+.content_right_item:hover {
+    border: 1px solid rgb(255, 51, 0) ;
+}
+.content_right_item:hover .content_right_item_header_img{
+    opacity: 0.2;
+}
+
+.content_right_item:hover .sale{
+    opacity: 0.2;
+}
+
+.content_right_item:hover .submit button{
+    
+    visibility: visible;
+    
+}
+.content_right_item:hover .content_right_item_information {
+    opacity: 0.5;
+}
+
+/*-----------------------------------------------------------------------------------------------*/
 .submit input{
     position: absolute;
     left: 1.5625rem;
@@ -450,170 +464,16 @@ max-width: 8rem;
     font-size: 1.3rem;
     color: white;
     padding: 0.3125rem 0.8rem;
-    width: 15.625rem;
+    width: 18.625rem;
 }
 .sale-now-content{
     display: flex;
     overflow-y: hidden;
 }
-.sale-playlist{
-    position: relative;
-    top: 1rem;
-    left: 2rem;
-}
-.sale-playlist img{
-    max-width: 8rem;
-}
-.sale-playlist p{
-    position: absolute;
-    width: 10rem;
-}
-.sale-pokemon-komala{
-    position: relative;
-    top: 0.6rem;
-    left: 5rem;
-    width: 9.375rem;
-}
-.sale-pokemon-komala img{
-    max-width: 9rem;
-}
-.sale-gundam-zgmf-x10a{
-    position: relative;
-    top: 0.5rem;
-    left: 8rem;
-}
-.sale-gundam-zgmf-x10a img{
-    max-width: 9rem;
-}
-.sale-gundam-zgmf-x10a p{
-    position: absolute;
-}
-.sale-teddy-chopper{
-    position: relative;
-    top: 1.7rem;
-    left: 13rem;
-    width: 9.375rem;
-}
-.sale-teddy-chopper img{
-    max-width: 8rem;
-}
-.sale-teddy-chopper p{
-    width: 200px;
-}
-.sale-myphamnhat{
-    position: relative;
-    left: 16rem ;
-}
-.sale-myphamnhat img{
-    max-width: 8rem;
-}
-.sale-myphamnhat p{
-    position: absolute;
-    top: 10rem;
-    left: 2rem;
-}
-.sale-led{
-    position: relative;
-    top: 1.75rem;
-    left: 19rem;
-}
-.sale-led img{
-    max-width: 8rem;
-}
-.sale-led p{
-    position: absolute;
-    left: 2rem;
-}
-.sale-playlist-next{
-    margin-left: 350px;
-}
-.new-come{
-    position: relative;
-    top: 19rem;
-    left: 10rem;
-    width: 72rem;    
-}
-.new-come-word{
-    clip-path: polygon(0 0, 75% 0%, 80% 50%, 75% 100%, 0% 100%);
-    background-color: #ff0000;
-    font-size: 1.3rem;
-    color: white;
-    padding: 0.3125rem 0.8rem;
-    width: 13.625rem;
-}
-.new-come-content{
-    display: flex;
-}
-.new-come-lavie{
-    position: relative;
-    top: 2rem;
-    left: 4rem;
-}
-.new-come-lavie img{
-    max-width: 10rem;
-}
-.new-come-lavie p{
-    max-width: 10rem;
-    position: absolute;
-    left: 2rem;
-}
-.new-come-fujistu{
-    position: relative;
-    top: 1.6rem;
-    left: 11.7rem;
-}
-.new-come-fujistu img{
-    max-width: 11rem;
-}
-.new-come-fujistu p{
-    max-width: 10rem;
-    position: absolute;
-    left: 2rem;
-}
-.new-come-toshiba{
-    position: relative;
-    top: 1.15rem;
-    left: 19.5rem;
-}
-.new-come-toshiba img{
-    max-width: 11rem;
-}
-.new-come-toshiba p{
-    max-width: 10rem;
-    position: absolute;
-    left: 2rem;
-}
-.new-come-asus{
-    position: relative;
-    left: 27.4rem;
-}
-.new-come-asus img{
-    max-width: 10.5rem;
-}
-.new-come-asus p{
-    max-width: 10rem;
-    position: absolute;
-    top: 9.7rem;
-    left: 2.5rem;
-
-}
-.new-come-submit input{
-    position: absolute;
-    left: 2.5rem;
-    top: 3.125rem;
-    padding: 0.3125rem 0.625rem;
-    display: none;
-    background-color:#fe6363;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-.hot-div:hover .new-come-submit input{
-    display: block;
-}
+/*--------------------------------------------------------------------------------------------------------*/
 hr {
     width: 30rem;
-    margin: 10px auto;
+    margin: 25px auto;
     border-style: solid;
     color: #ff0000;
 }
