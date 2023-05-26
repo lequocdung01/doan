@@ -26,8 +26,7 @@
             <p class="hot-content">{{product.name}}</p>
             <div class="submit">
                <br>
-               <a href="{% url 'detail' %}" target="_blank"><input type="submit"
-                     value="xem chi tiết"></a>
+               <a href="{% url 'detail' %}" target="_blank"><input type="submit" value="xem chi tiết"></a>
             </div>
             <div class="note note-a">
                <p>Đã bán {{product.sell}}</p>
@@ -37,21 +36,22 @@
       {% endfor %}
       </div>
    </div>
-   <div class="content_right_category_item">
-      <p clads="sale-now-word">ĐANG KHUYẾN MÃI</p>
+   <div class="sale-now">
+      <p class="sale-now-word">ĐANG KHUYẾN MÃI</p>
       <div class="overflow-hot">
          {% for product in product %}
-          {% if product.sale > 10 %}
-            <div class="hot-div hot-fujina">
-               <img class="hot-img" src="{% static 'topsale/OP02-removebg-preview.png' %}">
-               <p class="hot-content">{{product.name}}</p>
-               <div class="submit">
-                  <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-               </div>
-               <div class="sale sale-b">
-                <p> - {{product.sale}} % </p>
-               </div>
+          {% if product.sale == 10 %}
+          <div class="hot-div hot-fujina">
+            <img class="hot-img" src="{{product.image.url}}">
+            <p class="hot-content">{{product.name}}</p>
+            <div class="submit">
+               <br>
+               <a  href="{% url 'detail' %}" target="_blank"><input type="submit" value="xem chi tiết"></a>
             </div>
+            <div class="note note-a">
+               <p>- {{product.sale}} %</p>
+            </div>
+         </div>
           {% endif %}
          {% endfor %}
       </div>
@@ -60,14 +60,15 @@
       <p class="new-come-word">SẢN PHẨM MỚI</p>
       <div class="new-come-content">
          {% for product in product %}
-            {% if product.categy == "Khác" %}
-               <div class="hot-div new-come-lavie">
-                  <img class="hot-img" src="{% static 'newcome/61lLDs6C6RL._AC_SL1280_-removebg-preview.png' %}">
-                  <p class="hot-content">{{product.name}}</p>
-                  <div class="new-come-submit">
-                     <a href="html/Chi tiet home/chopper.html" target="_blank"><input type="submit" value="xem chi tiết"></a>
-                  </div>
+            {% if product.categy == "Thực phẩm" %}
+            <div class="hot-div hot-fujina">
+               <img class="hot-img" src="{{ product.image.url }}">
+               <p class="hot-content">{{product.name}}</p>
+               <div class="submit">
+                  <br>
+                  <a href="{% url 'detail' %}" target="_blank"><input type="submit" value="xem chi tiết"></a>
                </div>
+            </div>
             {% endif %}
          {% endfor %}
       </div>

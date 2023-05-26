@@ -289,69 +289,40 @@ h2{
 ::-webkit-scrollbar {
     display: none;
 }
+
+/*---------------------------------- hot ------------------------------------------------------------------*/
 .hot-fujina{
     position: relative;
     left: 1rem;
     top: 1.2rem;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 .hot-fujina img{
     max-width: 8rem;
+    width: 128px;
+    height: 128px;
 }
 .hot-fujina p{
     position: absolute;
     left: 1.5rem;
 }
-/*test*/
-.content_right_category_item {
-    background-color: rgb(237, 230, 230);;
-    width: 1000px;
-    height: 60px;
-    display: grid;
-    grid-template-rows: repeat(5,12%);
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-.content_right_category_item p {
-    padding-top: 10px;
-    padding-bottom: 17px;
-    padding-right: 10px;
-}
-.content_right_category_item button {
-    border: 1px solid rgb(252, 247, 247);
-    width: 110px;
-    height: 40px;
-    background-color: rgb(252, 247, 247);
-    border-radius: 6%;
-}
-.content_right_category_item a {
-    text-decoration: none;
-    color: black;
-}
-.content_right_category_item_button_a button {
-    background-color: rgb(255, 51, 0);
-}
-.content_right_item_information {
-    width: 172px;
-    font-size: 18px;
-    padding-top: 10px;
-    margin-left: 10px;
-}
-/*---------------------------------------------------------------------------------------------------------*/
-.hot-fujina-next{
-    margin-left: 300px;
-}
+
 .note p{
+    
     clip-path: polygon(0 28%, 79% 28%, 85% 50%, 79% 72%, 0 72%);
     background-color: red;
     color: white;
     width: 80px;
     padding: 10px 10px;
     font-size: 0.7rem;
+    margin-left: -30px;
+    
 }
 .note-a{
     position: absolute;
     top: 5.9rem;
+    
 }
 .note-b{
     position: absolute;
@@ -390,6 +361,7 @@ h2{
     left: 1.5625rem;
     top: 3.125rem;
     padding: 0.3125rem 0.625rem;
+    margin-left: 10px;
     display: none;
     background-color:#fe6363;
     color: white;
@@ -405,6 +377,9 @@ h2{
 .hot-div:hover .hot-content{
     font-size: 1.1rem;
     width: 9em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .hot-div:hover .note{
     opacity: 0.5;
@@ -412,6 +387,8 @@ h2{
 .hot-div:hover .sale{
     opacity: 0.5;
 }
+/*------------------------------------------------------------------------------------------------------*/
+/*----------------------------------- sale -------------------------------------------------------------*/
 .sale-now{
     position: relative;
     top: 15rem;
@@ -430,77 +407,10 @@ h2{
     display: flex;
     overflow-y: hidden;
 }
-.sale-playlist{
-    position: relative;
-    top: 1rem;
-    left: 2rem;
-}
-.sale-playlist img{
-    max-width: 8rem;
-}
-.sale-playlist p{
-    position: absolute;
-    width: 10rem;
-}
-.sale-pokemon-komala{
-    position: relative;
-    top: 0.6rem;
-    left: 5rem;
-    width: 9.375rem;
-}
-.sale-pokemon-komala img{
-    max-width: 9rem;
-}
-.sale-gundam-zgmf-x10a{
-    position: relative;
-    top: 0.5rem;
-    left: 8rem;
-}
-.sale-gundam-zgmf-x10a img{
-    max-width: 9rem;
-}
-.sale-gundam-zgmf-x10a p{
-    position: absolute;
-}
-.sale-teddy-chopper{
-    position: relative;
-    top: 1.7rem;
-    left: 13rem;
-    width: 9.375rem;
-}
-.sale-teddy-chopper img{
-    max-width: 8rem;
-}
-.sale-teddy-chopper p{
-    width: 200px;
-}
-.sale-myphamnhat{
-    position: relative;
-    left: 16rem ;
-}
-.sale-myphamnhat img{
-    max-width: 8rem;
-}
-.sale-myphamnhat p{
-    position: absolute;
-    top: 10rem;
-    left: 2rem;
-}
-.sale-led{
-    position: relative;
-    top: 1.75rem;
-    left: 19rem;
-}
-.sale-led img{
-    max-width: 8rem;
-}
-.sale-led p{
-    position: absolute;
-    left: 2rem;
-}
-.sale-playlist-next{
-    margin-left: 350px;
-}
+
+
+/*---------------------------------------------------------------------------------------------------------------*/
+/*---------------------------- new-come -------------------------------------------------------------------------*/
 .new-come{
     position: relative;
     top: 19rem;
@@ -518,70 +428,7 @@ h2{
 .new-come-content{
     display: flex;
 }
-.new-come-lavie{
-    position: relative;
-    top: 2rem;
-    left: 4rem;
-}
-.new-come-lavie img{
-    max-width: 10rem;
-}
-.new-come-lavie p{
-    max-width: 10rem;
-    position: absolute;
-    left: 2rem;
-}
-.new-come-fujistu{
-    position: relative;
-    top: 1.6rem;
-    left: 11.7rem;
-}
-.new-come-fujistu img{
-    max-width: 11rem;
-}
-.new-come-fujistu p{
-    max-width: 10rem;
-    position: absolute;
-    left: 2rem;
-}
-.new-come-toshiba{
-    position: relative;
-    top: 1.15rem;
-    left: 19.5rem;
-}
-.new-come-toshiba img{
-    max-width: 11rem;
-}
-.new-come-toshiba p{
-    max-width: 10rem;
-    position: absolute;
-    left: 2rem;
-}
-.new-come-asus{
-    position: relative;
-    left: 27.4rem;
-}
-.new-come-asus img{
-    max-width: 10.5rem;
-}
-.new-come-asus p{
-    max-width: 10rem;
-    position: absolute;
-    top: 9.7rem;
-    left: 2.5rem;
-
-}
-.new-come-submit input{
-    position: absolute;
-    left: 2.5rem;
-    top: 3.125rem;
-    padding: 0.3125rem 0.625rem;
-    display: none;
-    background-color:#fe6363;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+/*-----------------------------------------------------------------------------------------------------------------*/
 .hot-div:hover .new-come-submit input{
     display: block;
 }
