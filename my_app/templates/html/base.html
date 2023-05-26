@@ -10,6 +10,13 @@
    <link rel="stylesheet" href="{% static 'assets/item.css' %}">
    <link rel="stylesheet" href="{% static 'assets/cart.css' %}" />
 <!--   <link rel="stylesheet" href="{% static 'assets/category.css' %}" />-->
+   <link rel="stylesheet" href="{% static 'assets/contactus.css' %}" />
+   <link rel="stylesheet" href="{% static 'assets/regestermember.css' %}" />
+   <link rel="stylesheet" href="{% static 'assets/memberkhuyenmai.css' %}" />
+   <link rel="stylesheet" href="{% static 'assets/introduce.css' %}" />
+   <link rel="stylesheet" href="{% static 'assets/TuyenDung.css' %}" />
+   <link rel="stylesheet" href="{% static 'assets/location.css' %}" />
+   <link rel="stylesheet" href="{% static 'assets/form.css' %}" />
    <title>CBC Mall - Siêu Thị Nhật Bản</title>
    <link rel="stylesheet" href="{% static 'assets/fontawesome-free-6.2.0-web/css/all.min.css' %}">
    <script src="{% static 'js/script.js' %}"></script>
@@ -38,7 +45,7 @@
       </div>
       <div class="clr"></div>
       <div class="right">
-         <p class="login"><i class="fa-solid fa-user"></i><i>&nbsp;</i><span><a href="/project/html/form.html"
+         <p class="login"><i class="fa-solid fa-user"></i><i>&nbsp;</i><span><a href="{% url 'form' %}"
                   target="_blank">Đăng nhập</a></span></p>
          <p class="shopping"><i class="fa-solid fa-bag-shopping"></i></p>
       </div>
@@ -57,8 +64,8 @@
             </div>
             <div class="dropdownmenu"><a href="">THÀNH VIÊN</a>
                <div class="dropdownmenu-content-tv dropdownmenu-content">
-                  <a href="/project/html/memberkhuyenmai.html" target="_blank">ƯU ĐÃI</a>
-                  <a href="/project/html/regestermember.html" target="_blank">ĐĂNG KÝ</a>
+                  <a href="{% url 'memberkhuyenmai' %}" target="_blank">ƯU ĐÃI</a>
+                  <a href="{% url 'regestermember' %}" target="_blank">ĐĂNG KÝ</a>
                </div>
             </div>
             <div class="dropdownmenu"><a href="{% url 'event' %}">KHUYẾN MÃI VÀ SỰ KIỆN</a>
@@ -66,12 +73,12 @@
             </div>
             <div class="dropdownmenu"><a href="">VỀ CHÚNG TÔI</a>
                <div class="dropdownmenu-content-us dropdownmenu-content">
-                  <a href="/project/html/introduce.html " target="_blank">GIỚI THIỆU</a>
-                  <a href="/project/html/Tuyen dung/TuyenDung.html">TUYỂN DỤNG</a>
+                  <a href="{% url 'introduce' %}" target="_blank">GIỚI THIỆU</a>
+                  <a href="{% url 'TuyenDung' %}">TUYỂN DỤNG</a>
                </div>
             </div>
-            <a href="/project/html/contactus.html" target="_blank">LIÊN HỆ</a>
-            <a href="/project/html/location.html" target="_blank">HỆ THỐNG CỬA HÀNG</a>
+            <a href="{% url 'contactus' %}" target="_blank">LIÊN HỆ</a>
+            <a href="{% url 'location' %}" target="_blank">HỆ THỐNG CỬA HÀNG</a>
          </nav>
          <img id="logo" src="/project/images/logo/logodqb-02.png" alt="logo" width="70px">
       </div>
@@ -95,6 +102,26 @@
    {% block event %}
    {% endblock event %}
 
+   {% block contactus %}
+   {% endblock contactus %}
+
+   {% block regestermember %}
+   {% endblock regestermember %}
+
+   {% block khuyenmai %}
+   {% endblock khuyenmai %}
+
+   {% block introduce %}
+   {% endblock introduce %}
+
+   {% block TuyenDung %}
+   {% endblock TuyenDung %}
+
+   {% block location %}
+   {% endblock location %}
+
+   {% block form %}
+   {% endblock form %}
 
    <footer id="footer">
       <div class="footer-follow-us">
@@ -152,5 +179,44 @@
          <p>&copy;2022 - Công ty TNHH CBC</p>
       </div>
    </footer>
+
+<script>
+        function brief_1(){
+            location.href = "/project/html/Tuyen%20Dung/GSAN.html";
+        }
+        function brief_2(){
+            location.href = "/project/html/Tuyen%20Dung/GSAN.html";
+        }
+        function brief_3(){
+            location.href = "/project/html/Tuyen%20Dung/GSAN.html";
+        }
+        function brief_4(){
+            location.href = "/project/html/Tuyen%20Dung/GSAN.html";
+        }
+        function brief_5(){
+            location.href = "/project/html/Tuyen%20Dung/GSAN.html";
+        }
+
+        $(document).ready(function(){
+         $(".content_right_location_HCM").show();
+         $(".content_right_location_DN").hide();
+         $(".content_right_location_HN").hide();
+         $(".content_left_location_HCM").click(function(){
+            $(".content_right_location_HCM").show();
+            $(".content_right_location_DN").hide();
+            $(".content_right_location_HN").hide();
+         });
+         $(".content_left_location_DN").click(function(){
+            $(".content_right_location_HCM").hide();
+            $(".content_right_location_DN").show();
+            $(".content_right_location_HN").hide();
+         });
+         $(".content_left_location_HN").click(function(){
+            $(".content_right_location_HCM").hide();
+            $(".content_right_location_DN").hide();
+            $(".content_right_location_HN").show();
+         });
+});
+    </script>
 </body>
 </html>
