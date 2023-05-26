@@ -1,6 +1,9 @@
 {% extends 'html/base.html' %}
 {% load static %}
 {% block form %}
+<head>
+    <link rel="stylesheet" href="{% static 'assets/form.css' %}" />
+</head>
     <div class="form">
         <div class="form-content" id="form">
             <!-- login -->
@@ -42,11 +45,11 @@
                 </div>
                 <div class="regester-other">
                     <div class="regester-other-content">
-                        <img class="google" src="/project/images/logo/Google__G__Logo.svg.webp" alt="">
+                        <img class="google" src="{% static '/images/logo/Google__G__Logo.svg.webp' %}" alt="">
                         <a href="">Google</a>
                     </div>
                     <div class="regester-other-content">
-                        <img class="facebook" src="/project/images/logo/Facebook-logo.png" alt="">
+                        <img class="facebook" src="{% static '/images/logo/Facebook-logo.png' %}" alt="">
                         <a href="">Facebook</a>
                     </div>
                 </div>
@@ -59,5 +62,6 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{% static 'js/form.js' %}"></script>
 {% endblock form %}

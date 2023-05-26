@@ -1,6 +1,9 @@
 {% extends 'html/base.html' %}
 {% load static %}
 {% block location %}
+<head>
+  <link rel="stylesheet" href="{% static 'assets/location.css' %}" />
+</head>
     <!-- content -->
     <div id="content">
         <div class="content_left">
@@ -44,4 +47,29 @@
           </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+         $(".content_right_location_HCM").show();
+         $(".content_right_location_DN").hide();
+         $(".content_right_location_HN").hide(); 
+         $(".content_left_location_HCM").click(function(){
+            $(".content_right_location_HCM").show();
+            $(".content_right_location_DN").hide();
+            $(".content_right_location_HN").hide();
+         });
+         $(".content_left_location_DN").click(function(){
+            $(".content_right_location_HCM").hide();
+            $(".content_right_location_DN").show();
+            $(".content_right_location_HN").hide();
+         });
+         $(".content_left_location_HN").click(function(){
+            $(".content_right_location_HCM").hide();
+            $(".content_right_location_DN").hide();
+            $(".content_right_location_HN").show();
+         });
+      });
+
+    </script>
+
 {% endblock location %}

@@ -1,6 +1,9 @@
 {% extends 'html/base.html' %}
 {% load static %}
 {% block introduce %}
+<head>
+   <link rel="stylesheet" href="{% static 'assets/introduce.css' %}" />
+</head>
    <!-- content -->
    <div id="content">
       <div>
@@ -63,12 +66,12 @@
          </div> <br>
          <h2>Các Phương thức thanh toán</h2>
          <div>
-            <img class="content_img" src="/project/images/introduce/thanh-toan-dien-tu-4.jpg" alt="">
+            <img class="content_img" src="{% static 'images/introduce/thanh-toan-dien-tu-4.jpg' %}" alt="">
          </div>
          <h2>Các phương thức giao hàng</h2>
          <div>
             <img class="content_img"
-               src="/project/images/introduce/8-ung-dung-giao-hang-toan-quoc-nhanh-chong-pho-bien-tot-nhat-thumb-800x450.jpg"
+               src="{% static 'images/introduce/8-ung-dung-giao-hang-toan-quoc-nhanh-chong-pho-bien-tot-nhat-thumb-800x450.jpg' %}"
                alt="">
          </div>
       </div>

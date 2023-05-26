@@ -1,6 +1,9 @@
 {% extends 'html/base.html' %}
 {% load static %}
 {% block regestermember %}
+<head>
+   <link rel="stylesheet" href="{% static 'assets/regestermember.css' %}" />
+</head>
    <div class="regester-member">
       <h1>Đăng kí thành viên</h1>
       <div class="regester-content">
@@ -10,17 +13,17 @@
       <div class="star">
          <p>Mua bất kỳ sản phẩm có giá trị từ <span class="red">599.000đ</span> khách hàng sẽ nhận được thẻ Star (Thẻ
             Đỏ)</p>
-         <center><img src="/project/images/logo/CBC MEMBER.jpg" alt=""></center>
+         <center><img src="{% static 'images/logo/CBC MEMBER.jpg' %}" alt=""></center>
       </div>
       <div class="star">
          <p>Mua bất kỳ sản phẩm có giá trị từ <span class="red">999.000đ</span> khách hàng sẽ nhận được thẻ Gold (Thẻ
             Vàng)</p>
-         <center><img src="/project/images/logo/CBC MEMBER-2.jpg" alt=""></center>
+         <center><img src="{% static 'images/logo/CBC MEMBER-2.jpg' %}" alt=""></center>
       </div>
       <div class="star">
          <p>Mua bất kỳ sản phẩm có giá trị từ <span class="red">1999.000đ</span> khách hàng sẽ nhận được thẻ Diamond
             (Thẻ Đen)</p>
-         <center><img src="/project/images/logo/CBC MEMBER-3.jpg" alt=""></center>
+         <center><img src="{% static 'images/logo/CBC MEMBER-3.jpg' %}" alt=""></center>
       </div>
       <div class="note">Thẻ thành viên thân thiết có giá trị sử dụng trên toàn hệ thống CBC.</div>
    </div>

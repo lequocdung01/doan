@@ -1,6 +1,14 @@
-{% extends 'html/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 {% load static %}
-{% block contactus %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/contactus.css' %}">
+    <title>Liên Hệ</title>
+</head>
+<body>
     <div class="form-contact">
         <div class="form-contact-content">
             <div class="form-contact-content-child-1">
@@ -25,10 +33,10 @@
             </div>
             <div class="form-contact-content-child-2">
                 <div class="logo">
-                    <img src="/project/images/logo/logo dqb-02.png" alt="">
+                    <img src="{% static 'images/logo/logdqb-02.png' %}" alt="">
                 </div>
             </div>
         </div>
     </div>
-
-{% endblock contactus %}
+</body>
+</html>
