@@ -295,75 +295,49 @@ h2{
     top: 1.2rem;
 }
 .hot-fujina img{
-max-width: 8rem;
+    max-width: 8rem;
 }
 .hot-fujina p{
     position: absolute;
     left: 1.5rem;
 }
-.hot-cleaner{
-    position: relative;
-    left: 5.5rem;
-    top: 0.2rem;
+/*test*/
+.content_right_category_item {
+    background-color: rgb(237, 230, 230);;
+    width: 1000px;
+    height: 60px;
+    display: grid;
+    grid-template-rows: repeat(5,12%);
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
 }
-.hot-cleaner img{
-    max-width: 9rem;
+.content_right_category_item p {
+    padding-top: 10px;
+    padding-bottom: 17px;
+    padding-right: 10px;
 }
-.hot-cleaner p{
-    position: absolute;
-    left: -0.5rem;
-    width: 10rem;
+.content_right_category_item button {
+    border: 1px solid rgb(252, 247, 247);
+    width: 110px;
+    height: 40px;
+    background-color: rgb(252, 247, 247);
+    border-radius: 6%;
 }
-.hot-pokemon-komala{
-    position: relative;
-    left: 9rem;
-    top: 0.2rem;
-    width: 9.375rem;
-    height: 6.25rem;
+.content_right_category_item a {
+    text-decoration: none;
+    color: black;
 }
-.hot-pokemon-komala img{
-    max-width: 9rem;
+.content_right_category_item_button_a button {
+    background-color: rgb(255, 51, 0);
 }
-.hot-pokemon-komala p{
-    width: 10rem;
+.content_right_item_information {
+    width: 172px;
+    font-size: 18px;
+    padding-top: 10px;
+    margin-left: 10px;
 }
-.hot-teddy-chopper{
-    position: relative;
-    left: 12rem;
-    top: 1.2rem;
-    width: 9.375rem;
-    height: 6.25rem;
-}
-.hot-teddy-chopper img{
-    max-width: 8rem;
-}
-.hot-teddy-chopper p{
-    width: 10rem;
-}
-.hot-gundam-zgmf-x10a{
-    position: relative;
-    left: 14rem;
-    width: 9.375rem;
-    height: 6.25rem;
-}
-.hot-gundam-zgmf-x10a img{
-    max-width: 9rem;
-}
-.hot-gundam-zgmf-x10a p{
-    width: 10rem;
-}
-.hot-teddy-frieza{
-    position: relative;
-    left: 17rem;
-    top: 1.2rem;
-    height:  6.25rem;
-}
-.hot-teddy-frieza img{
-    max-width: 8rem;
-}
-.hot-teddy-frieza p{
-    width: 10rem;
-}
+/*---------------------------------------------------------------------------------------------------------*/
 .hot-fujina-next{
     margin-left: 300px;
 }
