@@ -5,7 +5,7 @@
 }
 @font-face {
     font-family: roboto;
-    src: url(/project/fonts/RobotoCondensed-Regular.ttf);
+    src: url("{% static 'fonts/RobotoCondensed-Regular.ttf' %}");
 }
 body{
     font-family: roboto;
@@ -55,6 +55,7 @@ body{
     top: 0.25rem;
     margin-top: -0.375rem;
 }
+/*----------------------------------- nav -------------------------------------------------*/
 #nav{
     position: relative;
     top: -1.3rem;
@@ -77,9 +78,10 @@ body{
     text-align: center;
     padding: 1.5rem 1.75rem;
     text-decoration: none;
-    font-size: 0.9375rem;
+    font-size: 0.8575rem;
     position: relative;
     top: -1.3125rem;
+    
 }
 .topnav a:hover{
     background-color: #fe6363;
@@ -88,6 +90,8 @@ body{
 .topnav a:active{
     background-color: #ef5d8e;
 }
+/*--------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------- search ----------------------------------------------------------------------------*/
 .search{
     margin-left: 48.125rem;
     margin-top: 0.625rem;
@@ -122,6 +126,7 @@ body{
 .search button:active{
     background: #ef5d8e ;
 }
+/*---------------------------------------------------------------------------------------------------------------------------------*/
 .clr{
     clear: both;
 }
@@ -157,6 +162,7 @@ h2{
     margin-top: -1.6875rem;
     color: white;
 }
+/*-------------------------------------- dropdownmenu -------------------------------------------------------------*/
 .dropdownmenu-content-sp{
     display: none;
     position: absolute;
@@ -239,6 +245,7 @@ h2{
 .dropdownmenu:hover .dropdownmenu-content{
     display: block; 
 }
+/*--------------------------------------------------------------------------------------------------------------*/
 .slides{
     max-width: 42rem;
     position: relative;

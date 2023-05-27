@@ -8,10 +8,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="{% static 'assets/style.css' %}">
    <!--<link rel="stylesheet" href="{% static 'assets/item.css' %}">
-   <link rel="stylesheet" href="{% static 'assets/cart.css' %}" />
-   <link rel="stylesheet" href="{% static 'assets/category.css' %}" />
-   <link rel="stylesheet" href="{% static 'assets/contactus.css' %}" />
-   <link rel="stylesheet" href="{% static 'assets/event.css' %}" />-->
+   <link rel="stylesheet" href="{% static 'assets/cart.css' %}" />-->
    <title>CBC Mall - Siêu Thị Nhật Bản</title>
    <link rel="stylesheet" href="{% static 'assets/fontawesome-free-6.2.0-web/css/all.min.css' %}">
    <script src="{% static 'js/script.js' %}"></script>
@@ -75,7 +72,7 @@
             <a href="{% url 'contactus' %}" target="_blank">LIÊN HỆ</a>
             <a href="{% url 'location' %}" target="_blank">HỆ THỐNG CỬA HÀNG</a>
          </nav>
-         <img id="logo" src="/project/images/logo/logodqb-02.png" alt="logo" width="70px">
+         <img id="logo" src="{% static 'images/logo/logodqb-02.png' %}" alt="logo" width="70px">
       </div>
    </header>
 
