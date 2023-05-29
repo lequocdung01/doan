@@ -1,9 +1,12 @@
 {% extends 'html/base.html' %}
 {% load static %}
 {% block detail_content %}
+<head>
+   <link rel="stylesheet" href="{% static 'assets/item.css' %}">
+</head>
 <div class="frame_1">
       <div class="float_left">
-         <img class="detail_img" src="/project/topsale/08110927_61131988a19f7-removebg-preview.png">
+         <img class="detail_img" src="{% static 'topsale/08110927_61131988a19f7-removebg-preview.png' %}">
       </div>
 
       <div class="float_right">
@@ -73,12 +76,9 @@
                <tr>
                   <td>Tỗng tiền</td>
                   <td id="Sum"> </td>
-                  <td><button><a href="{% url 'cart' %}">Gio hang</a></button></td>
+                  <td><button id="pay"><a href="{% url 'cart' %}">Gio hang</a></button></td>
                </tr>
-               <tr>
-<!--                  <td><button id="pay">Thanh toán</button></td>-->
-                  <td><button><a href="{% url 'cart' %}">Gio hang</a></button></td>
-               </tr>
+               
             </table>
          </div>
 
