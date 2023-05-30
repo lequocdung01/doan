@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse
+from django.core.paginator import Paginator
+
 # Create your views here.
 def get_my_app(request):
     product = Product.objects.all()
@@ -17,8 +19,14 @@ def cart(request):
 # trang sản phẩm
 def product(request):
     product = Product.objects.all()
-    context = {'product': product}
-    return render(request, 'html/category.html', context)
+    page = request.GET.get('page')
+    page = page or 1
+    paginator = Paginator(product, 10)  # hiện số lượng sản phẩm
+    paged_products = paginator.get_page(page)
+    page_obj = product.count()
+
+    context = {'product': paged_products, 'page_obj': page_obj}
+    return render(request, 'html/category.html', context=context)
 # trang mỹ phẩm
 def product_mypham(request):
     product = Product.objects.all()

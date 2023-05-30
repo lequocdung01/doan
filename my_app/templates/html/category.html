@@ -93,21 +93,38 @@
          
          <!-- content_right_page_controller -->
          <div class="content_right_page_controller">
+            
             <div class="content_right_page_controller_button_left">
                 <button type="submit">
-                    <i class="fa-solid fa-angle-left"></i>
+                  {% if product.number|add:'-1' > 0 %}
+                     <a href="{% url 'product' %}?page={{product.number|add:'-1'}}" ><i class="fa-solid fa-angle-left"></i></a>
+                  {% endif %}
                 </button>
             </div>
+            
+            {% for page in product.paginator.page_range %} 
             <div class="content_right_page_controller_button_page">
+              
                 <button type="submit" >
-                    1
+                  
+                    <a href="{% url 'product' %}?page={{page}}" >{{page}}</a>
+                  
                 </button>
+              
             </div>
+            {% endfor %}  
+            
             <div class="content_right_page_controller_button_right">
                 <button type="submit">
-                    <i class="fa-solid fa-angle-right"></i>
+                  {% for page in product.paginator.page_range  %}
+                     {% if product.number|add:'1' == page %}
+                        <a href="{% url 'product' %}?page={{product.number|add:'1'}}" ><i class="fa-solid fa-angle-right"></i></a>
+                     {% endif %}
+                  {% endfor %}
+                  
                 </button>
             </div>
+            
         </div>
       </div>
    </div>
