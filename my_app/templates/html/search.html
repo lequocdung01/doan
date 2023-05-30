@@ -1,0 +1,117 @@
+{% extends 'html/base.html' %}
+{% load static %}
+{% block mypham %}
+
+<head>
+   <link rel="stylesheet" href="{% static 'assets/category.css' %}" />
+</head>
+    <div class="content">
+      <div class="content_left">
+         <div class="content_left_category">
+            <a href="" class="content_left_category_header"> <i class="fa-solid fa-list"></i> Tất Cả Danh Mục </a>
+            <a href="/project/html/My%20pham/main/category.html" class="content_left_category_main">Mỹ Phẩm </a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Thực phẩm</a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Quần áo</a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Đồ gia dụng</a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Đồ chơi</a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Khác</a>
+         </div>
+      </div>
+      <div class="content_right">
+         <div class="content_right_category_item">
+            <p>
+               Sắp xếp theo
+            </p>
+            <div class="content_right_category_item_button_a popular">
+                <button>
+                    <a href="/project/html/my%20pham/category/Pho_Bien.html">Phổ Biến</a>
+                </button>
+            </div>
+            <div class="content_right_category_item_button_new">
+                <button>
+                    <a href="/project/html/my%20pham/category/Moi_Nhat.html">Mới Nhất</a>
+                </button>
+            </div>
+            <div class="content_right_category_item_button_selling">
+                <button>
+                    <a href="/project/html/my%20pham/category/Ban_Chay.html">Bán Chạy</a>
+                </button>
+            </div>
+            <div class="content_right_category_item_button_price">
+                <form action="">
+                    <select name="" id="select">
+                       <option value="gia" id="" selected="selected">Giá</option>
+                       <option value="Gia: thap den cao">Giá: từ thấp đến cao</option>
+                       <option value="Gia: cao den thap">Giá: từ cao đến thấp</option>
+                    </select>
+                 </form>
+            </div>
+         </div>
+         <h5>Sản phẩm liên quan: {{searched}} </h5>
+            
+         <div class="content_right_group_item">
+            
+            {% for product in keys  %}
+            
+            <div class="content_right_item">
+               <div class="content_right_item_header">
+                  <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
+                  <div class="submit">
+                     
+                        <button onclick="Produce_1()">Xem chi tiết</button>
+                     
+               </div>
+               <div class="sale">-{{product.sale}}%</div>
+            </div>
+            <div class="content_right_item_information">
+               
+                  <div class="name">
+                     {{product.name}}
+                  </div>
+                  <div class="price">
+                     <del >{{product.price}}</del>
+                     <span>₫3.999.000</span>
+                  </div>
+                  <div class="racting">
+                     <span>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                     </span>
+                        Đã bán {{product.sell}}    
+                  </div>
+            </div>
+            </div>
+            
+            
+            {% endfor %}
+            
+         </div>
+         
+         
+         
+         
+         <!-- content_right_page_controller -->
+         <div class="content_right_page_controller">
+            <div class="content_right_page_controller_button_left">
+                <button type="submit">
+                    <i class="fa-solid fa-angle-left"></i>
+                </button>
+            </div>
+            <div class="content_right_page_controller_button_page">
+                <button type="submit" >
+                    1
+                </button>
+            </div>
+            <div class="content_right_page_controller_button_right">
+                <button type="submit">
+                    <i class="fa-solid fa-angle-right"></i>
+                </button>
+            </div>
+        </div>
+      </div>
+   </div>
+   
+{% endblock mypham %}
