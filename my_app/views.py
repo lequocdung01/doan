@@ -15,8 +15,14 @@ def cart(request):
     context={}
     return render(request, 'html/cart.html', context)
 
+def product(request):
+    product = Product.objects.all()
+    context = {'product': product}
+    return render(request, 'html/category.html', context)
+
 def product_mypham(request):
-    context = {}
+    product = Product.objects.all()
+    context = {'product': product}
     return render(request, 'html/category.html', context)
 
 def event(request):

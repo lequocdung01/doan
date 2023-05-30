@@ -359,6 +359,45 @@ h2{
     color: white;
 }
 
+/* group item */
+.content_right_group_item {
+    display: grid;
+    grid-row: 30% 70%;
+    grid-template-columns: repeat(6, 198px);
+    padding-top: 10px;
+    
+}
+/* item */
+
+.content_right_item {
+    width: 188px;
+    height: 240px;
+    border-bottom: 2px solid rgb(212, 211, 211);
+    border-right: 2px solid rgb(212, 211, 211);
+    background-color: rgb(228, 226, 226);
+    margin-top: 20px;
+}
+
+/* header of item */
+.content_right_item_header_img {
+    width: 188px;
+    height: 188px;
+}
+/* content_right_item_header's sumbit */
+.submit {
+    margin-top: -100px;
+    margin-bottom: 70px;
+    margin-left: 50px;
+    visibility: hidden;
+}
+.submit button {
+    height: 25px;
+    background-color: rgb(255, 51, 0);
+    border: 1px solid rgb(255, 51, 0);
+    padding: 5px;
+    color: white;
+}
+
 /* content_right_item_information */
 .content_right_item_information {
     width: 172px;
@@ -368,14 +407,15 @@ h2{
 }
 /* content_right_item_information's name */ 
 .name {
-    width: 172px;
+    width: 160px;
     height: 40px;
     font-size: 15px;
     overflow: hidden;
     display: block;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    overflow: hidden; /* Ẩn nội dung vượt quá kích thước của phần tử */
+     text-overflow: ellipsis;
 }
 /* content_right_item_information's price */
 .price {
@@ -388,27 +428,25 @@ h2{
 .price del {
     color: rgb(99, 99, 99);
 }
-/* content_right_item_information's racting */
-.racting {
-    width: 172px;
-    height: 28px;
-    font-size: 14px;
-    padding-top: 10px;
-}
-.racting span {
-    color: rgb(225, 4, 4);
-    font-size: 12px;
-    padding-right: 10px;
-}
-/* content_right_item_information's sale */
+
+/* content_right_item_information's sale and sell */
 .sale {
     margin-top: -30px;
     clip-path: polygon(0 28%, 79% 28%, 85% 50%, 79% 72%, 0 72%);
     background-color: red;
     color: white;
     font-size: 1rem;
-    padding: 10px 10px;
+    padding: 12px 10px;
     max-width: 60px;
+}
+.sell {
+    margin-top: -30px;
+    clip-path: polygon(0 28%, 79% 28%, 85% 50%, 79% 72%, 0 72%);
+    background-color: red;
+    color: white;
+    font-size: 1rem;
+    padding: 12px 10px;
+    width: 120px;
 }
 /* hover content_right_item_information */
 .content_right_item:hover {
