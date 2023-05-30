@@ -472,7 +472,7 @@ h2{
 /* content_right_page_controller */
 .content_right_page_controller {
     display: grid;
-    grid-template-columns: repeat(3, 10%);
+    grid-template-columns: repeat(5, 10%);
     width: 600px;
     height: 40px;
     margin-left: 400px;
