@@ -34,7 +34,7 @@
                         {% for item in items %}
                         <tr>
                             <td><img src="{{item.product.ImageURL}}" alt=""></td>
-                            <td><p>"{{item.product.name}}"</p></td>
+                            <td><p>{{item.product.name}}</p></td>
                             <td><input type="number" value="{{item.quantity}}" min="1"></td>
                             <td><p>{{item.product.price}}<sup>đ</sup></p></td>
                             <td><span>X</span></td>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="cart-content-right-button">
                         <button>Tiếp tục mua sắm</button>
-                        <button>Thanh toán</button>
+                        <button><a href="{% url 'delivery' %}">Thanh toán</a></button>
                     </div>
                     <div class="cart-content-right-dangnhap">
                         <p>Tài khoản IVY</p><br>

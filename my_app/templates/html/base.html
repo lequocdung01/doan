@@ -10,6 +10,25 @@
    <title>CBC Mall - Siêu Thị Nhật Bản</title>
    <link rel="stylesheet" href="{% static 'assets/fontawesome-free-6.2.0-web/css/all.min.css' %}">
    <script src="{% static 'js/script.js' %}"></script>
+   <script type="text/javascript">
+      var user = '{{request.user}}'
+      function getCookie(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              const cookies = document.cookie.split(';');
+              for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+      const csrftoken = getCookie('csrftoken');
+   </script>
 </head>
 
 <body>
@@ -23,7 +42,7 @@
       </form>
       <div class="clr"></div>
       <div class="left">
-         <p class="delivery"><i class="fa-solid fa-truck-fast"></i><i>&nbsp;</i> 0365112601</p>
+         <p class="delivery"><i class="fa-solid fa-truck-fast"></i><i>&nbsp;</i></p>
       </div>
       <div class="lang1">
          <p>VN</p>
@@ -38,7 +57,7 @@
       <div class="right">
          <p class="login"><i class="fa-solid fa-user"></i><i>&nbsp;</i><span><a href="{% url 'form' %}"
                   >Đăng nhập</a></span></p>
-         <p class="shopping"><i class="fa-solid fa-bag-shopping"></i></p>
+         <p class="shopping"><a href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a></p>
       </div>
       <div id="nav">
          <nav class="topnav">
@@ -91,6 +110,12 @@
 
    {% block cart_content %}
    {% endblock cart_content %}
+
+   {% block delivery_content %}
+   {% endblock delivery_content %}
+
+   {% block payment_content %}
+   {% endblock payment_content %}
 
    {% block mypham %}
    {% endblock mypham %}
@@ -175,5 +200,6 @@
          <p>&copy;2022 - Công ty TNHH CBC</p>
       </div>
    </footer>
+<script src="{% static 'js/cart.js' %}"></script>
 </body>
 </html>

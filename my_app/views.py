@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .models import *
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.core.paginator import Paginator
+import json
 
 # Create your views here.
 def get_my_app(request):
@@ -20,8 +21,44 @@ def cart(request):
         items = order.orderitem_set.all()
     else:
         items = []
+        order = {'get_cart_item':0,'get_cart_total':0}
     context={'items':items, 'order':order}
     return render(request, 'html/cart.html', context)
+
+#Thanh toan
+def delivery(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+    else:
+        items = []
+        order = {'get_cart_item': 0, 'get_cart_total': 0}
+    context = {'items': items, 'order': order}
+    return render(request, 'html/delivery.html', context)
+
+def updateItem(request):
+    data = json.loads(request.body)
+    productID = data['productID']
+    action = data['action']
+    customer = request.user.customer
+    product = Product.objects.get(ID = productID)
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+    if action=='add':
+        orderItem.quantity +=1
+    elif action == 'remove':
+        orderItem.quantity -=1
+    orderItem.save()
+    if orderItem.quantity <=0:
+        orderItem.delete()
+    return JsonResponse('added',safe=False)
+
+#Thanh toan
+def payment(request):
+    context = {}
+    return render(request, 'html/payment.html', context)
+
 # trang sản phẩm
 def product(request):
     product = Product.objects.all()
