@@ -2,11 +2,8 @@ from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse,JsonResponse
 from django.core.paginator import Paginator
-<<<<<<< HEAD
 import json
-=======
 from django.contrib.auth.forms import UserCreationForm
->>>>>>> a296dd0ec962795931ca664672d456b00a86ed29
 
 # Create your views here.
 def get_my_app(request):
