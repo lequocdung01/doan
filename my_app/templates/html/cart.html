@@ -35,7 +35,9 @@
                         <tr>
                             <td><img src="{{item.product.ImageURL}}" alt=""></td>
                             <td><p>{{item.product.name}}</p></td>
-                            <td><input type="number" value="{{item.quantity}}" min="1"></td>
+<!--                            <td><input type="number" value="{{item.quantity}}" min="1" ></td>-->
+                            <td>{{item.quantity}}<button data-product="{{item.product.ID}}" data-action="add" class="update-cart">+</button>
+                                <button data-product="{{item.product.ID}}" data-action="remove" class="update-cart">-</button></td>
                             <td><p>{{item.product.price}}<sup>đ</sup></p></td>
                             <td><span>X</span></td>
                         </tr>
