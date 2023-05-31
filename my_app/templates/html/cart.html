@@ -27,30 +27,19 @@
                         <tr>
                             <th>Sản phẩm</th>
                             <th>Tên sản phẩm</th>
-                            <th>Màu</th>
-                            <th>Size</th>
                             <th>SL</th>
                             <th>Thành tiền</th>
                             <th>Xóa</th>
                         </tr>
+                        {% for item in items %}
                         <tr>
-                            <td><img src="./image1/sp1.1.jfif" alt=""></td>
-                            <td><p>Ao thun co tron MS 57E2969</p></td>
-                            <td><img src="./image1/sp1color.png" alt=""></td>
-                            <td><p>L</p></td>
-                            <td><input type="number" value="1" min="1"></td>
-                            <td><p>490.000<sup>đ</sup></p></td>
+                            <td><img src="{{item.product.ImageURL}}" alt=""></td>
+                            <td><p>"{{item.product.name}}"</p></td>
+                            <td><input type="number" value="{{item.quantity}}" min="1"></td>
+                            <td><p>{{item.product.price}}<sup>đ</sup></p></td>
                             <td><span>X</span></td>
                         </tr>
-                        <tr>
-                            <td><img src="./image1/sp2.1.jfif" alt=""></td>
-                            <td><p>Ao thun co tron MS 57E2969</p></td>
-                            <td><img src="./image1/sp1color.png" alt=""></td>
-                            <td><p>L</p></td>
-                            <td><input type="number" value="1" min="1"></td>
-                            <td><p>490.000<sup>đ</sup></p></td>
-                            <td><span>X</span></td>
-                        </tr>
+                        {% endfor %}
                     </table>
                 </div>
                 <div class="cart-content-right">
@@ -59,16 +48,16 @@
                             <th colspan="2">TỔNG TIỀN GIỎ HÀNG</th>
                         </tr>
                         <tr>
-                            <td>TỔNG SẢN PHẨM</td>
-                            <td>2</td>
+                            <td>TỔNG SỐ LƯỢNG SẢN PHẨM</td>
+                            <td>{{order.get_cart_item}}</td>
                         </tr>
                         <tr>
                             <td>TỔNG TIỀN HÀNG</td>
-                            <td><p>489.000<sub>đ</sub></p></td>
+                            <td><p>{{order.get_cart_total}}<sub>đ</sub></p></td>
                         </tr>
                         <tr>
                             <td>TẠM TÍNH</td>
-                            <td><p style="color: black; font-weight: bold;">489.000<sup>đ</sup></p></td>
+                            <td><p style="color: black; font-weight: bold;">{{order.get_cart_total}}<sup>đ</sup></p></td>
                         </tr>
                     </table>
                     <div class="cart-content-right-text">
