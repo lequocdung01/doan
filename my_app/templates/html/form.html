@@ -5,8 +5,14 @@
     <link rel="stylesheet" href="{% static 'assets/form.css' %}" />
 </head>
     <div class="form">
+        <!---->
         <div class="form-content" id="form">
-            <!-- login -->
+            <form method = "POST" action="">
+                {% csrf_token %}
+                    {{form.as_p}}
+                    <input type="submit">
+            </form>
+            <!-- login 
             <div class="form-login login-regester">
                 <h1>Đăng Nhập</h1>
                 <div class="input-form input-content">
@@ -22,8 +28,8 @@
                     <label for="saveme">Nhớ mật khẩu </label>
                 </div>
                 <button>Đăng Nhập</button>
-            </div>
-            <!-- regester -->
+            </div>-->
+            <!-- regester 
             <div class="form-regester login-regester">
                 <h1>Đăng Ký</h1>
                 <div class="input-form input-content">
@@ -59,7 +65,7 @@
                 <div class="option-background" id="option-background"></div>
                 <div class="option-content active" id="login">Đăng Nhập</div>
                 <div class="option-content active" id="regester">Đăng Ký</div>
-            </div>
+            </div>-->
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
