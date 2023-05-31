@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def get_my_app(request):
@@ -75,5 +76,10 @@ def location(request):
     return render(request, 'html/location.html', context)
 # trang đăng nhập/ đăng ký
 def form(request):
-    context = {}
+    form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {"form":form}
     return render(request, 'html/form.html', context)
