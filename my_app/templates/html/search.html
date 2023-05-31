@@ -47,9 +47,11 @@
                  </form>
             </div>
          </div>
-         
+         <h5>Sản phẩm liên quan: {{searched}} </h5>
+            
          <div class="content_right_group_item">
-            {% for product in product  %}
+            
+            {% for product in keys  %}
             
             <div class="content_right_item">
                <div class="content_right_item_header">
@@ -93,38 +95,21 @@
          
          <!-- content_right_page_controller -->
          <div class="content_right_page_controller">
-            
             <div class="content_right_page_controller_button_left">
                 <button type="submit">
-                  {% if product.number|add:'-1' > 0 %}
-                     <a href="{% url 'product' %}?page={{product.number|add:'-1'}}" ><i class="fa-solid fa-angle-left"></i></a>
-                  {% endif %}
+                    <i class="fa-solid fa-angle-left"></i>
                 </button>
             </div>
-            
-            {% for page in product.paginator.page_range %} 
             <div class="content_right_page_controller_button_page">
-              
                 <button type="submit" >
-                  
-                    <a href="{% url 'product' %}?page={{page}}" >{{page}}</a>
-                  
+                    1
                 </button>
-              
             </div>
-            {% endfor %}  
-            
             <div class="content_right_page_controller_button_right">
                 <button type="submit">
-                  {% for page in product.paginator.page_range  %}
-                     {% if product.number|add:'1' == page %}
-                        <a href="{% url 'product' %}?page={{product.number|add:'1'}}" ><i class="fa-solid fa-angle-right"></i></a>
-                     {% endif %}
-                  {% endfor %}
-                  
+                    <i class="fa-solid fa-angle-right"></i>
                 </button>
             </div>
-            
         </div>
       </div>
    </div>

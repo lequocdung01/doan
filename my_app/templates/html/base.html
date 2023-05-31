@@ -16,8 +16,9 @@
 
    <!---Header-->
    <header id="header">
-      <form class="search">
-         <input class="input" type="text" placeholder="Biet ong Liem khong..">
+      <form class="search" method = POST action = "{% url 'search' %}">
+         {% csrf_token %}
+         <input class="input" type="text" placeholder="Biet ong Liem khong.." name="searched">
          <button type="submit"><i class="fa fa-search"></i></button>
       </form>
       <div class="clr"></div>
@@ -36,13 +37,13 @@
       <div class="clr"></div>
       <div class="right">
          <p class="login"><i class="fa-solid fa-user"></i><i>&nbsp;</i><span><a href="{% url 'form' %}"
-                  target="_blank">Đăng nhập</a></span></p>
+                  >Đăng nhập</a></span></p>
          <p class="shopping"><i class="fa-solid fa-bag-shopping"></i></p>
       </div>
       <div id="nav">
          <nav class="topnav">
             <a href="{% url 'home' %}">TRANG CHỦ</a>
-            <div class="dropdownmenu"><a href="">SẢN PHẨM</a>
+            <div class="dropdownmenu"><a href="{% url 'product' %}">SẢN PHẨM</a>
                <div class="dropdownmenu-content-sp dropdownmenu-content">
                   <a href="{% url 'mypham' %}">MỸ PHẨM</a>
                   <a href="/project/html/Thuc%20pham/main/category.html">THỰC PHẨM</a>
@@ -52,23 +53,28 @@
                   <a href="">KHÁC</a>
                </div>
             </div>
-            <div class="dropdownmenu"><a href="">THÀNH VIÊN</a>
+            <div class="dropdownmenu"><a href="{% url 'memberkhuyenmai' %}">THÀNH VIÊN</a>
                <div class="dropdownmenu-content-tv dropdownmenu-content">
-                  <a href="{% url 'memberkhuyenmai' %}" target="_blank">ƯU ĐÃI</a>
-                  <a href="{% url 'regestermember' %}" target="_blank">ĐĂNG KÝ</a>
+                  <a href="{% url 'memberkhuyenmai' %}" >ƯU ĐÃI</a>
+                  <a href="{% url 'regestermember' %}" >ĐĂNG KÝ</a>
                </div>
             </div>
             <div class="dropdownmenu"><a href="{% url 'event' %}">KHUYẾN MÃI VÀ SỰ KIỆN</a>
 
             </div>
-            <div class="dropdownmenu"><a href="">VỀ CHÚNG TÔI</a>
+            <div class="dropdownmenu"><a href="{% url 'introduce' %}">VỀ CHÚNG TÔI</a>
                <div class="dropdownmenu-content-us dropdownmenu-content">
-                  <a href="{% url 'introduce' %}" target="_blank">GIỚI THIỆU</a>
+                  <a href="{% url 'introduce' %}" >GIỚI THIỆU</a>
                   <a href="{% url 'TuyenDung' %}">TUYỂN DỤNG</a>
                </div>
             </div>
-            <a href="{% url 'contactus' %}" target="_blank">LIÊN HỆ</a>
-            <a href="{% url 'location' %}" target="_blank">HỆ THỐNG CỬA HÀNG</a>
+            <div class="dropdownmenu">
+               <a href="{% url 'contactus' %}" >LIÊN HỆ</a>
+            </div>
+            <div class="dropdownmenu">
+               <a href="{% url 'location' %}" >HỆ THỐNG CỬA HÀNG</a>
+            </div>
+            
          </nav>
          <img id="logo" src="{% static 'images/logo/logodqb-02.png' %}" alt="logo" width="70px">
       </div>
@@ -169,45 +175,5 @@
          <p>&copy;2022 - Công ty TNHH CBC</p>
       </div>
    </footer>
-<!--
-<script>
-        function brief_1(){
-            location.href = "/project/html/Tuyen%20Dung/GSAN.html";
-        }
-        function brief_2(){
-            location.href = "/project/html/Tuyen%20Dung/GSAN.html";
-        }
-        function brief_3(){
-            location.href = "/project/html/Tuyen%20Dung/GSAN.html";
-        }
-        function brief_4(){
-            location.href = "/project/html/Tuyen%20Dung/GSAN.html";
-        }
-        function brief_5(){
-            location.href = "/project/html/Tuyen%20Dung/GSAN.html";
-        }
-
-        $(document).ready(function(){
-         $(".content_right_location_HCM").show();
-         $(".content_right_location_DN").hide();
-         $(".content_right_location_HN").hide();
-         $(".content_left_location_HCM").click(function(){
-            $(".content_right_location_HCM").show();
-            $(".content_right_location_DN").hide();
-            $(".content_right_location_HN").hide();
-         });
-         $(".content_left_location_DN").click(function(){
-            $(".content_right_location_HCM").hide();
-            $(".content_right_location_DN").show();
-            $(".content_right_location_HN").hide();
-         });
-         $(".content_left_location_HN").click(function(){
-            $(".content_right_location_HCM").hide();
-            $(".content_right_location_DN").hide();
-            $(".content_right_location_HN").show();
-         });
-      });
-</script>
--->
 </body>
 </html>
