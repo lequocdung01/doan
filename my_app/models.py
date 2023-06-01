@@ -25,9 +25,11 @@ class Product(models.Model):
         except:
             url = ''
         return url
-class category(models.Model):
-    ID = models.AutoField(primary_key=True)
+class Category(models.Model):
+    sub_category = models.ForeignKey('self',on_delete = models.CASCADE, related_name='sub_categories',null=True,blank=True)
+    is_sub = models.BooleanField(default=False)
     name = models.CharField(max_length=200, null=True)
+    slug = models.SlugField(max_length=200, unique=True)
 
     def __str__(self):
         return self.name
