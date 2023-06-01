@@ -91,10 +91,15 @@ def category(request):
 
 # trang tìm kiếm
 def search(request):
+    searched = None
+    keys = None
     if request.method == "POST":
         searched = request.POST["searched"]
         keys = Product.objects.filter(name__contains = searched)
-    return render(request, 'html/search.html', {"searched":searched, "keys":keys })
+
+    context = {"searched":searched, "keys":keys }
+    
+    return render(request, 'html/search.html', context)
 
 # trang sự kiện
 def event(request):

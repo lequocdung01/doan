@@ -13,6 +13,8 @@
         <div class="form-content" id="form">
             <!-- login -->
             <div class="form-login login-regester">
+            <form method = "POST" action="">
+                {% csrf_token %}
                 <h1>Đăng Nhập</h1>
                 <div class="input-form input-content">
                     <input type="text" placeholder=" " class="input-text" required="" id="username">
@@ -26,7 +28,8 @@
                     <input type="checkbox" id="saveme">
                     <label for="saveme">Nhớ mật khẩu</label>
                 </div>
-                <button>Đăng Nhập</button>
+                <button type="submit" >Đăng Nhập</button>
+            </form>
             </div>
             <!-- regester -->
             <div class="form-regester login-regester">
@@ -34,7 +37,7 @@
                 {% csrf_token %}
                 <h1>Đăng Ký</h1>
               <div class="input-form input-content">
-                <input type="password" placeholder=" " class="input-text" required="" id="id_username">
+                <input type="text" placeholder=" " class="input-text" required="" id="id_username">
                 <label for="password" class="input-label">Tên Đăng Nhập</label>
              </div>
              <div class="input-form input-content">
