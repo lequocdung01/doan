@@ -4,7 +4,10 @@ from django.http import HttpResponse,JsonResponse
 from django.core.paginator import Paginator
 import json
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> d9cc8524a3c085c8b56c2c71e2c26cd4371a0136
 from django.contrib.auth.forms import UserCreationForm
 
 >>>>>>> dung
