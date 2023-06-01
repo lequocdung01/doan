@@ -1,6 +1,6 @@
 /* link den web thong tin cua may hut bui */
 function Produce_1() {
-    location.href = "";
+    location.href = "{% url 'detail' %}";
 }
 /* link den web thong tin cua ti vi */
 function Produce_2() {

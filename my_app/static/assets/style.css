@@ -462,7 +462,7 @@ h2{
     height: 188px;
 }
 /* content_right_item_header's sumbit */
-.submit {
+/*.submit {
     margin-top: -100px;
     margin-bottom: 70px;
     margin-left: 50px;
@@ -474,7 +474,7 @@ h2{
     border: 1px solid rgb(255, 51, 0);
     padding: 5px;
     color: white;
-}
+}*/
 
 /* content_right_item_information */
 .content_right_item_information {
