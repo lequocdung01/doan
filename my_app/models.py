@@ -8,8 +8,17 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 # tạo class product dùng để chứa các sản phẩm của website
+class Category(models.Model):
+    sub_category = models.ForeignKey('self',on_delete=models.CASCADE, related_name="sub_categories",null=True,blank=True)
+    is_sub = models.BooleanField(default=False)
+    name = models.CharField(max_length=200, null=True)
+    slug = models.SlugField(max_length=200,unique=True)
+
+    def __str__(self):
+        return self.name
 class Product(models.Model):
     ID = models.IntegerField(primary_key=True)
+    category = models.ManyToManyField(Category,related_name="product")
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField()
     categy = models.CharField(max_length=200,null=True)
@@ -25,12 +34,7 @@ class Product(models.Model):
         except:
             url = ''
         return url
-class category(models.Model):
-    ID = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=200, null=True)
 
-    def __str__(self):
-        return self.name
 class UserAdmin(admin.ModelAdmin):
     # Cấu hình hiển thị thông tin user trong trang admin
     list_display = ['username', 'email', 'first_name', 'last_name']

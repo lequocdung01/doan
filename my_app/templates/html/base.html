@@ -64,12 +64,9 @@
             <a href="{% url 'home' %}">TRANG CHỦ</a>
             <div class="dropdownmenu"><a href="{% url 'product' %}">SẢN PHẨM</a>
                <div class="dropdownmenu-content-sp dropdownmenu-content">
-                  <a href="{% url 'mypham' %}">MỸ PHẨM</a>
-                  <a href="/project/html/Thuc%20pham/main/category.html">THỰC PHẨM</a>
-                  <a href="/project/html/Quan%20Ao/main/category.html">QUẦN ÁO</a>
-                  <a href="/project/html/thiet%20bi%20gia%20dung/main/category.html">ĐỒ GIA DỤNG</a>
-                  <a href="/project/html/Do%20choi/main/category.html">ĐỒ CHƠI</a>
-                  <a href="">KHÁC</a>
+                  {% for category in categories %}
+                  <a href="{% url 'category' %}?category={{category.slug}}">{{ category.name }}</a>
+                  {% endfor %}
                </div>
             </div>
             <div class="dropdownmenu"><a href="{% url 'memberkhuyenmai' %}">THÀNH VIÊN</a>
@@ -117,8 +114,11 @@
    {% block payment_content %}
    {% endblock payment_content %}
 
-   {% block mypham %}
-   {% endblock mypham %}
+   {% block category %}
+   {% endblock category %}
+
+   {% block product %}
+   {% endblock product %}
 
    {% block event %}
    {% endblock event %}
