@@ -4,7 +4,7 @@ from django.db import models
 # Khi bạn muốn tạo một hệ thống người dùng riêng biệt và không sử dụng mô hình người dùng mặc định của Django, 
 # bạn có thể kế thừa AbstractBaseUser để tạo ra mô hình người dùng theo ý muốn.
 from django.contrib.auth.models import User
-
+from django.contrib.auth.forms import UserCreationForm
 # Create your models here.
 
 # tạo class product dùng để chứa các sản phẩm của website
@@ -31,9 +31,7 @@ class category(models.Model):
 
     def __str__(self):
         return self.name
-class UserAdmin(admin.ModelAdmin):
-    # Cấu hình hiển thị thông tin user trong trang admin
-    list_display = ['username', 'email', 'first_name', 'last_name']
+
 
 class Customer(models.Model):
     user = models.OneToOneField(User,on_delete=models.SET_NULL,null=True,blank=False)
@@ -87,3 +85,7 @@ class ShippingAddress(models.Model):
         return self.address
 
 
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username','email','first_name','last_name','password1','password2']
