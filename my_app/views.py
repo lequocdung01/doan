@@ -8,7 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 def get_my_app(request):
     product = Product.objects.all()
-    context = {'product': product}
+    categories = Category.objects.filter(is_sub=False)
+    context = {'categories': categories,'product': product}
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):
@@ -70,18 +71,29 @@ def product(request):
     page_obj = product.count()
 
     context = {'product': paged_products, 'page_obj': page_obj}
-    return render(request, 'html/category.html', context=context)
+    return render(request, 'html/product.html', context=context)
 # trang mỹ phẩm
 def product_mypham(request):
     product = Product.objects.all()
     context = {'product': product}
     return render(request, 'html/category.html', context)
+
+#Tran san pham
+def category(request):
+    categories = Category.objects.filter(is_sub=False)
+    active_category = request.GET.get('category','')
+    if active_category:
+        products = Product.objects.filter(category__slug = active_category)
+    context = {'categories': categories,'products':products,'active_category':active_category}
+    return render(request,'html/category.html', context)
+
 # trang tìm kiếm
 def search(request):
     if request.method == "POST":
         searched = request.POST["searched"]
         keys = Product.objects.filter(name__contains = searched)
     return render(request, 'html/search.html', {"searched":searched, "keys":keys })
+
 # trang sự kiện
 def event(request):
     product = Product.objects.all()

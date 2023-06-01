@@ -1,6 +1,6 @@
 {% extends 'html/base.html' %}
 {% load static %}
-{% block category %}
+{% block product %}
 
 <head>
    <link rel="stylesheet" href="{% static 'assets/category.css' %}" />
@@ -9,9 +9,12 @@
       <div class="content_left">
          <div class="content_left_category">
             <a href="" class="content_left_category_header"> <i class="fa-solid fa-list"></i> Tất Cả Danh Mục </a>
-            {% for category in categories %}
-             <a href="{% url 'category' %}?category={{category.slug}}">{{ category.name }}</a>
-             {% endfor %}
+            <a href="/project/html/My%20pham/main/category.html" class="content_left_category_main">Mỹ Phẩm </a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Thực phẩm</a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Quần áo</a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Đồ gia dụng</a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Đồ chơi</a>
+            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Khác</a>
          </div>
       </div>
       <div class="content_right">
@@ -46,7 +49,7 @@
          </div>
          
          <div class="content_right_group_item">
-            {% for product in products  %}
+            {% for product in product  %}
             
             <div class="content_right_item">
                <div class="content_right_item_header">
@@ -126,4 +129,4 @@
       </div>
    </div>
    
-{% endblock category %}
+{% endblock product %}
