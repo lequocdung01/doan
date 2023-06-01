@@ -1,10 +1,15 @@
 {% extends 'html/base.html' %}
 {% load static %}
+<<<<<<< HEAD
 {% block category %}
+=======
+>>>>>>> bc6e865aa67209de5f172cfeed0b7bbe955d3782
 
+{% block mypham %}
 <head>
    <link rel="stylesheet" href="{% static 'assets/category.css' %}" />
 </head>
+<body>
     <div class="content">
       <div class="content_left">
          <div class="content_left_category">
@@ -46,43 +51,48 @@
          </div>
          
          <div class="content_right_group_item">
+<<<<<<< HEAD
             {% for product in products  %}
             
             <div class="content_right_item">
                <div class="content_right_item_header">
                   <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                   <div class="submit">
+=======
+            {% for product in product  %}
+               <div class="content_right_item">
+                  <div class="content_right_item_header">
+                   <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
+                     <div class="submit">
+>>>>>>> bc6e865aa67209de5f172cfeed0b7bbe955d3782
                      
-                        <button onclick="Produce_1()">Xem chi tiết</button>
+                           <button onclick="Produce_1()">Xem chi tiết</button>
                      
+                  </div>
+                  <div class="sale">-{{product.sale}}%</div>
                </div>
-               <div class="sale">-{{product.sale}}%</div>
-            </div>
-            <div class="content_right_item_information">
+               <div class="content_right_item_information">
                
-                  <div class="name">
-                     {{product.name}}
-                  </div>
-                  <div class="price">
-                     <del >{{product.price}}</del>
-                     <span>₫3.999.000</span>
-                  </div>
-                  <div class="racting">
-                     <span>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                     </span>
-                        Đã bán {{product.sell}}    
-                  </div>
-            </div>
-            </div>
-            
-            
+                     <div class="name">
+                        {{product.name}}
+                     </div>
+                     <div class="price">
+                        <del >{{product.price}}</del>
+                        <span>₫3.999.000</span>
+                     </div>
+                     <div class="racting">
+                        <span>
+                           <i class="fa-solid fa-star"></i>
+                           <i class="fa-solid fa-star"></i>
+                           <i class="fa-solid fa-star"></i>
+                           <i class="fa-solid fa-star"></i>
+                           <i class="fa-solid fa-star-half-stroke"></i>
+                        </span>
+                         Đã bán {{product.sell}}    
+                   </div>
+               </div>
+               </div>
             {% endfor %}
-            
          </div>
          
          
@@ -125,5 +135,10 @@
         </div>
       </div>
    </div>
+<<<<<<< HEAD
    
 {% endblock category %}
+=======
+</body> 
+{% endblock mypham %}
+>>>>>>> bc6e865aa67209de5f172cfeed0b7bbe955d3782
