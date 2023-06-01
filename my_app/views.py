@@ -3,6 +3,11 @@ from .models import *
 from django.http import HttpResponse,JsonResponse
 from django.core.paginator import Paginator
 import json
+<<<<<<< HEAD
+=======
+from django.contrib.auth.forms import UserCreationForm
+
+>>>>>>> dung
 # Create your views here.
 def get_my_app(request):
     product = Product.objects.all()
