@@ -74,13 +74,8 @@ def product(request):
 
     context = {'product': paged_products, 'page_obj': page_obj}
     return render(request, 'html/product.html', context=context)
-# trang mỹ phẩm
-def product_mypham(request):
-    product = Product.objects.all()
-    context = {'product': product}
-    return render(request, 'html/category.html', context)
 
-#Tran san pham
+# Tran san pham
 def category(request):
     categories = Category.objects.filter(is_sub=False)
     active_category = request.GET.get('category','')
@@ -97,7 +92,7 @@ def search(request):
         searched = request.POST["searched"]
         keys = Product.objects.filter(name__contains = searched)
 
-    context = {"searched":searched, "keys":keys }
+    context = {"searched":searched, "keys":keys, "categories": categories, 'active_category':active_category }
     
     return render(request, 'html/search.html', context)
 
