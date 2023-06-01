@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
+from django.core.paginator import Paginator
 from django.http import HttpResponse,JsonResponse
 from django.core.paginator import Paginator
 import json
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 # Create your views here.
 def get_my_app(request):
     product = Product.objects.all()
@@ -13,8 +15,11 @@ def get_my_app(request):
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):
-    context={}
-    return render(request,'html/detail_product.html',context)
+    id =request.GET.get('id','')
+    products = Product.objects.filter(ID=id)
+    categories = Category.objects.filter(is_sub=False)
+    context={'categories': categories,'products': products}
+    return render(request,'html/detail.html',context)
 # 
 def cart(request):
     if request.user.is_authenticated:
@@ -69,16 +74,11 @@ def product(request):
     paginator = Paginator(product, 10)  # hiện số lượng sản phẩm
     paged_products = paginator.get_page(page)
     page_obj = product.count()
-
-    context = {'product': paged_products, 'page_obj': page_obj}
+    categories = Category.objects.filter(is_sub=False)
+    context = {'categories': categories,'product': paged_products, 'page_obj': page_obj}
     return render(request, 'html/product.html', context=context)
-# trang mỹ phẩm
-def product_mypham(request):
-    product = Product.objects.all()
-    context = {'product': product}
-    return render(request, 'html/category.html', context)
 
-#Tran san pham
+# Tran san pham
 def category(request):
     categories = Category.objects.filter(is_sub=False)
     active_category = request.GET.get('category','')
@@ -89,10 +89,15 @@ def category(request):
 
 # trang tìm kiếm
 def search(request):
+    searched = None
+    keys = None
     if request.method == "POST":
         searched = request.POST["searched"]
         keys = Product.objects.filter(name__contains = searched)
-    return render(request, 'html/search.html', {"searched":searched, "keys":keys })
+
+    context = {"searched":searched, "keys":keys, "categories": categories, 'active_category':active_category }
+    
+    return render(request, 'html/search.html', context)
 
 # trang sự kiện
 def event(request):
@@ -123,12 +128,27 @@ def TuyenDung(request):
 def location(request):
     context = {}
     return render(request, 'html/location.html', context)
-# trang đăng nhập/ đăng ký
+# trang đăng ký
 def form(request):
-    form = UserCreationForm()
+    form = CreateUserForm()
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
     context = {"form":form}
     return render(request, 'html/form.html', context)
+# trang dang nhap
+def login(request):
+    if request.user.is_autheticated:
+        return redirect('home')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request,username='username',password='password')
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else:
+            messages.info(request,'Tên Đăng Nhập Hoặc Mật Khẩu Không Đúng!')
+    context = {}
+    return render(request,'html/form.html',context)

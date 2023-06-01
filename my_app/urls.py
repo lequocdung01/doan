@@ -17,6 +17,7 @@ urlpatterns = [
     path('TuyenDung/',views.TuyenDung, name='TuyenDung'),
     path('location/',views.location, name='location'),
     path('form/',views.form, name='form'),
+    path('login/',views.form, name='login'),
     path('product/',views.product, name='product'),
     path('search/',views.search, name='search'),
 ]
