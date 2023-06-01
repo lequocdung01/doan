@@ -9,12 +9,9 @@
       <div class="content_left">
          <div class="content_left_category">
             <a href="" class="content_left_category_header"> <i class="fa-solid fa-list"></i> Tất Cả Danh Mục </a>
-            <a href="/project/html/My%20pham/main/category.html" class="content_left_category_main">Mỹ Phẩm </a>
-            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Thực phẩm</a>
-            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Quần áo</a>
-            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Đồ gia dụng</a>
-            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Đồ chơi</a>
-            <a href="/project/html/My%20pham/main/Don.html" class="content_left_category_main">Khác</a>
+             {% for category in categories %}
+             <a href="{% url 'category' %}?category={{category.slug}}" class="content_left_category_main">{{ category.name }}</a>
+             {% endfor %}
          </div>
       </div>
       <div class="content_right">

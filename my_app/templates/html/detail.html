@@ -6,15 +6,15 @@
 </head>
 <div class="ads">
 </div>
-
+{% for product in products%}
 <div class="frame_1">
    <div class="float_left">
-      <img class="detail_img" src="{% static 'images/toy/Gundam/png-clipart-blue-and-white-gundam-seed-kira-yamato-metal-build-zgmf-x20a-strike-freedom-gundam-zgmf-x10a-freedom-gundam-strike-miscellaneous-action-figure.png' %}">
+      <img class="detail_img" src="{{ product.ImageURL }}">
    </div>
 
    <div class="float_right">
       <div>
-         <h1>Mô hình đồ chơi Gundam</h1><br>
+         <h1>{{ product.name }}</h1><br>
          <h3 class="frame_0"> Hàng nhập khẩu từ Nhật Bản 100%</h3>
          <h3 class="frame_0">Cam kết chính hãng</h3>
 
@@ -32,7 +32,7 @@
          <a>
             <span class="text_color2">200</span> <span class="text_color1">Đã bán</span>
          </a>
-         <p class="number3"><span id="money">4000000</span> VNĐ<span class="text_color3">Giảm 12%</span></p>
+         <p class="number3"><span id="money">{{ product.price }}</span> VNĐ<span class="text_color3">Giảm {{ product.sale }}</span></p>
 
       </div>
       <div>
@@ -69,19 +69,7 @@
                </td>
             </tr>
             <tr>
-               <td>
-                  Số lượng
-               </td>
-               <td>
-                  <input type="number" min="1" max="100" step="1" id="quantity"></input>
-               </td>
-            </tr>
-            <tr>
-               <td>Tỗng tiền</td>
-               <td id="Sum"> </td>
-            </tr>
-            <tr>
-               <td><button id="pay"><a href='{% url 'cart' %}'>Thanh toán</a></button></td>
+               <td><button data-product="{{product.ID}}" data-action="add" class="update-cart">Mua Ngay</button></td>
                <td></td>
             </tr>
          </table>
@@ -171,4 +159,5 @@
    </div>
 
 </div>
+{% endfor %}
 {% endblock detail_content %}
