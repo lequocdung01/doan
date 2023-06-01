@@ -1,11 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from django.core.paginator import Paginator
 from django.http import HttpResponse,JsonResponse
 from django.core.paginator import Paginator
 import json
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 # Create your views here.
 def get_my_app(request):
     product = Product.objects.all()
@@ -124,7 +125,7 @@ def TuyenDung(request):
 def location(request):
     context = {}
     return render(request, 'html/location.html', context)
-# trang đăng nhập/ đăng ký
+# trang đăng ký
 def form(request):
     form = CreateUserForm()
     if request.method == "POST":
@@ -133,3 +134,18 @@ def form(request):
             form.save()
     context = {"form":form}
     return render(request, 'html/form.html', context)
+# trang dang nhap
+def login(request):
+    if request.user.is_autheticated:
+        return redirect('home')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request,username='username',password='password')
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else:
+            messages.info(request,'Tên Đăng Nhập Hoặc Mật Khẩu Không Đúng!')
+    context = {}
+    return render(request,'html/form.html',context)
