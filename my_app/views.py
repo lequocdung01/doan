@@ -7,6 +7,7 @@ import json
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def get_my_app(request):
     product = Product.objects.all()
@@ -139,8 +140,6 @@ def register(request):
     return render(request, 'html/register.html', context)
 # trang dang nhap
 def loginPage(request):
-    if request.user.is_autheticated:
-        return redirect('home')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -149,6 +148,10 @@ def loginPage(request):
             login(request,user)
             return redirect('home')
         else:
-            messages.info(request,'Tên Đăng Nhập Hoặc Mật Khẩu Không Đúng!')
+            messages.info(request,message='Tên Đăng Nhập Hoặc Mật Khẩu Không Đúng!')
     context = {}
-    return render(request,'html/form.html',context)
+    return render(request,'html/loginPage.html',context)
+# trang dang xuat
+def logoutPage(request):
+    logout(request)
+    return redirect('login')
