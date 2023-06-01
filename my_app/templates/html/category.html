@@ -1,10 +1,7 @@
 {% extends 'html/base.html' %}
 {% load static %}
 {% block category %}
-<head>
-   <link rel="stylesheet" href="{% static 'assets/category.css' %}" />
-</head>
-<body>
+
     <div class="content">
       <div class="content_left">
          <div class="content_left_category">
@@ -46,15 +43,13 @@
          </div>
          
          <div class="content_right_group_item">
-
             {% for product in products  %}
             
             <div class="content_right_item">
                <div class="content_right_item_header">
                   <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                   <div class="submit">
-
-            {% for product in products  %}
+            {% for product in product  %}
                <div class="content_right_item">
                   <div class="content_right_item_header">
                    <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
@@ -129,5 +124,5 @@
         </div>
       </div>
    </div>
-</body>
 {% endblock category %}
+

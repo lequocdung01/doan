@@ -10,7 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 def get_my_app(request):
     product = Product.objects.all()
     categories = Category.objects.filter(is_sub=False)
-    context = {'product': product}
+    context = {'categories': categories,'product': product}
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):
