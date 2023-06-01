@@ -14,8 +14,11 @@ def get_my_app(request):
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):
-    context={}
-    return render(request,'html/detail_product.html',context)
+    id =request.GET.get('id','')
+    products = Product.objects.filter(ID=id)
+    categories = Category.objects.filter(is_sub=False)
+    context={'categories': categories,'products': products}
+    return render(request,'html/detail.html',context)
 # 
 def cart(request):
     if request.user.is_authenticated:
@@ -70,8 +73,8 @@ def product(request):
     paginator = Paginator(product, 10)  # hiện số lượng sản phẩm
     paged_products = paginator.get_page(page)
     page_obj = product.count()
-
-    context = {'product': paged_products, 'page_obj': page_obj}
+    categories = Category.objects.filter(is_sub=False)
+    context = {'categories': categories,'product': paged_products, 'page_obj': page_obj}
     return render(request, 'html/product.html', context=context)
 
 # Tran san pham

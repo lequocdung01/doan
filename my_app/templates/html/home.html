@@ -26,9 +26,7 @@
             <div class="content_right_item_header">
                <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                <div class="submit">
-                  
-                     <button onclick="Produce_1()">Xem chi tiết</button>
-                  
+                  <button onclick="Produce_1()">Xem chi tiết</button>
                </div>
             <div class="sell">Đã bán {{product.sell}}</div>
             </div>
@@ -40,6 +38,7 @@
          </div>
             <br>
             <button data-product="{{product.ID}}" data-action="add" class="update-cart">Mua Ngay</button>
+            <a href="{% url 'detail' %}?id={{product.ID}}">Xem chi tiết</a>
          </div>
 
          {% endif %}
@@ -71,6 +70,7 @@
          </div>
             <br>
             <button data-product="{{product.ID}}" data-action="add" class="update-cart">Mua Ngay</button>
+            <a href="{% url 'detail' %}?id={{product.ID}}">Xem chi tiết</a>
          </div>
 
          
@@ -90,7 +90,7 @@
                <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                <div class="submit">
                   
-                     <button onclick="Produce_1()">Xem chi tiết</button>
+                     <button onclick="Produce_1()"><a href="{% url 'detail' %}">Xem chi tiết</a></button>
                   
                </div>
             </div>
@@ -102,6 +102,7 @@
          </div>
             <br>
             <button data-product="{{product.ID}}" data-action="add" class="update-cart">Mua Ngay</button>
+            <a href="{% url 'detail' %}?id={{product.ID}}">Xem chi tiết</a>
          </div>
          
          {% endif %}
