@@ -9,9 +9,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 # Create your views here.
 def get_my_app(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
+    else:
+        items = []
+        order = {'get_cart_item': 0, 'get_cart_total': 0}
+        cartItems = order['get_cart_item']
     product = Product.objects.all()
     categories = Category.objects.filter(is_sub=False)
-    context = {'categories': categories,'product': product}
+    context = {'categories': categories,'product': product,'cartItems':cartItems}
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):
