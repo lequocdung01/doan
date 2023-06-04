@@ -13,14 +13,21 @@ from django.contrib.auth.decorators import login_required
 # trang chu
 def get_my_app(request):
     if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
     else:
+        items = []
+        order = {'get_cart_item': 0, 'get_cart_total': 0}
+        cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
     product = Product.objects.all()
     categories = Category.objects.filter(is_sub=False)
-    context = {'categories': categories,'product': product,'user_login':user_login, 'user_logout':user_logout}
+    context = {'categories': categories,'product': product,'cartItems':cartItems,'user_login':user_login, 'user_logout':user_logout}
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):

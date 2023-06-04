@@ -63,7 +63,7 @@
              <span >{{request.user}}<a href="{% url 'logout' %}">Đăng Xuất</a></span>
          </p>
 
-         <p class="shopping"><a href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a></p>
+         <p class="shopping"><a href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a> {{cartItems}}</p>
       </div>
       <div id="nav">
          <nav class="topnav">
