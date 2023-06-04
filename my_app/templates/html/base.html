@@ -56,8 +56,13 @@
       </div>
       <div class="clr"></div>
       <div class="right">
-         <p class="login"><i class="fa-solid fa-user"></i><i>&nbsp;</i><span><a href="{% url 'login' %}"
-                  >Đăng nhập</a></span></p>
+         <p class="login" style = "visibility: {{user_login}} "><i class="fa-solid fa-user"></i>
+            <span  ><a href="{% url 'login' %}"> <i>&nbsp;</i> Đăng nhập</a></span>
+         </p>
+         <p class="login" style = "visibility: {{user_logout}} ">
+             <span >{{request.user}}<a href="{% url 'logout' %}">Đăng Xuất</a></span>
+         </p>
+
          <p class="shopping"><a href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a></p>
       </div>
       <div id="nav">

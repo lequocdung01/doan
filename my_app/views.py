@@ -9,10 +9,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+# trang chu
 def get_my_app(request):
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
     product = Product.objects.all()
     categories = Category.objects.filter(is_sub=False)
-    context = {'categories': categories,'product': product}
+    context = {'categories': categories,'product': product,'user_login':user_login, 'user_logout':user_logout}
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):
@@ -24,7 +32,7 @@ def detail(request):
 # 
 def cart(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order, created = Order.objects.get_or_create(customer = customer,complete = False)
         items = order.orderitem_set.all()
     else:
@@ -36,7 +44,7 @@ def cart(request):
 #Thanh toan
 def delivery(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
     else:
@@ -49,7 +57,7 @@ def updateItem(request):
     data = json.loads(request.body)
     productID = data['productID']
     action = data['action']
-    customer = request.user.customer
+    customer = request.user
     product = Product.objects.get(ID = productID)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
@@ -136,6 +144,9 @@ def register(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('home')
+        else:
+            messages.error(request=request,message='Tên đăng nhập đã tồn tại!')
     context = {"form":form}
     return render(request, 'html/register.html', context)
 # trang dang nhap
@@ -154,4 +165,5 @@ def loginPage(request):
 # trang dang xuat
 def logoutPage(request):
     logout(request)
+    messages.success(request=request,message='Bạn đã đăng xuất thành công!')
     return redirect('login')

@@ -38,13 +38,16 @@
                             <label class="form-label" for="form3Example4c">Mật Khẩu</label>
                             <input type="password" id="form3Example1c" class="form-control" name="password" />
                           </div>
+                          
                         </div>
-      
+                          {% for message in messages %}
+                            <p id="message" class="text-center h6 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{message}}</p>
+                          {% endfor %}
                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button type="submit" class="btn btn-primary btn-lg">Đăng Nhập</button>
-                          <p class="text-center h6 fw-bold mb-5 mx-1 mx-md-4 mt-4">Bạn chưa có tài khoản? <a href="{% url 'register' %}">Đăng Ký</a> </p>
+                          
                         </div>
-      
+                        <p class="text-center h6 fw-bold mb-5 mx-1 mx-md-4 mt-4">Bạn chưa có tài khoản? <a href="{% url 'register' %}">Đăng Ký</a> </p>
                       </form>
       
                     </div>
