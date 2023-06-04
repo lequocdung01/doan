@@ -10,7 +10,7 @@ a{
 }
 @font-face {
   font-family: roboto;
-  src: url(/project/fonts/RobotoCondensed-Regular.ttf);
+  src: url(/static/fonts/RobotoCondensed-Regular.ttf);
 }
 input[type="checkbox"] {
   accent-color: red;

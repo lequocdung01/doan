@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: roboto;
-    src: url(/project/fonts/RobotoCondensed-Regular.ttf);
+    src: url(/static/fonts/RobotoCondensed-Regular.ttf);
 }
 
 body {

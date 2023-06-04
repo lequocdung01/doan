@@ -12,11 +12,11 @@ body{
 }
 @font-face {
     font-family: roboto;
-    src: url(/project/fonts/RobotoCondensed-Regular.ttf);
+    src: url(/static/fonts/RobotoCondensed-Regular.ttf);
 }
 .form-contact{
-   margin: 2000px:
-   padding: 2000px:
+   margin: 2000px;
+   padding: 2000px;
 }
 .form-contact-content{
     width: 100%;

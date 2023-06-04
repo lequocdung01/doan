@@ -31,10 +31,16 @@ def get_my_app(request):
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
     id =request.GET.get('id','')
     products = Product.objects.filter(ID=id)
     categories = Category.objects.filter(is_sub=False)
-    context={'categories': categories,'products': products}
+    context={'categories': categories,'products': products,'user_login':user_login, 'user_logout':user_logout}
     return render(request,'html/detail.html',context)
 # 
 def cart(request):
@@ -42,10 +48,14 @@ def cart(request):
         customer = request.user
         order, created = Order.objects.get_or_create(customer = customer,complete = False)
         items = order.orderitem_set.all()
+        user_login = "hidden"
+        user_logout = "show"
     else:
         items = []
         order = {'get_cart_item':0,'get_cart_total':0}
-    context={'items':items, 'order':order}
+        user_login = "show"
+        user_logout = "hidden"
+    context={'items':items, 'order':order, 'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/cart.html', context)
 
 #Thanh toan
@@ -54,10 +64,14 @@ def delivery(request):
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
+        user_login = "hidden"
+        user_logout = "show"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
-    context = {'items': items, 'order': order}
+        user_login = "show"
+        user_logout = "hidden"
+    context = {'items': items, 'order': order, 'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/delivery.html', context)
 
 def updateItem(request):
@@ -79,11 +93,23 @@ def updateItem(request):
 
 #Thanh toan
 def payment(request):
-    context = {}
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
+    context = {'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/payment.html', context)
 
 # trang sản phẩm
 def product(request):
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
     product = Product.objects.all()
     page = request.GET.get('page')
     page = page or 1
@@ -91,58 +117,114 @@ def product(request):
     paged_products = paginator.get_page(page)
     page_obj = product.count()
     categories = Category.objects.filter(is_sub=False)
-    context = {'categories': categories,'product': paged_products, 'page_obj': page_obj}
+    context = {'categories': categories,'product': paged_products, 'page_obj': page_obj,'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/product.html', context=context)
 
 # Tran san pham
 def category(request):
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
     categories = Category.objects.filter(is_sub=False)
     active_category = request.GET.get('category','')
     if active_category:
         products = Product.objects.filter(category__slug = active_category)
-    context = {'categories': categories,'products':products,'active_category':active_category}
+    context = {'categories': categories,'products':products,'active_category':active_category,'user_login':user_login, 'user_logout':user_logout}
     return render(request,'html/category.html', context)
 
 # trang tìm kiếm
 def search(request):
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
+    categories = Category.objects.filter(is_sub=False)
+    active_category = request.GET.get('category','')
     searched = None
     keys = None
     if request.method == "POST":
         searched = request.POST["searched"]
         keys = Product.objects.filter(name__contains = searched)
 
-    context = {"searched":searched, "keys":keys, "categories": categories, 'active_category':active_category }
+    context = {"searched":searched, "keys":keys, "categories": categories, 'active_category':active_category,'user_login':user_login, 'user_logout':user_logout }
     
     return render(request, 'html/search.html', context)
 
 # trang sự kiện
 def event(request):
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
     product = Product.objects.all()
-    context = {'product': product}
+    context = {'product': product,'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/event.html', context)
 # trang liên hệ
 def contactus(request):
-    context = {}
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
+    context = {'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/contactus.html', context)
 # trang đăng ký thành viên 
 def regestermember(request):
-    context = {}
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
+    context = {'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/regestermember.html', context)
 # trang khuyến mãi
 def memberkhuyenmai(request):
-    context = {}
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
+    context = {'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/memberkhuyenmai.html', context)
 # trang giới thiệu
 def introduce(request):
-    context = {}
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
+    context = {'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/introduce.html', context)
 # trang tuyển dụng
 def TuyenDung(request):
-    context = {}
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
+    context = {'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/TuyenDung.html', context)
 # trang địa chỉ
 def location(request):
-    context = {}
+    if request.user.is_authenticated:
+        user_login = "hidden"
+        user_logout = "show"
+    else:
+        user_login = "show"
+        user_logout = "hidden"
+    context = {'user_login':user_login, 'user_logout':user_logout}
     return render(request, 'html/location.html', context)
 # trang đăng ký
 def register(request):
