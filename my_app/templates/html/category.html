@@ -52,12 +52,12 @@
                <div class="content_right_item_header">
                   <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                   <div class="submit">
-
-                        <button onclick="Produce_1()">Xem chi tiết</button>
-
-               </div>
+                        <a href="{% url 'detail' %}?id={{product.ID}}"><input type="submit" value="Xem chi tiết" class="button"></a>
+                  </div>
+               
                <div class="sale">-{{product.sale}}%</div>
             </div>
+            
             <div class="content_right_item_information">
 
                   <div class="name">
@@ -78,10 +78,12 @@
                         Đã bán {{product.sell}}
                   </div>
             </div>
-            </div>
-
+         
+         </div>
+         
 
             {% endfor %}
+         </div>
 
          </div>
 

@@ -1,8 +1,5 @@
 from django.contrib import admin
 from django.db import models
-# AbstractBaseUser là một lớp cơ sở trừu tượng được cung cấp sẵn để tạo ra mô hình người dùng tùy chỉnh. 
-# Khi bạn muốn tạo một hệ thống người dùng riêng biệt và không sử dụng mô hình người dùng mặc định của Django, 
-# bạn có thể kế thừa AbstractBaseUser để tạo ra mô hình người dùng theo ý muốn.
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 # Create your models here.
@@ -89,3 +86,5 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username','email','first_name','last_name','password1','password2']
+
+

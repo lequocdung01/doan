@@ -139,24 +139,25 @@
 </div>
 <div class="comment_item">
    <h1 class="comment_title">Ý kiến</h1>
+   {% for comment in post.comments.all %}
    <label class="comment_font">
-      <span class="text_color1">Người viết:</span>
-      <input id="member" />
+      <span class="text_color1">Người viết:{{comment.customer}}</span>
    </label>
-   <textarea id="comment" rows="10" cols="20" maxlength="1024" placeholder="Ý kiến của bạn"
-      oninput="show()"></textarea>
+   <p > {{comment.body|linebreaks}} </p>
    <br>
-   <p id="submit" class="hide" onclick="submit()">Gửi bình luận</p>
-
-   <p id="comment1" class="show"></p>
+   {% endfor %}
 </div>
-<div class="comment_title1">
-   <h2 class="text_color1">Bình luận</h2>
-   <hr class="hr_style">
-   <br>
-   <div id="comments" style="padding-left: 50px;">
-
-   </div>
+{% if user.username %}
+<div class="comment_item">
+   <form action = "" method = 'POST'>
+      {% csrf_token %}
+      <h1 class="comment_title">Ý kiến</h1>
+      <p>
+         {{form.body}}
+      </p>
+      <input type="submit" value="Gửi bình luận">
+</div>
+{% endif %}
 
 </div>
 {% endfor %}
