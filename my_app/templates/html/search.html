@@ -10,7 +10,7 @@
          <div class="content_left_category">
             <a href="" class="content_left_category_header"> <i class="fa-solid fa-list"></i> Tất Cả Danh Mục </a>
             {% for category in categories %}
-             <a href="{% url 'category' %}?category={{category.slug}}">{{ category.name }}</a>
+             <a href="{% url 'category' %}?category={{category.slug}}" class="content_left_category_main">{{ category.name }}</a>
              {% endfor %}
          </div>
       </div>
@@ -44,7 +44,7 @@
                  </form>
             </div>
          </div>
-         <h5>Sản Phẩm Liên Quan Đến: {{searched}}</h5>
+         <h5>Sản Phẩm Liên Quan Đến: {{searched}}</h5> 
          <div class="content_right_group_item">
             {% for product in keys  %}
 
@@ -52,12 +52,12 @@
                <div class="content_right_item_header">
                   <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                   <div class="submit">
-
-                        <button onclick="Produce_1()">Xem chi tiết</button>
-
-               </div>
+                        <a href="{% url 'detail' %}?id={{product.ID}}"><input type="submit" value="Xem chi tiết" class="button"></a>
+                  </div>
+               
                <div class="sale">-{{product.sale}}%</div>
             </div>
+            
             <div class="content_right_item_information">
 
                   <div class="name">
@@ -78,10 +78,12 @@
                         Đã bán {{product.sell}}
                   </div>
             </div>
-            </div>
-
+         
+         </div>
+         
 
             {% endfor %}
+         </div>
 
          </div>
 
