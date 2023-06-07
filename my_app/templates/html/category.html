@@ -47,45 +47,44 @@
 
          <div class="content_right_group_item">
             {% for product in products  %}
-
             <div class="content_right_item">
                <div class="content_right_item_header">
-                  <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
+                  <img src="{{ product.ImageURL }}" alt="" class="content_right_item_header_img" >
                   <div class="submit">
-                        <a href="{% url 'detail' %}?id={{product.ID}}"><input type="submit" value="Xem chi tiết" class="button"></a>
+                     
+                     <button>Xem chi tiết</button>
+                  
                   </div>
-               
-               <div class="sale">-{{product.sale}}%</div>
-            </div>
-            
-            <div class="content_right_item_information">
-
+                  <div class="sale">-{{product.sale}}%</div>
+               </div>
+               <div class="content_right_item_information">
                   <div class="name">
                      {{product.name}}
                   </div>
                   <div class="price">
                      <del >{{product.price}}</del>
-                     <span>₫3.999.000</span>
+                     <span>₫3.599.000</span>
                   </div>
                   <div class="racting">
                      <span>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star-half-stroke"></i>
+                        <i class="fa-regular fa-star"></i>
                      </span>
-                        Đã bán {{product.sell}}
+                        Đã bán {{product.sell}}   
                   </div>
+               </div>
             </div>
-         
-         </div>
+
+            
          
 
             {% endfor %}
          </div>
 
-         </div>
+        
 
 
 

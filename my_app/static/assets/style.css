@@ -345,52 +345,11 @@ h2{
     position: absolute;
     top: 5.6rem;
 }
-.sale p{
-    clip-path: polygon(0 28%, 79% 28%, 85% 50%, 79% 72%, 0 72%);
-    background-color: red;
-    color: white;
-    font-size: 0.7rem;
-    padding: 10px 10px;
-    width: 60px;
-    margin-left: -30px;
-}
-
 .sale-b{
     position: absolute;
     top: 6.8rem;
 }
 
-.submit input{
-    position: absolute;
-    left: 1.5625rem;
-    top: 3.125rem;
-    padding: 0.3125rem 0.625rem;
-    margin-left: 10px;
-    display: none;
-    background-color:#fe6363;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-.hot-div:hover .submit input{
-    display: block;
-}
-.hot-div:hover .hot-img{
-    opacity: 0.5;
-}
-.hot-div:hover .hot-content{
-    font-size: 1.1rem;
-    width: 6em;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-.hot-div:hover .note{
-    opacity: 0.5;
-}
-.hot-div:hover .sale{
-    opacity: 0.5;
-}
 /*------------------------------------------------------------------------------------------------------*/
 /*----------------------------------- sale -------------------------------------------------------------*/
 .sale-now{
@@ -433,9 +392,8 @@ h2{
     display: flex;
 }
 
-.hot-div:hover .new-come-submit input{
-    display: block;
-}
+
+
 /*-----------------------------------------------------------------------------------------------------------------*/
 /*--------------------------------------- group item --------------------------------------------*/
 /* group item */
@@ -469,7 +427,7 @@ h2{
     margin-left: 50px;
     visibility: hidden;
 }
-.submit .button {
+.submit button {
     position: absolute;
     height: 25px;
     background-color: rgb(255, 51, 0);
@@ -541,7 +499,7 @@ h2{
     opacity: 0.5;
 }
 
-.content_right_item:hover .submit input{
+.content_right_item:hover .submit button {
     
     visibility: visible;
     
@@ -640,3 +598,6 @@ hr {
 }
 
 
+.new-come .name {
+    margin-top: 35px;
+}

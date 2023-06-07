@@ -26,16 +26,16 @@
             <div class="content_right_item_header">
                <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                <div class="submit">
-                  <a href="{% url 'detail' %}?id={{product.ID}}"><input type="submit" class="button" value="Xem chi tiết"></a>
+                  <button>Xem chi tiết</button>
                </div>
-            <div class="sell">Đã bán {{product.sell}}</div>
+               <div class="sell">Đã bán {{product.sell}}</div>
             </div>
-         <div class="content_right_item_information">
+            <div class="content_right_item_information">
             
                <div class="name">
                   {{product.name}}
                </div>
-         </div>
+            </div>
          </div>
 
          {% endif %}
@@ -54,17 +54,17 @@
                <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                <div class="submit">
                   
-                     <a href="{% url 'detail' %}?id={{product.ID}}"><input type="submit" class="button" value="Xem chi tiết"></a>
-                  
-            </div>
+                     <button>Xem chi tiết</button>
+                
+               </div>
             <div class="sale">-{{product.sale}}%</div>
-         </div>
-         <div class="content_right_item_information">
+            </div>
+            <div class="content_right_item_information">
             
                <div class="name">
                   {{product.name}}
                </div>
-         </div>
+            </div>
          </div>
 
          
@@ -84,16 +84,16 @@
                <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                <div class="submit">
                   
-                  <a href="{% url 'detail' %}?id={{product.ID}}"><input type="submit" class="button" value="Xem chi tiết"></a>
+                     <button>Xem chi tiết</button>
                   
                </div>
             </div>
-         <div class="content_right_item_information">
+            <div class="content_right_item_information">
             
                <div class="name">
                   {{product.name}}
                </div>
-         </div>
+             </div>
          </div>
          
          {% endif %}
