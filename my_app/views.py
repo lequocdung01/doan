@@ -27,8 +27,13 @@ def get_my_app(request):
         user_login = "show"
         user_logout = "hidden"
     product = Product.objects.all()
+    page = request.GET.get('page')
+    page = page or 1
+    paginator = Paginator(product, 6)  # hiện số lượng sản phẩm
+    paged_products = paginator.get_page(page)
+    page_obj = product.count()
     categories = Category.objects.filter(is_sub=False)
-    context = {'categories': categories,'product': product,'cartItems':cartItems,'user_login':user_login, 'user_logout':user_logout}
+    context = {'categories': categories,'product': product,'cartItems':cartItems,'user_login':user_login, 'user_logout':user_logout,'paged_products':paged_products,'page_obj':page_obj}
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):
