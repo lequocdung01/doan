@@ -67,7 +67,7 @@ body{
     display: flex;
 }
 .topnav a{   
-    display: none;
+    display: block;
     color: black;
     text-align: center;
     padding: 1.5rem 1.75rem;
@@ -167,7 +167,7 @@ h2{
     color: black;
     padding: 0.625rem 1rem;
     text-decoration: none;
-    display: none;
+    display: block;
     float: none;
     position: relative;
     top: 0.3125rem;
@@ -187,7 +187,7 @@ h2{
     color: black;
     padding: 0.625rem 1rem;
     text-decoration: none;
-    display: none;
+    display: block;
     float: none;
     position: relative;
     top: 0.3125rem;
@@ -207,7 +207,7 @@ h2{
     color: black;
     padding: 0.625rem 4.03125rem;
     text-decoration: none;
-    display: none;
+    display: block;
     float: none;
     position: relative;
     top: 0.3125rem;
@@ -226,13 +226,13 @@ h2{
     color: black;
     padding: 0.625rem 4.03125rem;
     text-decoration: none;
-    display: none;
+    display: block;
     float: none;
     position: relative;
     top: 0.3125rem;
 }
 .dropdownmenu:hover .dropdownmenu-content{
-    display: none; 
+    display: block; 
 }
 
 /* content */
@@ -352,13 +352,11 @@ h2{
     visibility: hidden;
 }
 .submit button {
-    position: absolute;
     height: 25px;
     background-color: rgb(255, 51, 0);
     border: 1px solid rgb(255, 51, 0);
     padding: 5px;
     color: white;
-    cursor: pointer;
 }
 
 /* content_right_item_information */
@@ -374,7 +372,7 @@ h2{
     height: 40px;
     font-size: 15px;
     overflow: hidden;
-    display: none;
+    display: block;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -417,28 +415,26 @@ h2{
     border: 1px solid rgb(255, 51, 0) ;
 }
 .content_right_item:hover .content_right_item_header_img{
-    opacity: 0.5;
-    
+    opacity: 0.2;
 }
 
 .content_right_item:hover .sale{
-    opacity: 0.5;
-    
+    opacity: 0.2;
 }
 
 .content_right_item:hover .submit button{
+    
     visibility: visible;
     
 }
 .content_right_item:hover .content_right_item_information {
     opacity: 0.5;
-    
 }
 
 /* content_right_page_controller */
 .content_right_page_controller {
     display: grid;
-    grid-template-columns: repeat(3, 10%);
+    grid-template-columns: repeat(5, 10%);
     width: 600px;
     height: 40px;
     margin-left: 400px;

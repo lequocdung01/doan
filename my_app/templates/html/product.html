@@ -53,7 +53,7 @@
                   <img src="{{product.ImageURL}}" alt="" class="content_right_item_header_img" >
                   <div class="submit">
                      
-                     <button>Xem chi tiết</button> 
+                     <button><a href="{% url 'detail' %}?id={{product.ID}}">Xem chi tiết</a></button> 
                      
                </div>
                <div class="sale">-{{product.sale}}%</div>

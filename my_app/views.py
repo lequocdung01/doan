@@ -53,7 +53,7 @@ def detail(request):
     id = request.GET.get('id','')
     products = Product.objects.filter(ID=id)
     categories = Category.objects.filter(is_sub=False)
-    context={'categories': categories,'products': products,'user_login':user_login,'user_logout':user_logout}
+    context={'categories': categories,'products': products,'user_login':user_login,'user_logout':user_logout,'cartItems':cartItems}
     return render(request,'html/detail.html',context)
 # 
 def cart(request):
@@ -61,14 +61,16 @@ def cart(request):
         customer = request.user
         order, created = Order.objects.get_or_create(customer = customer,complete = False)
         items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
     else:
         items = []
         order = {'get_cart_item':0,'get_cart_total':0}
+        cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
-    context={'items':items, 'order':order, 'user_login':user_login, 'user_logout':user_logout}
+    context={'items':items, 'order':order, 'user_login':user_login, 'user_logout':user_logout,"cartItems":cartItems}
     return render(request, 'html/cart.html', context)
 
 #Thanh toan
@@ -77,14 +79,16 @@ def delivery(request):
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
+        cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
-    context = {'items': items, 'order': order, 'user_login':user_login, 'user_logout':user_logout}
+    context = {'items': items, 'order': order, 'user_login':user_login, 'user_logout':user_logout,"cartItems":cartItems}
     return render(request, 'html/delivery.html', context)
 
 def updateItem(request):
