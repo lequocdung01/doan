@@ -436,7 +436,9 @@ h2{
     color: white;
     cursor: pointer;
 }
-
+.submit a {
+    color: white;
+}
 /* content_right_item_information */
 .content_right_item_information {
     width: 172px;
@@ -600,4 +602,7 @@ hr {
 
 .new-come .name {
     margin-top: 35px;
+}
+a {
+    text-decoration: non;
 }

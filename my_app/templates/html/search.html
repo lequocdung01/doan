@@ -8,9 +8,9 @@
     <div class="content">
       <div class="content_left">
          <div class="content_left_category">
-            <a href="" class="content_left_category_header"> <i class="fa-solid fa-list"></i> Tất Cả Danh Mục </a>
+            <a style="text-decoration: none"  href="" class="content_left_category_header"> <i class="fa-solid fa-list"></i> Tất Cả Danh Mục </a>
             {% for category in categories %}
-             <a href="{% url 'category' %}?category={{category.slug}}" class="content_left_category_main">{{ category.name }}</a>
+             <a style="text-decoration: none"  href="{% url 'category' %}?category={{category.slug}}" class="content_left_category_main">{{ category.name }}</a>
              {% endfor %}
          </div>
       </div>
@@ -21,17 +21,17 @@
             </p>
             <div class="content_right_category_item_button_a popular">
                 <button>
-                    <a href="/project/html/my%20pham/category/Pho_Bien.html">Phổ Biến</a>
+                    <a style="text-decoration: none"  href="/project/html/my%20pham/category/Pho_Bien.html">Phổ Biến</a>
                 </button>
             </div>
             <div class="content_right_category_item_button_new">
                 <button>
-                    <a href="/project/html/my%20pham/category/Moi_Nhat.html">Mới Nhất</a>
+                    <a style="text-decoration: none"  href="/project/html/my%20pham/category/Moi_Nhat.html">Mới Nhất</a>
                 </button>
             </div>
             <div class="content_right_category_item_button_selling">
                 <button>
-                    <a href="/project/html/my%20pham/category/Ban_Chay.html">Bán Chạy</a>
+                    <a style="text-decoration: none"  href="/project/html/my%20pham/category/Ban_Chay.html">Bán Chạy</a>
                 </button>
             </div>
             <div class="content_right_category_item_button_price">
@@ -52,7 +52,7 @@
                   <img src="{{ product.ImageURL }}" alt="" class="content_right_item_header_img" >
                   <div class="submit">
                      
-                     <button><a href="{% url 'detail' %}?id={{product.ID}}">Xem chi tiết</a></button>
+                     <button><a style="text-decoration: none"  href="{% url 'detail' %}?id={{product.ID}}">Xem chi tiết</a></button>
                   
                   </div>
                   <div class="sale">-{{product.sale}}%</div>
@@ -95,7 +95,7 @@
             <div class="content_right_page_controller_button_left">
                 <button type="submit">
                   {% if product.number|add:'-1' > 0 %}
-                     <a href="{% url 'product' %}?page={{product.number|add:'-1'}}" ><i class="fa-solid fa-angle-left"></i></a>
+                     <a style="text-decoration: none"  href="{% url 'product' %}?page={{product.number|add:'-1'}}" ><i class="fa-solid fa-angle-left"></i></a>
                   {% endif %}
                 </button>
             </div>
@@ -105,7 +105,7 @@
 
                 <button type="submit" >
 
-                    <a href="{% url 'product' %}?page={{page}}" >{{page}}</a>
+                    <a style="text-decoration: none"  href="{% url 'product' %}?page={{page}}" >{{page}}</a>
 
                 </button>
 
@@ -116,7 +116,7 @@
                 <button type="submit">
                   {% for page in product.paginator.page_range  %}
                      {% if product.number|add:'1' == page %}
-                        <a href="{% url 'product' %}?page={{product.number|add:'1'}}" ><i class="fa-solid fa-angle-right"></i></a>
+                        <a style="text-decoration: none"  href="{% url 'product' %}?page={{product.number|add:'1'}}" ><i class="fa-solid fa-angle-right"></i></a>
                      {% endif %}
                   {% endfor %}
 

@@ -69,8 +69,21 @@
                </td>
             </tr>
             <tr>
-               <td><button data-product="{{product.ID}}" data-action="add" class="update-cart">Mua Ngay</button></td>
-               <td></td>
+               <td >
+                  <div style = "visibility: {{user_logout}} ">
+                     <button data-product="{{product.ID}}" data-action="add" class="update-cart">
+                        <a  href="{% url 'cart' %}"> Mua Ngay </a>
+                     
+                     </button>
+                  </div>
+
+                  <div style = "visibility: {{user_login}} ">
+                     <button data-product="{{product.ID}}" data-action="add" class="update-cart">
+                        <a  href="{% url 'cart' %}"> Mua Ngay </a>
+                     
+                     </button>
+                  </div>
+               </td>
             </tr>
          </table>
       </div>

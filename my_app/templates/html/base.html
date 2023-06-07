@@ -57,44 +57,44 @@
       <div class="clr"></div>
       <div class="right">
          <p class="login" style = "visibility: {{user_login}} "><i class="fa-solid fa-user"></i>
-            <span  ><a href="{% url 'login' %}"> <i>&nbsp;</i> Đăng nhập</a></span>
+            <span  ><a style="text-decoration: none" href="{% url 'login' %}"> <i>&nbsp;</i> Đăng nhập</a></span>
          </p>
          <p class="login" style = "visibility: {{user_logout}} ">
-             <span >{{request.user}}<a href="{% url 'logout' %}">Đăng Xuất</a></span>
+             <span >{{request.user}}<a style="text-decoration: none" href="{% url 'logout' %}">Đăng Xuất</a></span>
          </p>
 
-         <p class="shopping"><a href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a> {{cartItems}}</p>
+         <p class="shopping"><a style="text-decoration: none" href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a> {{cartItems}}</p>
       </div>
       <div id="nav">
          <nav class="topnav">
-            <a href="{% url 'home' %}">TRANG CHỦ</a>
-            <div class="dropdownmenu"><a href="{% url 'product' %}">SẢN PHẨM</a>
+            <a style="text-decoration: none" href="{% url 'home' %}">TRANG CHỦ</a>
+            <div class="dropdownmenu"><a style="text-decoration: none" href="{% url 'product' %}">SẢN PHẨM</a>
                <div class="dropdownmenu-content-sp dropdownmenu-content">
                   {% for category in categories %}
-                  <a href="{% url 'category' %}?category={{category.slug}}">{{ category.name }}</a>
+                  <a style="text-decoration: none" href="{% url 'category' %}?category={{category.slug}}">{{ category.name }}</a>
                   {% endfor %}
                </div>
             </div>
-            <div class="dropdownmenu"><a href="{% url 'memberkhuyenmai' %}">THÀNH VIÊN</a>
+            <div class="dropdownmenu"><a style="text-decoration: none" href="{% url 'memberkhuyenmai' %}">THÀNH VIÊN</a>
                <div class="dropdownmenu-content-tv dropdownmenu-content">
-                  <a href="{% url 'memberkhuyenmai' %}" >ƯU ĐÃI</a>
-                  <a href="{% url 'regestermember' %}" >ĐĂNG KÝ</a>
+                  <a style="text-decoration: none" href="{% url 'memberkhuyenmai' %}" >ƯU ĐÃI</a>
+                  <a style="text-decoration: none" href="{% url 'regestermember' %}" >ĐĂNG KÝ</a>
                </div>
             </div>
-            <div class="dropdownmenu"><a href="{% url 'event' %}">KHUYẾN MÃI VÀ SỰ KIỆN</a>
+            <div class="dropdownmenu"><a style="text-decoration: none" href="{% url 'event' %}">KHUYẾN MÃI VÀ SỰ KIỆN</a>
 
             </div>
-            <div class="dropdownmenu"><a href="{% url 'introduce' %}">VỀ CHÚNG TÔI</a>
+            <div class="dropdownmenu"><a style="text-decoration: none" href="{% url 'introduce' %}">VỀ CHÚNG TÔI</a>
                <div class="dropdownmenu-content-us dropdownmenu-content">
-                  <a href="{% url 'introduce' %}" >GIỚI THIỆU</a>
-                  <a href="{% url 'TuyenDung' %}">TUYỂN DỤNG</a>
+                  <a style="text-decoration: none" href="{% url 'introduce' %}" >GIỚI THIỆU</a>
+                  <a style="text-decoration: none" href="{% url 'TuyenDung' %}">TUYỂN DỤNG</a>
                </div>
             </div>
             <div class="dropdownmenu">
-               <a href="{% url 'contactus' %}" >LIÊN HỆ</a>
+               <a style="text-decoration: none" href="{% url 'contactus' %}" >LIÊN HỆ</a>
             </div>
             <div class="dropdownmenu">
-               <a href="{% url 'location' %}" >HỆ THỐNG CỬA HÀNG</a>
+               <a style="text-decoration: none" href="{% url 'location' %}" >HỆ THỐNG CỬA HÀNG</a>
             </div>
             
          </nav>
@@ -154,11 +154,11 @@
       <div class="footer-follow-us">
          <p class="footer-follow-us-content">Kết nối với chúng tôi trên mạng xã hội:</p>
          <div class="footer-follow-us-logo">
-            <a href=""><i class="fa-brands fa-facebook">&nbsp;</i></a>
-            <a href=""><i class="fa-brands fa-instagram">&nbsp;</i></a>
-            <a href=""><i class="fa-brands fa-square-twitter">&nbsp;</i></a>
-            <a href=""><i class="fa-brands fa-linkedin">&nbsp;</i></a>
-            <a href=""><i class="fa-brands fa-google">&nbsp;</i></a>
+            <a style="text-decoration: none" href=""><i class="fa-brands fa-facebook">&nbsp;</i></a>
+            <a style="text-decoration: none" href=""><i class="fa-brands fa-instagram">&nbsp;</i></a>
+            <a style="text-decoration: none" href=""><i class="fa-brands fa-square-twitter">&nbsp;</i></a>
+            <a style="text-decoration: none" href=""><i class="fa-brands fa-linkedin">&nbsp;</i></a>
+            <a style="text-decoration: none" href=""><i class="fa-brands fa-google">&nbsp;</i></a>
          </div>
       </div>
       <div class="footer-content">
@@ -172,10 +172,10 @@
             <p>THÔNG TIN CỬA HÀNG</p>
             <p>
             <ul>
-               <li><a href="">Giới thiệu cửa hàng</a></li>
-               <li><a href="">Hệ thống cửa hàng</a></li>
-               <li><a href="">Phương châm bán hàng</a></li>
-               <li><a href="">Tuyển dụng</a></li>
+               <li><a style="text-decoration: none" href="">Giới thiệu cửa hàng</a></li>
+               <li><a style="text-decoration: none" href="">Hệ thống cửa hàng</a></li>
+               <li><a style="text-decoration: none" href="">Phương châm bán hàng</a></li>
+               <li><a style="text-decoration: none" href="">Tuyển dụng</a></li>
             </ul>
             </p>
          </div>
@@ -183,10 +183,10 @@
             <p>CHÍNH SÁCH CHUNG</p>
             <p>
             <ul>
-               <li><a href="">Bảo trì - Bảo hành - Đổi trả</a></li>
-               <li><a href="">Quy định giao hàng</a></li>
-               <li><a href="">Điều khoản sử dụng</a></li>
-               <li><a href="">Thỏa thuận người dùng</a></li>
+               <li><a style="text-decoration: none" href="">Bảo trì - Bảo hành - Đổi trả</a></li>
+               <li><a style="text-decoration: none" href="">Quy định giao hàng</a></li>
+               <li><a style="text-decoration: none" href="">Điều khoản sử dụng</a></li>
+               <li><a style="text-decoration: none" href="">Thỏa thuận người dùng</a></li>
             </ul>
             </p>
          </div>
@@ -194,10 +194,10 @@
             <p>THẺ THÀNH VIÊN</p>
             <p>
             <ul>
-               <li><a href="">Quyền lợi của Thành Viên</a></li>
-               <li><a href="">Hỗ trợ thành viên</a></li>
-               <li><a href="">Điều khoản sử dụng</a></li>
-               <li><a href="">Thỏa thuận người dùng</a></li>
+               <li><a style="text-decoration: none" href="">Quyền lợi của Thành Viên</a></li>
+               <li><a style="text-decoration: none" href="">Hỗ trợ thành viên</a></li>
+               <li><a style="text-decoration: none" href="">Điều khoản sử dụng</a></li>
+               <li><a style="text-decoration: none" href="">Thỏa thuận người dùng</a></li>
             </ul>
             </p>
          </div>
