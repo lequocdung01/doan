@@ -12,17 +12,18 @@
           <form method = "POST" action="" >
             {% csrf_token %}
               <table align="center" id="myfont" align="left">
+
                   <tr>
                       <td>
                           <p>
-                              <label for="id_ID">ID sản phẩm:</label> <br>
-                              <input type="number" placeholder="" class="input" id="id_ID" name="ID">
+                              <label for="id_ID">ID sản phẩm:</label>
+                              <input type="number" name="ID" required="" id="id_ID" class="input">
                           </p>
                       </td>
                   </tr>
                   <tr>
                     <td>
-                        <label for="id_category">Loại sản phẩm:</label> <br>
+                        <label for="id_category">Loại sản phẩm:</label>
                         <select name="category" required="" id="id_category" class="input">
                           <option value="Đồ chơi" selected="selected">Đồ chơi</option>
                   
@@ -38,39 +39,46 @@
                   
                         </select>
                     </td>
-                </tr>
+                  </tr>
                   <tr>
                       <td>
-                          <label for="id_name">Tên sản phẩm:</label> <br>
-                          <input type="text" placeholder="" class="input" id="id_name" name = "name">
+                          <label for="id_name">Tên sản phẩm:</label>
+                          <input type="text" name="name" maxlength="200" required="" id="id_name" class="input">
                       </td>
                       
                   </tr>
                   <tr>
                       <td>
-                          <label for="id_price">Giá sản phẩm:</label> <br>
-                          <input type="number" placeholder="" class="input" id="id_price" name="price">
+                          <label for="id_price">Giá sản phẩm:</label>
+                          <input type="number" name="price" step="any" required="" id="id_price" class="input">
                       </td>
                   </tr>
                   <tr>
                     <td>
-                        <label for="id_sell">Số lượng sản phẩm đã bán:</label> <br>
-                        <input type="number" placeholder="" class="input" id="id_sell" name="sell">
+                        <label for="id_sell">Loại sản phẩm:</label>
+                        <input type="text" name="categy" maxlength="200" required="" id="id_categy">
                     </td>
                   </tr>
                   <tr>
                     <td>
-                        <label for="id_sale">Giảm giá:</label> <br>
-                        <input type="number" placeholder="" class="input" id="id_sale" name="sale">
+                        <label for="id_sell">Số lượng sản phẩm đã bán:</label>
+                        <input type="number" name="sell" required="" id="id_sell" class="input">
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <label class="col-md-4 control-label" for="filebutton">Ảnh sản phẩm</label> <br>
-                      
-                      <input id="id_image" name="image" class="input" type="file">
+                      <label class="col-md-4 control-label" for="filebutton">Ảnh sản phẩm</label>
+                      <input type="file" name="image" accept="image/*" id="id_image">
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                        <label for="id_sale">Giảm giá:</label>
+                        <input type="number" name="sale" required="" id="id_sale" class="input">
+                    </td>
+                  </tr>
+                  
+                  
               </table> 
               <div class="DangKy">
                 <button id="button" type="submit">

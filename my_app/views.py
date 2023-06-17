@@ -20,12 +20,17 @@ def get_my_app(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
+        user_staff = "hidden"
     product = Product.objects.all()
     page = request.GET.get('page')
     page = page or 1
@@ -33,7 +38,7 @@ def get_my_app(request):
     paged_products = paginator.get_page(page)
     page_obj = product.count()
     categories = Category.objects.filter(is_sub=False)
-    context = {'categories': categories,'product': product,'cartItems':cartItems,'user_login':user_login, 'user_logout':user_logout,'paged_products':paged_products,'page_obj':page_obj}
+    context = {'categories': categories,'product': product,'cartItems':cartItems,'user_login':user_login, 'user_logout':user_logout,'paged_products':paged_products,'page_obj':page_obj,'user_staff':user_staff}
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):
@@ -44,16 +49,21 @@ def detail(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
+        user_staff = "hidden"
     id = request.GET.get('id','')
     products = Product.objects.filter(ID=id)
     categories = Category.objects.filter(is_sub=False)
-    context={'categories': categories,'products': products,'user_login':user_login,'user_logout':user_logout,'cartItems':cartItems}
+    context={'categories': categories,'products': products,'user_login':user_login,'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff}
     return render(request,'html/detail.html',context)
 # 
 def cart(request):
@@ -64,13 +74,19 @@ def cart(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item':0,'get_cart_total':0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
-    context={'items':items, 'order':order, 'user_login':user_login, 'user_logout':user_logout,"cartItems":cartItems}
+        user_staff = "hidden"
+    categories = Category.objects.filter(is_sub=False)
+    context={'items':items, 'order':order, 'user_login':user_login, 'user_logout':user_logout,"cartItems":cartItems,'user_staff':user_staff,'categories':categories}
     return render(request, 'html/cart.html', context)
 
 #Thanh toan
@@ -82,13 +98,19 @@ def delivery(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
-    context = {'items': items, 'order': order, 'user_login':user_login, 'user_logout':user_logout,"cartItems":cartItems}
+        user_staff = "hidden"
+    categories = Category.objects.filter(is_sub=False)
+    context = {'items': items, 'order': order, 'user_login':user_login, 'user_logout':user_logout,"cartItems":cartItems,'user_staff':user_staff,"categories":categories}
     return render(request, 'html/delivery.html', context)
 
 def updateItem(request):
@@ -117,13 +139,19 @@ def payment(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems}
+        user_staff = "hidden"
+    categories = Category.objects.filter(is_sub=False)
+    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
     return render(request, 'html/payment.html', context)
 
 # trang sản phẩm
@@ -135,12 +163,17 @@ def product(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
+        user_staff = "hidden"
     product = Product.objects.all()
     page = request.GET.get('page')
     page = page or 1
@@ -148,7 +181,7 @@ def product(request):
     paged_products = paginator.get_page(page)
     page_obj = product.count()
     categories = Category.objects.filter(is_sub=False)
-    context = {'categories': categories,'product': paged_products, 'page_obj': page_obj,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems}
+    context = {'categories': categories,'product': paged_products, 'page_obj': page_obj,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff}
     return render(request, 'html/product.html', context=context)
 
 # Tran san pham
@@ -160,17 +193,22 @@ def category(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
+        user_staff = "hidden"
     categories = Category.objects.filter(is_sub=False)
     active_category = request.GET.get('category','')
     if active_category:
         products = Product.objects.filter(category__slug = active_category)
-    context = {'categories': categories,'products':products,'active_category':active_category,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems}
+    context = {'categories': categories,'products':products,'active_category':active_category,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff}
     return render(request,'html/category.html', context)
 
 # trang tìm kiếm
@@ -182,12 +220,17 @@ def search(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
+        user_staff = "hidden"
     categories = Category.objects.filter(is_sub=False)
     active_category = request.GET.get('category','')
     searched = None
@@ -196,7 +239,7 @@ def search(request):
         searched = request.POST["searched"]
         keys = Product.objects.filter(name__contains = searched)
 
-    context = {"searched":searched, "keys":keys, "categories": categories, 'active_category':active_category,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems }
+    context = {"searched":searched, "keys":keys, "categories": categories, 'active_category':active_category,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff }
     
     return render(request, 'html/search.html', context)
 
@@ -209,14 +252,20 @@ def event(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
+        user_staff = "hidden"
     product = Product.objects.all()
-    context = {'product': product,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems}
+    categories = Category.objects.filter(is_sub=False)
+    context = {'product': product,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
     return render(request, 'html/event.html', context)
 # trang liên hệ
 def contactus(request):
@@ -235,13 +284,19 @@ def memberkhuyenmai(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems}
+        user_staff = "hidden"
+    categories = Category.objects.filter(is_sub=False)
+    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
     return render(request, 'html/memberkhuyenmai.html', context)
 # trang giới thiệu
 def introduce(request):
@@ -252,13 +307,19 @@ def introduce(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems}
+        user_staff = "hidden"
+    categories = Category.objects.filter(is_sub=False)
+    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
     return render(request, 'html/introduce.html', context)
 # trang tuyển dụng
 def TuyenDung(request):
@@ -269,13 +330,19 @@ def TuyenDung(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems}
+        user_staff = "hidden"
+    categories = Category.objects.filter(is_sub=False)
+    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
     return render(request, 'html/TuyenDung.html', context)
 # trang địa chỉ
 def location(request):
@@ -286,13 +353,19 @@ def location(request):
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
         cartItems = order['get_cart_item']
         user_login = "show"
         user_logout = "hidden"
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems}
+        user_staff = "hidden"
+    categories = Category.objects.filter(is_sub=False)
+    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
     return render(request, 'html/location.html', context)
 # trang đăng ký
 def register(request):
@@ -338,7 +411,8 @@ def create_product(request):
             form = ProductForm(request.POST)
             if form.is_valid():
                 form.save()
-        context = {"form":form,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems}
+        categories = Category.objects.filter(is_sub=False)
+        context = {"form":form,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'categories':categories}
         return render(request,'html/create_product.html',context)
     else:
         return redirect('home')
