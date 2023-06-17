@@ -47,6 +47,7 @@
          <h5>Sản Phẩm Liên Quan Đến: {{searched}}</h5> 
          <div class="content_right_group_item">
             {% for product in keys  %}
+            {% csrf_token %}
             <div class="content_right_item">
                <div class="content_right_item_header">
                   <img src="{{ product.ImageURL }}" alt="" class="content_right_item_header_img" >

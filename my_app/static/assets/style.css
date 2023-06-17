@@ -607,3 +607,6 @@ hr {
 a {
     text-decoration: non;
 }
+.logout {
+    display: none;
+}

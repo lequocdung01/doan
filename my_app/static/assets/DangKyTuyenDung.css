@@ -243,22 +243,27 @@ h2{
 #content {
     position: relative;
     top: 10rem;
-    width: 1000px;
+    width: 700px;
     margin: auto;
     line-height: 50px;
     text-align: left;
-    margin-left: 200px;
+    margin-left: 400px;
+    margin-right: 400px;
     font-size: 25px;
     border: 1px solid rgb(33, 32, 32);
     padding-top: 50px;
     padding-bottom: 50px;
-    padding-left: 100px;
+    padding-left: 50px;
 }
 #content h2 {
     color: rgb(237, 29, 29);
     font-weight: 800;
     text-transform:uppercase;
     font-size: 30px;
+}
+#content form {
+    width: 500px;
+    padding-left: 50px;
 }
 .input {
     width: 350px;

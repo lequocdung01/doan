@@ -60,7 +60,11 @@
             <span  ><a style="text-decoration: none" href="{% url 'login' %}"> <i>&nbsp;</i> Đăng nhập</a></span>
          </p>
          <p class="login" style = "visibility: {{user_logout}} ">
-             <span >{{request.user}}<a style="text-decoration: none" href="{% url 'logout' %}">Đăng Xuất</a></span>
+             <span >
+               {{request.user}}
+               
+            </span>
+            <a class="logout" style="text-decoration: none" href="{% url 'logout' %}">Đăng Xuất</a>
          </p>
 
          <p class="shopping"><a style="text-decoration: none" href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a> {{cartItems}}</p>

@@ -1,0 +1,85 @@
+{% extends 'html/base.html' %}
+{% load static %}
+{% block form %}
+<head>
+   <link rel="stylesheet" href="{% static 'assets/DangKyTuyenDung.css' %}" />
+</head>
+<div id="content">
+        
+  <div>
+      <div>
+          <h2>Thêm sản phẩm</h2>
+          <form method = "POST" action="" >
+            {% csrf_token %}
+              <table align="center" id="myfont" align="left">
+                  <tr>
+                      <td>
+                          <p>
+                              <label for="id_ID">ID sản phẩm:</label> <br>
+                              <input type="number" placeholder="" class="input" id="id_ID" name="ID">
+                          </p>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <label for="id_category">Loại sản phẩm:</label> <br>
+                        <select name="category" required="" id="id_category" class="input">
+                          <option value="Đồ chơi" selected="selected">Đồ chơi</option>
+                  
+                          <option value="Mỹ phẩm">Mỹ phẩm</option>
+                  
+                          <option value="Khác">Khác</option>
+                  
+                          <option value="Thực phẩm">Thực phẩm</option>
+                  
+                          <option value="Đồ gia dụng">Đồ gia dụng</option>
+                  
+                          <option value="Quần Áo">Quần Áo</option>
+                  
+                        </select>
+                    </td>
+                </tr>
+                  <tr>
+                      <td>
+                          <label for="id_name">Tên sản phẩm:</label> <br>
+                          <input type="text" placeholder="" class="input" id="id_name" name = "name">
+                      </td>
+                      
+                  </tr>
+                  <tr>
+                      <td>
+                          <label for="id_price">Giá sản phẩm:</label> <br>
+                          <input type="number" placeholder="" class="input" id="id_price" name="price">
+                      </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <label for="id_sell">Số lượng sản phẩm đã bán:</label> <br>
+                        <input type="number" placeholder="" class="input" id="id_sell" name="sell">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                        <label for="id_sale">Giảm giá:</label> <br>
+                        <input type="number" placeholder="" class="input" id="id_sale" name="sale">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label class="col-md-4 control-label" for="filebutton">Ảnh sản phẩm</label> <br>
+                      
+                      <input id="id_image" name="image" class="input" type="file">
+                    </td>
+                  </tr>
+              </table> 
+              <div class="DangKy">
+                <button id="button" type="submit">
+                    Thêm sản phẩm
+                </button>
+              </div>
+          </form>
+      </div>
+  </div>
+  
+</div>
+{% endblock form %}

@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from .forms import *
 # Create your views here.
 
 # trang chu
@@ -325,3 +325,21 @@ def logoutPage(request):
     messages.success(request=request,message='Bạn đã đăng xuất thành công!')
     return redirect('login')
 
+def create_product(request):
+    if request.user.is_staff:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
+        user_login = "hidden"
+        user_logout = "show"
+        form = ProductForm()
+        if request.method == "POST":
+            form = ProductForm(request.POST)
+            if form.is_valid():
+                form.save()
+        context = {"form":form,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems}
+        return render(request,'html/create_product.html',context)
+    else:
+        return redirect('home')
+    
