@@ -62,12 +62,14 @@
          <p class="login" style = "visibility: {{user_logout}} ">
              <span >
                {{request.user}}
+               <a class="logout" style="text-decoration: none" href="{% url 'logout' %}">Đăng Xuất</a>
                
             </span>
-            <a class="logout" style="text-decoration: none" href="{% url 'logout' %}">Đăng Xuất</a>
+            
          </p>
 
          <p class="shopping"><a style="text-decoration: none" href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a> {{cartItems}}</p>
+         
       </div>
       <div id="nav">
          <nav class="topnav">
@@ -99,6 +101,9 @@
             </div>
             <div class="dropdownmenu">
                <a style="text-decoration: none" href="{% url 'location' %}" >HỆ THỐNG CỬA HÀNG</a>
+            </div>
+            <div class="dropdownmenu" style = "visibility:{{user_staff}}">
+               <a style="text-decoration: none" href="{% url 'create' %}" >THÊM SẢN PHẨM</a>
             </div>
             
          </nav>
