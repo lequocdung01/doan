@@ -12,31 +12,30 @@
           <form method = "POST" action="" >
             {% csrf_token %}
               <table align="center" id="myfont" align="left">
-
                   <tr>
                       <td>
-                          <p>
-                              <label for="id_ID">ID sản phẩm:</label>
-                              <input type="number" name="ID" required="" id="id_ID" class="input">
-                          </p>
+                          
+                          <label for="id_ID">ID sản phẩm:</label>
+                          <input type="number" name="ID" required="" id="id_ID" class="input">
+                          
                       </td>
                   </tr>
                   <tr>
                     <td>
                         <label for="id_category">Loại sản phẩm:</label>
-                        <select name="category" required="" id="id_category" class="input">
-                          <option value="Đồ chơi" selected="selected">Đồ chơi</option>
-                  
-                          <option value="Mỹ phẩm">Mỹ phẩm</option>
-                  
-                          <option value="Khác">Khác</option>
-                  
-                          <option value="Thực phẩm">Thực phẩm</option>
-                  
-                          <option value="Đồ gia dụng">Đồ gia dụng</option>
-                  
-                          <option value="Quần Áo">Quần Áo</option>
-                  
+                        <select name="category" required="" id="id_category" multiple="" class="input">
+                          <option value="1">Đồ chơi</option>
+                        
+                          <option value="2">Mỹ phẩm</option>
+                        
+                          <option value="3">Khác</option>
+                        
+                          <option value="4">Thực phẩm</option>
+                        
+                          <option value="5">Đồ gia dụng</option>
+                        
+                          <option value="6">Quần Áo</option>
+                        
                         </select>
                     </td>
                   </tr>
@@ -56,7 +55,7 @@
                   <tr>
                     <td>
                         <label for="id_sell">Loại sản phẩm:</label>
-                        <input type="text" name="categy" maxlength="200" required="" id="id_categy">
+                        <input type="text" name="categy" maxlength="200" required="" id="id_categy" class="input">
                     </td>
                   </tr>
                   <tr>

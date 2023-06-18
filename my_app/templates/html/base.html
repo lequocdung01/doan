@@ -61,9 +61,7 @@
          </p>
          <p class="login" style = "visibility: {{user_logout}} ">
              <span >
-               {{request.user}}
-               <a class="logout" style="text-decoration: none" href="{% url 'logout' %}">Đăng Xuất</a>
-               
+               {{request.user}} | <a style="text-decoration: none" href="{% url 'logout' %}">Đăng Xuất</a>
             </span>
             
          </p>
