@@ -1,0 +1,53 @@
+{% extends 'html/base.html' %}
+{% load static %}
+{% block form %}
+<head>
+   <link rel="stylesheet" href="{% static 'assets/User.css' %}" />
+</head>
+<div id="content">
+        
+  <div>
+      <div>
+          <h2>Thông tin người dùng</h2>
+          <br>
+          <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="id_first_name">Tên:</label>
+              <input type="text" name="first_name" required="" id="id_first_name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="id_last_name">Họ:</label>
+              <input type="text" name="last_name" required="" id="id_last_name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="id_dob">Ngày sinh:</label>
+              <input type="date" name="dob" required="" id="id_dob" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Giới tính:</label><br>
+              <input type="radio" name="gender" value="Nam" id="id_gender_male">
+              <label for="id_gender_male">Nam</label>
+              <input type="radio" name="gender" value="Nữ" id="id_gender_female">
+              <label for="id_gender_female">Nữ</label>
+            </div>
+            <div class="form-group">
+              <label for="id_email">Email:</label>
+              <input type="email" name="email" required="" id="id_email" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="id_phone">Số điện thoại:</label>
+              <input type="tel" name="phone" required="" id="id_phone" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="id_address">Địa chỉ:</label>
+              <textarea name="address" id="id_address" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          
+      </div>
+  </div>
+  
+</div>
+{% endblock form %}
