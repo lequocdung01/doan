@@ -134,19 +134,32 @@
    <div class="frame_recomment">
       <h2 class="recomment_item_title">Đánh giá sản phẩm</h2>
    </div>
-   <div>
-      <span class="frame_star" id="star"> <span class="number2">4.7</span> <span class="number1">trên 5</span>
-         <span class="icon rating-outer">
-            <span class="icon rating-inner"></span>
-         </span>
-      </span>
-      <div class="Review_star"> Tất cả</div>
-      <div class="Review_star"> 5 Sao(200)</div>
-      <div class="Review_star"> 4 Sao(20)</div>
-      <div class="Review_star"> 3 Sao(10)</div>
-      <div class="Review_star"> 2 Sao(10) </div>
-      <div class="Review_star"> 1 Sao(10) </div>
-
+   <div class="stars">
+      <form action="">
+         <div class="rating">
+            <input type="radio" class="star star-5" id="star-5" name="star" value="5"/>
+            <label class="star star-5" for="star-5"></label>
+            <input type="radio" class="star star-4.5" id="star-4.5" name="star" value="4.5"/>
+            <label class="half" for="star-4.5"></label>
+            <input type="radio" class="star star-4" id="star-4" name="star" value="4"/>
+            <label class="star star-4" for="star-4"></label>
+            <input type="radio" class="star star-3.5" id="star-3.5" name="star" value="3.5"/>
+            <label class="half" for="star-3.5"></label>
+            <input type="radio" class="star star-3" id="star-3" name="star" value="3"/>
+            <label class="star star-3" for="star-3"></label>
+            <input type="radio" class="star star-2.5" id="star-2.5" name="star" value="2.5"/>
+            <label class="half" for="star-2.5"></label>
+            <input type="radio" class="star star-2" id="star-2" name="star" value="2"/>
+            <label class="star star-2" for="star-2"></label>
+            <input type="radio" class="star star-1.5" id="star-1.5" name="star" value="1.5"/>
+            <label class="half" for="star-1.5"></label>
+            <input type="radio" class="star star-1" id="star-1" name="star" value="1"/>
+            <label class="star star-1" for="star-1"></label>
+            <input type="radio" class="star star-0.5" id="star-0.5" name="star" value="0.5"/>
+            <label class="half" for="star-0.5"></label>
+         </div>
+      </form>
+      <h4 id="rating-value"></h4>
    </div>
 
 </div>

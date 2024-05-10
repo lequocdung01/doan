@@ -417,3 +417,6 @@ def create_product(request):
     else:
         return redirect('home')
     
+def user(request):
+    context = {}
+    return render(request, 'html/User.html', context)
