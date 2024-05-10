@@ -23,6 +23,7 @@ class Product(models.Model):
     sell = models.IntegerField()
     image = models.ImageField(null=True,blank=True)
     sale = models.IntegerField(null=True)
+    star_rating = models.FloatField(default=0)  # Thêm trường star_rating
     def __str__(self):
         return self.name
     @property

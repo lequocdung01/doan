@@ -3,6 +3,7 @@
 {% block detail_content %}
 <head>
    <link rel="stylesheet" href="{% static 'assets/item.css' %}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <div class="ads">
 </div>
@@ -135,8 +136,9 @@
       <h2 class="recomment_item_title">Đánh giá sản phẩm</h2>
    </div>
    <div>
-      <span class="frame_star" id="star"> <span class="number2">4.7</span> <span class="number1">trên 5</span>
-         <span class="icon rating-outer">
+      <span class="frame_star" id="star"> <span class="number2">{{product.star_rating}}</span> <span class="number1">trên 5</span>
+        
+      {% comment %} <span class="icon rating-outer">
             <span class="icon rating-inner"></span>
          </span>
       </span>
@@ -145,7 +147,34 @@
       <div class="Review_star"> 4 Sao(20)</div>
       <div class="Review_star"> 3 Sao(10)</div>
       <div class="Review_star"> 2 Sao(10) </div>
-      <div class="Review_star"> 1 Sao(10) </div>
+      <div class="Review_star"> 1 Sao(10) </div> {% endcomment %}
+      {% comment %} <i class="fa-regular fa-star"></i> {% endcomment %}
+      <div class="stars">
+         <form action="">
+            <div class="rating">
+               <input type="radio" class="star star-5" id="star-5" name="star"/>
+               <label class="star star-5" for="star-5"></label>
+               <input type="radio" class="star star-4.5" id="star-4.5" name="star"/>
+               <label class="star star-4.5" for="star-4.5"></label>
+               <input type="radio" class="star star-4" id="star-4" name="star"/>
+               <label class="star star-4" for="star-4"></label>
+               <input type="radio" class="star star-3.5" id="star-3.5" name="star"/>
+               <label class="star star-3.5" for="star-3.5"></label>
+               <input type="radio" class="star star-3" id="star-3" name="star"/>
+               <label class="star star-3" for="star-3"></label>
+               <input type="radio" class="star star-2.5" id="star-2.5" name="star"/>
+               <label class="star star-2.5" for="star-2.5"></label>
+               <input type="radio" class="star star-2" id="star-2" name="star"/>
+               <label class="star star-2" for="star-2"></label>
+               <input type="radio" class="star star-1.5" id="star-1.5" name="star"/>
+               <label class="star star-1.5" for="star-1.5"></label>
+               <input type="radio" class="star star-1" id="star-1" name="star"/>
+               <label class="star star-1" for="star-1"></label>
+               <input type="radio" class="star star-0.5" id="star-0.5" name="star"/>
+               <label class="star star-0.5" for="star-0.5"></label>
+            </div>
+         </form>
+      </div>
 
    </div>
 
