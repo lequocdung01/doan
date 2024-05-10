@@ -145,16 +145,16 @@ class MyUser(AbstractBaseUser):
     username = models.CharField(
         max_length=25, 
         unique=True,
-        default=""
+        null=True
     )
     date_of_birth = models.DateField()
     GENDER_CHOICES = (
         ('male', 'Male'),
         ('female', 'Female'),
     )
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default="")
-    address = models.CharField(max_length=255, default="")
-    phone = models.CharField(max_length=10, default="", validators=[validators.RegexValidator(r'^[0-9]*$', 'Phone number must be numeric')])
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
+    phone = models.CharField(max_length=10, null=True, validators=[validators.RegexValidator(r'^[0-9]*$', 'Phone number must be numeric')], blank=True)
     
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
