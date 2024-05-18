@@ -22,5 +22,5 @@ urlpatterns = [
     path('login/',views.loginPage, name='login'),
     path('logout/',views.logoutPage, name='logout'),
     path('create/',views.create_product,name='create'),
-    path('user/',views.user,name='user')
+    path('user/',views.user,name='user'),
 ]

@@ -88,11 +88,11 @@ class ShippingAddress(models.Model):
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username','email','first_name','last_name','password1','password2']
+        fields = ['username','email','password1','password2']
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, username, date_of_birth, gender, address, phone, password=None):
+    def create_user(self, email, username, firstname, lastname, date_of_birth, gender, address, phone, password=None):
         """
         Creates and saves a User with the given email, date of
         birth, gender, address, phone and password.
@@ -105,17 +105,20 @@ class MyUserManager(BaseUserManager):
             id=self.model.objects.last().id + 1 if self.model.objects.last() else 1,
             email=self.normalize_email(email),
             username=username,
+            firstname=firstname,
+            lastname=lastname,
             date_of_birth=date_of_birth,
             gender=gender,
             address=address,
             phone=phone,
+            
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, date_of_birth, gender, address, phone, password=None):
+    def create_superuser(self, email, username, firstname, lastname, date_of_birth, gender, address, phone, password=None):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -127,7 +130,9 @@ class MyUserManager(BaseUserManager):
             date_of_birth=date_of_birth,
             gender=gender,
             address=address,
-            phone=phone
+            phone=phone,
+            firstname=firstname,
+            lastname=lastname,
 
         )
         user.is_admin = True
@@ -137,48 +142,38 @@ class MyUserManager(BaseUserManager):
 
 class MyUser(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
-    email = models.EmailField(
-        verbose_name="email address",
-        max_length=255,
-        unique=True,
-    )
-    username = models.CharField(
-        max_length=25, 
-        unique=True,
-        default=""
-    )
-    date_of_birth = models.DateField()
+    email = models.EmailField(verbose_name="email address", max_length=255, unique=True)
+    username = models.CharField(max_length=25, unique=True)
+    date_of_birth = models.DateField(blank=True)
     GENDER_CHOICES = (
         ('male', 'Male'),
         ('female', 'Female'),
     )
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default="")
-    address = models.CharField(max_length=255, default="")
-    phone = models.CharField(max_length=10, default="", validators=[validators.RegexValidator(r'^[0-9]*$', 'Phone number must be numeric')])
-    
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
+    address = models.CharField(max_length=255, blank=True)
+    phone = models.CharField(max_length=10, blank=True, validators=[validators.RegexValidator(r'^[0-9]*$', 'Phone number must be numeric')])
+    firstname = models.CharField(max_length=255, blank=True)
+    lastname = models.CharField(max_length=255, blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-
+    date_joined = models.DateTimeField(auto_now_add=True)
+    last_login = models.DateTimeField(auto_now_add=True)
     objects = MyUserManager()
 
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["email", "date_of_birth"]
+    REQUIRED_FIELDS = ['email']
 
     def __str__(self):
         return self.email
 
     def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always
         return True
 
     @property
     def is_staff(self):
-        "Is the user a member of staff?"
-        # Simplest possible answer: All admins are staff
         return self.is_admin
+    
+    
