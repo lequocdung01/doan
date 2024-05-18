@@ -9,6 +9,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from django.db import IntegrityError
+
 # Create your views here.
 
 # trang chu
@@ -31,6 +33,7 @@ def get_my_app(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+    
     product = Product.objects.all()
     page = request.GET.get('page')
     page = page or 1
@@ -38,7 +41,7 @@ def get_my_app(request):
     paged_products = paginator.get_page(page)
     page_obj = product.count()
     categories = Category.objects.filter(is_sub=False)
-    context = {'categories': categories,'product': product,'cartItems':cartItems,'user_login':user_login, 'user_logout':user_logout,'paged_products':paged_products,'page_obj':page_obj,'user_staff':user_staff}
+    context = {'categories': categories,'product': product,'cartItems':cartItems,'user_login':user_login, 'user_logout':user_logout,'paged_products':paged_products,'page_obj':page_obj,'user_staff':user_staff, 'user':request.user}
     return render(request,'html/home.html',context)
 # chi tiết sản phẩm
 def detail(request):
@@ -369,16 +372,15 @@ def location(request):
     return render(request, 'html/location.html', context)
 # trang đăng ký
 def register(request):
-    form = CreateUserForm()
-    if request.method == "POST":
-        form = CreateUserForm(request.POST)
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('login')
-        else:
-            messages.error(request=request,message='Tên đăng nhập đã tồn tại!')
-    context = {"form":form}
-    return render(request, 'html/register.html', context)
+            user = form.save()
+            login(request, user)  # Log the user in after registration
+            return redirect('home')  # Redirect to the home page or wherever you want
+    else:
+        form = UserCreationForm()
+    return render(request, 'html/register.html', {'form': form})
 # trang dang nhap
 def loginPage(request):
     if request.method == 'POST':
@@ -416,7 +418,8 @@ def create_product(request):
         return render(request,'html/create_product.html',context)
     else:
         return redirect('home')
-    
+
+@login_required
 def user(request):
-    context = {}
-    return render(request, 'html/User.html', context)
+    return render(request, 'html/User.html', {'user': request.user})
+
