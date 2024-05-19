@@ -38,7 +38,7 @@
    <header id="header">
       <form class="search" method = POST action = "{% url 'search' %}">
          {% csrf_token %}
-         <input class="input" type="text" placeholder="Biet ong Liem khong.." name="searched">
+         <input class="input" type="text"  name="searched">
          <button type="submit"><i class="fa fa-search"></i></button>
       </form>
       <div class="clr"></div>

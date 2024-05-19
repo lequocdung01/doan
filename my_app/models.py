@@ -144,16 +144,16 @@ class MyUser(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     email = models.EmailField(verbose_name="email address", max_length=255, unique=True)
     username = models.CharField(max_length=25, unique=True)
-    date_of_birth = models.DateField(blank=True)
+    date_of_birth = models.DateField(null=True)
     GENDER_CHOICES = (
         ('male', 'Male'),
         ('female', 'Female'),
     )
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
-    address = models.CharField(max_length=255, blank=True)
-    phone = models.CharField(max_length=10, blank=True, validators=[validators.RegexValidator(r'^[0-9]*$', 'Phone number must be numeric')])
-    firstname = models.CharField(max_length=255, blank=True)
-    lastname = models.CharField(max_length=255, blank=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True)
+    address = models.CharField(max_length=255, null=True)
+    phone = models.CharField(max_length=10, null=True, validators=[validators.RegexValidator(r'^[0-9]*$', 'Phone number must be numeric')])
+    firstname = models.CharField(max_length=255, null=True)
+    lastname = models.CharField(max_length=255, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)

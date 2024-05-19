@@ -18,9 +18,7 @@ admin.site.register(ShippingAddress)
 admin.site.unregister(User)
 
 class UserAdmin(BaseUserAdmin):
-    # The forms to add and change user instances
-    form = UserChangeForm
-    add_form = UserCreationForm
+    
     
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin

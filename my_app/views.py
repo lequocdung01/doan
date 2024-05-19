@@ -272,7 +272,26 @@ def event(request):
     return render(request, 'html/event.html', context)
 # trang liên hệ
 def contactus(request):
-    context = {}
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
+        user_login = "hidden"
+        user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
+    else:
+        items = []
+        order = {'get_cart_item': 0, 'get_cart_total': 0}
+        cartItems = order['get_cart_item']
+        user_login = "show"
+        user_logout = "hidden"
+        user_staff = "hidden"
+    categories = Category.objects.filter(is_sub=False)
+    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
     return render(request, 'html/contactus.html', context)
 # trang đăng ký thành viên 
 def regestermember(request):
