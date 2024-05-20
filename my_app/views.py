@@ -177,7 +177,15 @@ def product(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
-    product = Product.objects.all()
+    ## sap xep gia
+    sort_option = request.GET.get('sort', 'gia')
+    if sort_option == 'asc':
+        product = Product.objects.all().order_by('price')
+    elif sort_option == 'desc':
+        product = Product.objects.all().order_by('-price')
+    else:
+        product = Product.objects.all()
+    ## phan trang
     page = request.GET.get('page')
     page = page or 1
     paginator = Paginator(product, 10)  # hiện số lượng sản phẩm
@@ -208,9 +216,12 @@ def category(request):
         user_logout = "hidden"
         user_staff = "hidden"
     categories = Category.objects.filter(is_sub=False)
+    
+    #####
     active_category = request.GET.get('category','')
     if active_category:
         products = Product.objects.filter(category__slug = active_category)
+    
     context = {'categories': categories,'products':products,'active_category':active_category,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff}
     return render(request,'html/category.html', context)
 
