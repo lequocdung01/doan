@@ -28,12 +28,18 @@ body{
     top: -1.9375rem;
     left: 0.3125rem;
 }
-.login{
-    margin-right: 9.375rem;
-    position: relative;
-    top: -1.625rem;
-    font-size:  1.3125rem;
+.login_out{
+    display: flex;
+    align-items: center;
+    margin-left: 60rem;
 }
+.login{
+    top: -3rem;
+    position: relative;
+    font-size:  0.3125rem;
+    white-space: nowrap;
+}
+
 .login a{
     text-decoration: none;
     color: white;
@@ -42,6 +48,32 @@ body{
 }
 .login span{
     font-size: 0.9375rem;
+}
+/* Hiển thị dropdown menu khi hover hoặc click vào phần đăng xuất */
+.login-dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(255, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.login:hover .login-dropdown-content {
+    display: block;
+}
+
+/* Thiết lập kiểu dạng và khoảng cách giữa các mục trong dropdown */
+.login-dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+}
+
+/* Highlight mục khi hover vào dropdown menu */
+.login-dropdown-content a:hover {
+    background-color: #f1f1f1;
 }
 .shopping{
     margin-right: 17.5rem;
@@ -156,11 +188,20 @@ h2{
     position: relative;
     top: -1.875rem;
 }
+.right {
+    display: flex;
+    align-items: center;
+    height: 10px;
+}
 .right p{
     float: right;
-    padding: 0rem 0.625rem;
-    margin-top: -1.6875rem;
+    padding: 0rem 1rem;
+    margin-top: -2.315rem;
     color: white;
+    right: -78rem;
+    position: relative;
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    
 }
 /*-------------------------------------- dropdownmenu -------------------------------------------------------------*/
 .dropdownmenu-content-sp{
