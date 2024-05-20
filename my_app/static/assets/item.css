@@ -632,7 +632,35 @@ h2 {
     align-items: center;
     padding: 10px;
 }
-
 .rating > input{
     display: none;
+}
+.rating > label::before {
+    content: '\f005';
+    font-family: FontAwesome;
+    margin: 5px;
+    font-size: 1.5rem;
+    display: inline-block;
+    cursor: pointer;
+}
+.rating > .half::before {
+    content: '\f089';
+    position: absolute;
+    cursor: pointer;
+}
+.rating > label {
+    color: #ddd;
+    float:right;
+    cursor: pointer;
+}
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: red;
+}
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > input:hover ~ label:checked ~ label,
+.rating > input:checked ~ label:hover ~ label{
+    color: rgb(251, 53, 53);
 }

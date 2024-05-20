@@ -9,7 +9,37 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from django.urls import reverse
+from django.utils import timezone
+from django.db.models import Avg
+from django.http import HttpResponse  # Import HttpResponse từ django.http
 # Create your views here.
+
+# trang lịch sử mua hàng
+@login_required
+def history(request):
+    customer = request.user
+    completed_orders = Order.objects.filter(customer=customer, complete=True)
+    
+    # Truy xuất tất cả các sản phẩm từ các đơn hàng đã hoàn thành
+    order_items = OrderItem.objects.filter(order__in=completed_orders).select_related('product')
+    
+    # Tạo danh sách các sản phẩm đã mua với các chi tiết cần thiết
+    purchased_items = []
+    for item in order_items:
+        shipping_address = ShippingAddress.objects.filter(order=item.order).first()
+        purchased_items.append({
+            'product': item.product,
+            'quantity': item.quantity,
+            'total_price': item.get_total,
+            'date_added': shipping_address.date_added if shipping_address else None,
+        })
+    
+    context = {
+        'purchased_items': purchased_items,
+    }
+    
+    return render(request, 'html/history.html', context)
 
 # trang chu
 def get_my_app(request):
@@ -60,11 +90,42 @@ def detail(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
-    id = request.GET.get('id','')
-    products = Product.objects.filter(ID=id)
+    prod_id = request.GET.get('id', '')
+    product = Product.objects.get(ID=prod_id)
+    
+    # Lấy giá trị trung bình của rate từ các đánh giá của sản phẩm
+    avg_rate = Review.objects.filter(product=product).aggregate(Avg('rate'))['rate__avg'] or 0
+    reviews = Review.objects.filter(product=product)
+
+    products = Product.objects.filter(ID=prod_id)
     categories = Category.objects.filter(is_sub=False)
-    context={'categories': categories,'products': products,'user_login':user_login,'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff}
-    return render(request,'html/detail.html',context)
+    context = {
+        'categories': categories,
+        'products': products,
+        'user_login': user_login,
+        'user_logout': user_logout,
+        'cartItems': cartItems,
+        'user_staff': user_staff,
+        'avg_rate': avg_rate,  # Truyền giá trị trung bình rate vào context
+        'reviews': reviews,
+    }
+    return render(request, 'html/detail.html', context)
+
+# xu ly Review
+def Review_rate(request):
+    if request.method == "GET":
+        prod_id = request.GET.get('prod_id')
+        product = Product.objects.get(ID=prod_id)
+        comment = request.GET.get('comment')
+        rate = request.GET.get('star')
+        created_at = timezone.now()  # Lấy ngày hiện tại
+        user = request.user
+        Review(user=user, product=product, comment=comment, rate=rate, created_at=created_at).save()
+        # Sử dụng reverse để xây dựng URL của trang detail và truyền prod_id qua kwargs
+        detail_url = reverse('detail')
+        return redirect(detail_url + f'?id={prod_id}')
+
+
 # 
 def cart(request):
     if request.user.is_authenticated:
@@ -112,6 +173,38 @@ def delivery(request):
     categories = Category.objects.filter(is_sub=False)
     context = {'items': items, 'order': order, 'user_login':user_login, 'user_logout':user_logout,"cartItems":cartItems,'user_staff':user_staff,"categories":categories}
     return render(request, 'html/delivery.html', context)
+
+@login_required
+def checkout(request):
+    if request.method == 'POST':
+        customer_name = request.POST.get('customerName')
+        mobile = request.POST.get('mobile')
+        city = request.POST.get('city')
+        address = request.POST.get('address')
+
+        if not all([customer_name, mobile, city, address]):
+            return HttpResponse("Vui lòng điền đầy đủ thông tin.", status=400)
+
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+        shipping_address = ShippingAddress(
+            User=customer,
+            order=order,
+            address=address,
+            city=city,
+            state=city,  # Giả sử state = city nếu không có trường state trong form
+            mobile=mobile
+        )
+        shipping_address.save()
+
+        # Đặt thuộc tính complete của order thành True
+        order.complete = True
+        order.save()
+        
+        return redirect('payment')  # Thay đổi theo URL thực tế của bạn
+
+    return render(request, 'html/delivery.html')
 
 def updateItem(request):
     data = json.loads(request.body)
@@ -417,3 +510,8 @@ def create_product(request):
     else:
         return redirect('home')
     
+def user(request):
+    context = {}
+    return render(request, 'html/User.html', context)
+        
+        

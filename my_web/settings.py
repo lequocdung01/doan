@@ -126,3 +126,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'my_app/static/images/new_images')
+
+# Disable automatic slash appending
+APPEND_SLASH = False

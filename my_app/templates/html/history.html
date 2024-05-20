@@ -1,0 +1,37 @@
+{% extends 'html/base.html' %}
+{% load static %}
+{% block history %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% if purchased_items %}
+<ul>
+    {% for item in purchased_items %}
+        <li>
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width:100px;height:100px;">
+            <p>Sản phẩm: {{ item.product.name }}</p>
+            <p>Số lượng: {{ item.quantity }}</p>
+            <p>Giá: {{ item.total_price }} VND</p>
+            <p>Ngày mua: {{ item.date_added|date:"d/m/Y H:i" }}</p> <!-- Hiển thị ngày giờ mua -->
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Bạn chưa mua sản phẩm nào.</p>
+{% endif %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock history %}
