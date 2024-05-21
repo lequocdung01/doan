@@ -9,6 +9,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from django.urls import reverse
+from django.utils import timezone
+from django.db.models import Avg
+from django.http import HttpResponse  # Import HttpResponse từ django.http
 from django.db import IntegrityError
 
 # Create your views here.
@@ -453,3 +457,41 @@ def create_product(request):
 def user(request):
     return render(request, 'html/User.html', {'user': request.user})
 
+# trang lịch sử mua hàng
+@login_required
+def history(request):
+    customer = request.user
+    completed_orders = Order.objects.filter(customer=customer, complete=True)
+    
+    # Truy xuất tất cả các sản phẩm từ các đơn hàng đã hoàn thành
+    order_items = OrderItem.objects.filter(order__in=completed_orders).select_related('product')
+    
+    # Tạo danh sách các sản phẩm đã mua với các chi tiết cần thiết
+    purchased_items = []
+    for item in order_items:
+        shipping_address = ShippingAddress.objects.filter(order=item.order).first()
+        purchased_items.append({
+            'product': item.product,
+            'quantity': item.quantity,
+            'total_price': item.get_total,
+            'date_added': shipping_address.date_added if shipping_address else None,
+        })
+    
+    context = {
+        'purchased_items': purchased_items,
+    }
+    
+    return render(request, 'html/history.html', context)
+# xu ly Review
+def Review_rate(request):
+    if request.method == "GET":
+        prod_id = request.GET.get('prod_id')
+        product = Product.objects.get(ID=prod_id)
+        comment = request.GET.get('comment')
+        rate = request.GET.get('star')
+        created_at = timezone.now()  # Lấy ngày hiện tại
+        user = request.user
+        Review(user=user, product=product, comment=comment, rate=rate, created_at=created_at).save()
+        # Sử dụng reverse để xây dựng URL của trang detail và truyền prod_id qua kwargs
+        detail_url = reverse('detail')
+        return redirect(detail_url + f'?id={prod_id}')

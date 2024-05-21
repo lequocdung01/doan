@@ -1,0 +1,32 @@
+{% extends 'html/base.html' %} {% load static %} {% block history %}
+<head>
+  <link rel="stylesheet" href="{% static 'assets/history.css' %}" />
+</head>
+<body>
+  <div class="purchase-history-container">
+    {% if purchased_items %}
+    <ul class="purchase-history-list">
+      {% for item in purchased_items %}
+      <li class="purchase-item">
+        <img
+          src="{{ item.product.image.url }}"
+          alt="{{ item.product.name }}"
+          class="product-image"
+        />
+        <div class="product-details">
+          <p class="product-name">Sản phẩm: {{ item.product.name }}</p>
+          <p class="product-quantity">Số lượng: {{ item.quantity }}</p>
+          <p class="product-price">Giá: {{ item.total_price }} VND</p>
+          <p class="purchase-date">
+            Ngày mua: {{ item.date_added|date:"d/m/Y H:i" }}
+          </p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-purchases">Bạn chưa mua sản phẩm nào.</p>
+    {% endif %}
+  </div>
+</body>
+{% endblock history %}

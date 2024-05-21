@@ -65,6 +65,7 @@
                <span>{{request.user}}</span>
                <div class="login-dropdown-content" id="logout-dropdown">
                   <a href="{% url 'user'  %}?id_user={{user.id}}">Thông tin cá nhân</a>
+                  <a style="text-decoration: none" href="{% url 'history' %}">LS</a>
                   <a href="{% url 'logout' %}">Đăng Xuất</a>
                </div>
             </div>

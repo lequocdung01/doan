@@ -23,4 +23,6 @@ urlpatterns = [
     path('logout/',views.logoutPage, name='logout'),
     path('create/',views.create_product,name='create'),
     path('user/',views.user,name='user'),
+    path('review/', views.Review_rate, name='review'),
+    path('history/', views.history, name='history'),
 ]

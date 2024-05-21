@@ -92,59 +92,26 @@ class CreateUserForm(UserCreationForm):
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, username, firstname, lastname, date_of_birth, gender, address, phone, password=None):
-        """
-        Creates and saves a User with the given email, date of
-        birth, gender, address, phone and password.
-        """
-        if not username:
-            raise ValueError("Users must have an username")
+    def create_user(self, username, email, password=None, **extra_fields):
         if not email:
-            raise ValueError("Users must have an email address")
-        user = self.model(
-            id=self.model.objects.last().id + 1 if self.model.objects.last() else 1,
-            email=self.normalize_email(email),
-            username=username,
-            firstname=firstname,
-            lastname=lastname,
-            date_of_birth=date_of_birth,
-            gender=gender,
-            address=address,
-            phone=phone,
-            
-        )
-
+            raise ValueError("The Email field must be set")
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, firstname, lastname, date_of_birth, gender, address, phone, password=None):
-        """
-        Creates and saves a superuser with the given email, date of
-        birth and password.
-        """
-        user = self.create_user(
-            email,
-            username,
-            password=password,
-            date_of_birth=date_of_birth,
-            gender=gender,
-            address=address,
-            phone=phone,
-            firstname=firstname,
-            lastname=lastname,
+    def create_superuser(self, username, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_admin', True)
+        extra_fields.setdefault('is_staff', True)
 
-        )
-        user.is_admin = True
-        user.save(using=self._db)
-        return user
-
+        return self.create_user(username, email, password, **extra_fields)
 
 class MyUser(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     email = models.EmailField(verbose_name="email address", max_length=255, unique=True)
     username = models.CharField(max_length=25, unique=True)
-    date_of_birth = models.DateField(null=True)
+    date_of_birth = models.DateField(null=True, default=None)
     GENDER_CHOICES = (
         ('male', 'Male'),
         ('female', 'Female'),
@@ -157,7 +124,7 @@ class MyUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(auto_now_add=True)
+    last_login = models.DateTimeField(auto_now=True)
     objects = MyUserManager()
 
     USERNAME_FIELD = "username"
@@ -175,5 +142,14 @@ class MyUser(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
     
+class Review(models.Model):
+    user = models.ForeignKey(User, models.CASCADE)
+    product = models.ForeignKey(Product, models.CASCADE)
+    comment = models.TextField(max_length=250)
+    rate = models.FloatField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
     
+    def __str__(self):
+        return str(self.id)

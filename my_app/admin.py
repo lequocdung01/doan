@@ -12,10 +12,31 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # Register your models here.
 admin.site.register(Product)
 admin.site.register(Category)
-admin.site.register(Order)
-admin.site.register(OrderItem)
-admin.site.register(ShippingAddress)
+# admin.site.register(Order)
+# admin.site.register(OrderItem)
+# admin.site.register(ShippingAddress)
+# admin.site.register(Review)
 admin.site.unregister(User)
+
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'product', 'comment', 'rate', 'created_at')  
+
+admin.site.register(Review, ReviewAdmin)
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'customer', 'date_order', 'complete', 'transaction_id')
+
+admin.site.register(Order, OrderAdmin)
+
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('id', 'product', 'order', 'quantity', 'date_added')
+
+admin.site.register(OrderItem, OrderItemAdmin)
+
+class ShippingAddressAdmin(admin.ModelAdmin):
+    list_display = ('id', 'User', 'order', 'address', 'city', 'state', 'mobile', 'date_added')
+
+admin.site.register(ShippingAddress, ShippingAddressAdmin)
 
 class UserAdmin(BaseUserAdmin):
     
@@ -54,4 +75,3 @@ admin.site.register(MyUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
-
