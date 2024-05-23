@@ -17,7 +17,6 @@ admin.site.register(Category)
 # admin.site.register(ShippingAddress)
 # admin.site.register(Review)
 admin.site.unregister(User)
-
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'product', 'comment', 'rate', 'created_at')  
 

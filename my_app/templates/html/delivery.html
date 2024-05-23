@@ -1,11 +1,10 @@
 {% extends 'html/base.html' %}
 {% load static %}
 {% block delivery_content %}
-<!------------------------------Cart-->
 <head>
     <link rel="stylesheet" href="{% static 'assets/delivery.css' %}">
 </head>
-<!---------------------------------------------------delivery------------------------------------------->
+<!---delivery -->
 <section class="delivery-cart">
     <div class="container">
         <div class="delivery-top-wrap">
@@ -25,45 +24,33 @@
     <div class="container">
         <div class="delivery-content row">
             <div class="delivery-content-left">
-                <p>Vui lòng chọn địa chỉ giao hàng</p>
-                <div class="delivery-content-left-dangnhap row">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <p>Đăng nhập (nếu đã có tài khoản IVY)</p>
-                </div>
-                <div class="delivery-content-left-khachle row">
-                    <input checked name="loaikhach" type="radio">
-                    <p><span style="font-weight:bold;">Khách lẻ</span> (Nếu bạn không muốn lưu lại thông tin)</p>
-                </div>
-                <div class="delivery-content-left-dangky row">
-                    <input checked name="loaikhach" type="radio">
-                    <p><span style="font-weight:bold;">Đăng ký</span> (Tạo tài khoản với thông tin đăng ký)</p>
-                </div>
-                <div class="delivery-content-left-input-top row">
-                    <div class="delivery-content-left-input-top-item">
-                        <label >Họ tên<span style="color:red">*</span></label>
-                        <input type="text">
+                <form action="{% url 'checkout' %}" method="POST">
+                    {% csrf_token %}
+                    <p>Vui lòng chọn địa chỉ giao hàng</p>
+                    <div class="delivery-content-left-input-top row">
+                        <div class="delivery-content-left-input-top-item">
+                            <label for="customerName">Họ tên<span style="color:red">*</span></label>
+                            <input type="text" name="customerName" id="customerName">
+                        </div>
+                        <div class="delivery-content-left-input-top-item">
+                            <label for="mobile">Điện thoại<span style="color:red">*</span></label>
+                            <input type="text" name="mobile" id="mobile">
+                        </div>
+                        <div class="delivery-content-left-input-top-item">
+                            <label for="city">Tỉnh/tp<span style="color:red">*</span></label>
+                            <input type="text" name="city" id="city">
+                        </div>
                     </div>
-                    <div class="delivery-content-left-input-top-item">
-                        <label >Điện thoại<span style="color:red">*</span></label>
-                        <input type="text">
+                    <div class="delivery-content-left-input-bottom">
+                        <label for="address">Địa chỉ<span style="color:red">*</span></label>
+                        <input type="text" name="address" id="address">
                     </div>
-                    <div class="delivery-content-left-input-top-item">
-                        <label >Tỉnh/tp<span style="color:red">*</span></label>
-                        <input type="text">
+                    <div class="delivery-content-left-button row">
+                        <a href="javascript:history.back()"><span>&#171;</span><p>Quay lại giỏ hàng</p></a>
+                        <button type="submit" style="font-weight: bold;">THANH TOÁN VÀ GIAO HÀNG</button>
                     </div>
-                    <div class="delivery-content-left-input-top-item">
-                        <label >Quận/huyện<span style="color:red">*</span></label>
-                        <input type="text">
-                    </div>
-                </div>
-                <div class="delivery-content-left-input-bottom">
-                    <label >Địa chỉ<span style="color:red">*</span></label>
-                    <input type="text">
-                </div>
-                <div class="delivery-content-left-button row">
-                    <a><span>&#171;</span><p>Quay lại giỏ hàng</p></a>
-                    <button><p style="font-weight: bold;">THANH TOÁN VÀ GIAO HÀNG</p></button>
-                </div>
+                </form>
+                
             </div>
             <div class="delivery-content-right">
                 <table>

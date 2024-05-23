@@ -3,6 +3,7 @@
 {% block detail_content %}
 <head>
    <link rel="stylesheet" href="{% static 'assets/item.css' %}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <div class="ads">
 </div>
@@ -134,8 +135,18 @@
    <div class="frame_recomment">
       <h2 class="recomment_item_title">Đánh giá sản phẩm</h2>
    </div>
+  <div class="detail-rating">
+   <div class="reviews">
+      {% for review in reviews %}
+      <p>{{ review.user.username }}</p>
+      <p>{{ review.comment }}</p>
+      <p>{{ review.created_at }}<p>
+   {% endfor %}
+      <p>Đánh giá trung bình: {{ avg_rate }}</p>
+   </div>
    <div class="stars">
-      <form action="">
+      <form action="/review" method="GET">
+         <input type="text" value="{{ product.ID }}" id="prod_id" name="prod_id">
          <div class="rating">
             <input type="radio" class="star star-5" id="star-5" name="star" value="5"/>
             <label class="star star-5" for="star-5"></label>
@@ -158,9 +169,13 @@
             <input type="radio" class="star star-0.5" id="star-0.5" name="star" value="0.5"/>
             <label class="half" for="star-0.5"></label>
          </div>
+         <div>
+            <textarea name="comment" id="comment"></textarea>
+         </div>
+         <button type="submit">Bình luận</button>
       </form>
-      <h4 id="rating-value"></h4>
    </div>
+  </div>
 
 </div>
 <div class="comment_item">

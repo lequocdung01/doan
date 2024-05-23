@@ -25,6 +25,7 @@ class Product(models.Model):
     sell = models.IntegerField()
     image = models.ImageField(null=True,blank=True)
     sale = models.IntegerField(null=True)
+    star_rating = models.FloatField(default=0,null=True)  # Thêm trường star_rating
     def __str__(self):
         return self.name
     @property
@@ -83,6 +84,16 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+    
+class Review(models.Model):
+    user = models.ForeignKey(User, models.CASCADE)
+    product = models.ForeignKey(Product, models.CASCADE)
+    comment = models.TextField(max_length=250)
+    rate = models.FloatField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return str(self.id)
 
 
 class CreateUserForm(UserCreationForm):
@@ -144,12 +155,3 @@ class MyUser(AbstractBaseUser):
         return self.is_admin
 
     
-class Review(models.Model):
-    user = models.ForeignKey(User, models.CASCADE)
-    product = models.ForeignKey(Product, models.CASCADE)
-    comment = models.TextField(max_length=250)
-    rate = models.FloatField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return str(self.id)

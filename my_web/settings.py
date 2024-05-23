@@ -140,3 +140,5 @@ MESSAGE_TAGS = {
 }
 
 
+# Disable automatic slash appending
+APPEND_SLASH = False
