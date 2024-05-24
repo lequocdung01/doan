@@ -14,6 +14,12 @@ from django.utils import timezone
 from django.db.models import Avg
 from django.http import HttpResponse  # Import HttpResponse từ django.http
 from django.db import IntegrityError
+
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
+from django.shortcuts import render
+from .forms import ContactForm
+import smtplib
 # Create your views here.
 
 # trang lịch sử mua hàng
@@ -393,8 +399,23 @@ def contactus(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+    success_message = ""
+    error_message = ""
+    
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+        send_mail(
+            name,   # Chủ đề email
+            message,                  # Nội dung email
+            settings.EMAIL_HOST_USER, # Từ email của hệ thống
+            [email],
+            fail_silently=False
+        )
+        success_message = "Bạn đã gửi thành công"
     categories = Category.objects.filter(is_sub=False)
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
+    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories,'success_message': success_message, 'error_message': error_message}
     return render(request, 'html/contactus.html', context)
 # trang đăng ký thành viên 
 def regestermember(request):
@@ -544,5 +565,4 @@ def create_product(request):
 @login_required
 def user(request):
     return render(request, 'html/User.html', {'user': request.user})
-
 

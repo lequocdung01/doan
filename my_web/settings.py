@@ -142,3 +142,14 @@ MESSAGE_TAGS = {
 
 # Disable automatic slash appending
 APPEND_SLASH = False
+
+# settings.py
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'cbcshopcp@gmail.com'
+EMAIL_HOST_PASSWORD = 'tnsbcdvrxqdrdylv'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+ALLOWED_HOSTS = []

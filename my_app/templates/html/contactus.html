@@ -5,12 +5,17 @@
 <body>
   <div class="container">
     <h1>Chăm sóc khách hàng</h1>
-    <form class="form-contact">
+    {% if success_message %}
+    <p style="color: green">{{ success_message }}</p>
+    {% endif %}
+    <form class="form-contact" method="post">
+      {% csrf_token %}
       <div class="input-form-contact">
         <input
           type="text"
           id="fullname"
           class="input-contact text"
+          name="name"
           placeholder=" "
           required
         />
@@ -21,25 +26,17 @@
           type="email"
           id="email"
           class="input-contact text"
+          name="email"
           placeholder=" "
           required
         />
         <label for="email" class="input-contact-label">Email</label>
       </div>
       <div class="input-form-contact">
-        <input
-          type="text"
-          id="subject"
-          class="input-contact text"
-          placeholder=" "
-          required
-        />
-        <label for="subject" class="input-contact-label">Chủ đề</label>
-      </div>
-      <div class="input-form-contact">
         <textarea
           id="message"
           class="input-contact mess"
+          name="message"
           placeholder=" "
           required
         ></textarea>

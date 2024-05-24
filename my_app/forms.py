@@ -53,3 +53,7 @@ class MyUserForm(forms.ModelForm):
         model = MyUser
         fields = ['date_of_birth', 'gender', 'address', 'phone', 'firstname', 'lastname']
         
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
