@@ -1,113 +1,91 @@
-{% extends 'html/base.html' %}
-{% load static %}
-{% block TuyenDung %}
+{% extends 'html/base.html' %} {% load static %} {% block TuyenDung %}
 <head>
-    <link rel="stylesheet" href="{% static 'assets/TuyenDung.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/TuyenDung.css' %}" />
 </head>
-    <!--Content-->
-    <div id="content">
-        <div class="content_search">
-            <form action="">
-                <input type="text" id="search" placeholder="Nhập từ khóa">
-            </form>
-            <button>
-                <i class="fa-sharp fa-solid fa-magnifying-glass"></i> Tìm việc làm
-            </button>
-        </div>
-        <div class="content_main">
-            <div class="content_main_title">
-                <h2>Các vị trí cần tuyển</h2>
-                <h3>
-                    5 Vị trí tuyển dụng
-                </h3>
-            </div>
-            <div class="content_main_brief">
-                <div class="brief" onclick="brief_1()">
-                    <div class="title">
-                        <h4>Giám Sát An Ninh</h4>
-                    </div>
-                    <div class="more">
-                        <p>
-                            <i class="fa-solid fa-briefcase"></i> Operation
-                        </p>
-                        <p>
-                            <i class="fa-solid fa-chart-simple"></i> Manager
-                        </p>
-                        <p>
-                            <i class="fa-solid fa-location-dot"></i> Thành Phố Hồ Chí Minh
-                        </p>
-                    </div>
-                </div>
-
-                <div class="brief" onclick="brief_2()">
-                    <div class="title">
-                        <h4>Business Development Intern</h4>
-                    </div>
-                    <div class="more">
-                        <p>
-                            <i class="fa-solid fa-briefcase"></i> Operation
-                        </p>
-                        <p>
-                            <i class="fa-solid fa-chart-simple"></i> Manager
-                        </p>
-                        <p>
-                            <i class="fa-solid fa-location-dot"></i> Thành Phố Hồ Chí Minh
-                        </p>
-                    </div>
-                </div>
-
-                <div class="brief" onclick="brief_3()">
-                    <div class="title">
-                        <h4>Business Development Executive </h4>
-                    </div>
-                    <div class="more">
-                        <p>
-                            <i class="fa-solid fa-briefcase"></i> Operation
-                        </p>
-                        <p>
-                            <i class="fa-solid fa-chart-simple"></i> Manager
-                        </p>
-                        <p>
-                            <i class="fa-solid fa-location-dot"></i> Thành Phố Hồ Chí Minh
-                        </p>
-                    </div>
-                </div>
-
-                <div class="brief" onclick="brief_4()">
-                    <div class="title">
-                        <h4>Chuyên Viên Quan Hệ Đối Ngoại</h4>
-                    </div>
-                    <div class="more">
-                        <p>
-                            <i class="fa-solid fa-briefcase"></i> Operation
-                        </p>
-                        <p>
-                            <i class="fa-solid fa-chart-simple"></i> Manager
-                        </p>
-                        <p>
-                            <i class="fa-solid fa-location-dot"></i> Thành Phố Hồ Chí Minh
-                        </p>
-                    </div>
-                </div>
-
-                <div class="brief" onclick="brief_5()">
-                    <div class="title">
-                        <h4>Operations Supervisor </h4>
-                    </div>
-                    <div class="more">
-                        <p>
-                            <i class="fa-solid fa-briefcase"></i> Operation
-                        </p>
-                        <p>
-                            <i class="fa-solid fa-chart-simple"></i> Manager
-                        </p>
-                        <p>
-                            <i class="fa-solid fa-location-dot"></i> Thành Phố Hồ Chí Minh
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<body>
+  <!--Content-->
+  <div id="content">
+    <div class="content_search">
+      <form action="">
+        <input type="text" id="search" placeholder="Nhập từ khóa" />
+      </form>
+      <button>
+        <i class="fa-sharp fa-solid fa-magnifying-glass"></i> Tìm việc làm
+      </button>
     </div>
-   <!--Footer-->
+    <div class="content_main">
+      <div class="content_main_title">
+        <h2>Các vị trí cần tuyển</h2>
+        <h3>5 Vị trí tuyển dụng</h3>
+      </div>
+      <div class="content_main_brief">
+        <div class="brief" onclick="brief_1()">
+          <div class="title">
+            <h4>Giám Sát An Ninh</h4>
+          </div>
+          <div class="more">
+            <p><i class="fa-solid fa-briefcase"></i> Operation</p>
+            <p><i class="fa-solid fa-chart-simple"></i> Manager</p>
+            <p>
+              <i class="fa-solid fa-location-dot"></i> Thành Phố Hồ Chí Minh
+            </p>
+          </div>
+        </div>
+
+        <div class="brief" onclick="brief_2()">
+          <div class="title">
+            <h4>Business Development Intern</h4>
+          </div>
+          <div class="more">
+            <p><i class="fa-solid fa-briefcase"></i> Operation</p>
+            <p><i class="fa-solid fa-chart-simple"></i> Manager</p>
+            <p>
+              <i class="fa-solid fa-location-dot"></i> Thành Phố Hồ Chí Minh
+            </p>
+          </div>
+        </div>
+
+        <div class="brief" onclick="brief_3()">
+          <div class="title">
+            <h4>Business Development Executive</h4>
+          </div>
+          <div class="more">
+            <p><i class="fa-solid fa-briefcase"></i> Operation</p>
+            <p><i class="fa-solid fa-chart-simple"></i> Manager</p>
+            <p>
+              <i class="fa-solid fa-location-dot"></i> Thành Phố Hồ Chí Minh
+            </p>
+          </div>
+        </div>
+
+        <div class="brief" onclick="brief_4()">
+          <div class="title">
+            <h4>Chuyên Viên Quan Hệ Đối Ngoại</h4>
+          </div>
+          <div class="more">
+            <p><i class="fa-solid fa-briefcase"></i> Operation</p>
+            <p><i class="fa-solid fa-chart-simple"></i> Manager</p>
+            <p>
+              <i class="fa-solid fa-location-dot"></i> Thành Phố Hồ Chí Minh
+            </p>
+          </div>
+        </div>
+
+        <div class="brief" onclick="brief_5()">
+          <div class="title">
+            <h4>Operations Supervisor</h4>
+          </div>
+          <div class="more">
+            <p><i class="fa-solid fa-briefcase"></i> Operation</p>
+            <p><i class="fa-solid fa-chart-simple"></i> Manager</p>
+            <p>
+              <i class="fa-solid fa-location-dot"></i> Thành Phố Hồ Chí Minh
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Footer-->
+</body>
 {% endblock TuyenDung %}

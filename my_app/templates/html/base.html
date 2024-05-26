@@ -38,7 +38,7 @@
    <header id="header">
       <form class="search" method = POST action = "{% url 'search' %}">
          {% csrf_token %}
-         <input class="input" type="text" placeholder="Biet ong Liem khong.." name="searched">
+         <input class="input" type="text"  name="searched">
          <button type="submit"><i class="fa fa-search"></i></button>
       </form>
       <div class="clr"></div>
@@ -56,19 +56,18 @@
       </div>
       <div class="clr"></div>
       <div class="right">
-         <p class="login" style = "visibility: {{user_login}} "><i class="fa-solid fa-user"></i>
-            <span  ><a style="text-decoration: none" href="{% url 'login' %}"> <i>&nbsp;</i> Đăng nhập</a></span>
-         </p>
-         <p class="login" style = "visibility: {{user_logout}} ">
-             <span >
-               {{request.user}} | <a style="text-decoration: none" href="{% url 'logout' %}">Đăng Xuất</a>
-               | <a style="text-decoration: none" href="{% url 'history' %}">LS</a>
-               | <a href="{% url 'user'  %}?id_user={{user.id}}">Thông tin cá nhân</a>
-            </span>
-            
-         </p>
-
-         <p class="shopping"><a style="text-decoration: none" href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a> {{cartItems}}</p>
+         <p class="shopping"><a href="{% url 'cart' %}"><i class="fa-solid fa-bag-shopping"></i></a> {{cartItems}}</p>
+         <div class="login_out">
+            <div class="login" style = "visibility: {{user_login}} ">
+               <span><a href="{% url 'login' %}"> <i>&nbsp;</i> Đăng nhập</a></span>
+            </div>
+            <div class="login" style = "visibility: {{user_logout}} ">
+               <span>{{request.user}}</span>
+                  <a href="{% url 'user'  %}?id_user={{user.id}}">Thông tin cá nhân</a>
+                  <a style="text-decoration: none" href="{% url 'history' %}">LS</a>
+                  <a href="{% url 'logout' %}">Đăng Xuất</a>
+            </div>
+         </div>
          
       </div>
       <div id="nav">

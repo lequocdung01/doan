@@ -1,88 +1,117 @@
-{% extends 'html/base.html' %}
-{% load static %}
-{% block khuyenmai %}
+{% extends 'html/base.html' %} {% load static %} {% block khuyenmai %}
 <head>
-   <link rel="stylesheet" href="{% static 'assets/memberkhuyenmai.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/memberkhuyenmai.css' %}" />
 </head>
-   <div class="member">
-      <h1>Ưu đãi cho thành viên</h1>
-      <div class="member-content">
-         <p>Thẻ Thành viên thân thiết CBC giúp khách hàng nhận được nhiều ưu đãi như: Giảm từ 2 – 10 % khi mua hàng,
-            nhận quà tặng hoặc giảm giá trong ngày sinh nhật của chủ thẻ, nhận chế độ chăm sóc đặc biệt và nhận được
-            nhiều tiện ích kèm theo…</p>
-         <p>Khi làm Thẻ Thành Viên lần đầu, khách hàng sẽ nhận ngay phiếu giảm giá 5% cho lần mua sắm hàng gia dụng tiếp
-            theo. Đặc biệt, khách hàng sẽ nhận được ưu đãi tương ứng với từng loại thẻ khác nhau:</p>
+<body>
+  <div class="member">
+    <h1>Ưu đãi cho thành viên</h1>
+    <div class="member-content">
+      <p>
+        Thẻ Thành viên thân thiết CBC giúp khách hàng nhận được nhiều ưu đãi
+        như: Giảm từ 2 – 10 % khi mua hàng, nhận quà tặng hoặc giảm giá trong
+        ngày sinh nhật của chủ thẻ, nhận chế độ chăm sóc đặc biệt và nhận được
+        nhiều tiện ích kèm theo…
+      </p>
+      <p>
+        Khi làm Thẻ Thành Viên lần đầu, khách hàng sẽ nhận ngay phiếu giảm giá
+        5% cho lần mua sắm hàng gia dụng tiếp theo. Đặc biệt, khách hàng sẽ nhận
+        được ưu đãi tương ứng với từng loại thẻ khác nhau:
+      </p>
+    </div>
+    <div class="table">
+      <table>
+        <tr>
+          <th>ƯU ĐÃI CHO THÀNH VIÊN THÂN THIẾT</th>
+          <th>THẺ STAR</th>
+          <th>THẺ GOLD</th>
+          <th>THẺ DIAMOND</th>
+        </tr>
+        <tr>
+          <td>
+            Mua hàng và tham gia CTKM với giá ưu đãi dành riêng cho Thành viên
+            thân thiết
+          </td>
+          <td>Có</td>
+          <td>Có</td>
+          <td>Có</td>
+        </tr>
+        <tr>
+          <td>Nhận ưu đãi đặc biệt vào ngày sinh nhật của chủ thẻ</td>
+          <td>Không</td>
+          <td>Có</td>
+          <td>Có</td>
+        </tr>
+        <tr>
+          <td>
+            Nhận các dịch vụ chăm sóc đặc biệt (Thanh toán, giao nhận, chăm sóc
+            thành viên…)
+          </td>
+          <td>Không</td>
+          <td>Có</td>
+          <td>Có</td>
+        </tr>
+        <tr>
+          <td>Giảm 5% quần áo, 3% đồ chơi, 2% Vi Tính, mỹ phẩm.</td>
+          <td>Không</td>
+          <td>Có</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Giảm 7% quần áo, 5% đồ chơi, 4% Vi Tính, mỹ phẩm.</td>
+          <td>Không</td>
+          <td>-</td>
+          <td>Có</td>
+        </tr>
+        <tr>
+          <td>
+            Nhận các ưu đãi Vip khác từ các đối tác liên kết ngoài ngành hàng
+            điện máy
+          </td>
+          <td>Không</td>
+          <td>Không</td>
+          <td>Có</td>
+        </tr>
+        <tr>
+          <td>
+            Nhận các ưu đãi Vip khác từ các đối tác liên kết ngoài ngành hàng
+            điện máy
+          </td>
+          <td>Không</td>
+          <td>Không</td>
+          <td>Có</td>
+        </tr>
+        <tr>
+          <td>
+            Kết nối đường dây nóng 24/24h để phục vụ yêu cầu của khách hàng
+          </td>
+          <td>Không</td>
+          <td>Không</td>
+          <td>Có</td>
+        </tr>
+      </table>
+      <div class="note-member">
+        <h4>Lưu ý:</h4>
+        <p>
+          Không áp động đối với các sản phẩm khuyến mãi Báo, Tờ Rơi, Online hoặc
+          các chương trình khuyến mãi khác.
+        </p>
+        <p>Không giới hạn số lượng sản phẩm được hưởng ưu đãi</p>
+        <p>Ưu đãi không áp dụng đối với phí dịch vụ (Phí vận chuyển, ...)</p>
+        <p>
+          Ưu đãi không có giá trị quy đổi thành tiền, sản phẩm hoặc dịch vụ khác
+        </p>
+        <p>
+          CBC có toàn quyền thay đổi mức ưu đãi và hình thức ưu đãi mà không cần
+          thông báo trước.
+        </p>
       </div>
-      <div class="table">
-         <table>
-            <tr>
-               <th>ƯU ĐÃI CHO THÀNH VIÊN THÂN THIẾT</th>
-               <th>THẺ STAR</th>
-               <th>THẺ GOLD</th>
-               <th>THẺ DIAMOND</th>
-            </tr>
-            <tr>
-               <td>Mua hàng và tham gia CTKM với giá ưu đãi dành riêng cho Thành viên thân thiết</td>
-               <td>Có</td>
-               <td>Có</td>
-               <td>Có</td>
-            </tr>
-            <tr>
-               <td>Nhận ưu đãi đặc biệt vào ngày sinh nhật của chủ thẻ</td>
-               <td>Không</td>
-               <td>Có</td>
-               <td>Có</td>
-            </tr>
-            <tr>
-               <td>Nhận các dịch vụ chăm sóc đặc biệt (Thanh toán, giao nhận, chăm sóc thành viên…)</td>
-               <td>Không</td>
-               <td>Có</td>
-               <td>Có</td>
-            </tr>
-            <tr>
-               <td>Giảm 5% quần áo, 3% đồ chơi, 2% Vi Tính, mỹ phẩm.</td>
-               <td>Không</td>
-               <td>Có</td>
-               <td>-</td>
-            </tr>
-            <tr>
-               <td>Giảm 7% quần áo, 5% đồ chơi, 4% Vi Tính, mỹ phẩm.</td>
-               <td>Không</td>
-               <td>-</td>
-               <td>Có</td>
-            </tr>
-            <tr>
-               <td>Nhận các ưu đãi Vip khác từ các đối tác liên kết ngoài ngành hàng điện máy</td>
-               <td>Không</td>
-               <td>Không</td>
-               <td>Có</td>
-            </tr>
-            <tr>
-               <td>Nhận các ưu đãi Vip khác từ các đối tác liên kết ngoài ngành hàng điện máy</td>
-               <td>Không</td>
-               <td>Không</td>
-               <td>Có</td>
-            </tr>
-            <tr>
-               <td>Kết nối đường dây nóng 24/24h để phục vụ yêu cầu của khách hàng</td>
-               <td>Không</td>
-               <td>Không</td>
-               <td>Có</td>
-            </tr>
-         </table>
-         <div class="note-member">
-            <h4>Lưu ý:</h4>
-            <p>Không áp động đối với các sản phẩm khuyến mãi Báo, Tờ Rơi, Online hoặc các chương trình khuyến mãi khác.
-            </p>
-            <p>Không giới hạn số lượng sản phẩm được hưởng ưu đãi</p>
-            <p>Ưu đãi không áp dụng đối với phí dịch vụ (Phí vận chuyển, ...)</p>
-            <p>Ưu đãi không có giá trị quy đổi thành tiền, sản phẩm hoặc dịch vụ khác</p>
-            <p>CBC có toàn quyền thay đổi mức ưu đãi và hình thức ưu đãi mà không cần thông báo trước.</p>
-         </div>
-         <div class="phone">
-            <p> Mọi thắc mắc về quyền lợi của Thành viên thân thiết Quý khách vui lòng liên hệ <span
-                  class="red">Hotline:</span> 19002628</p>
-         </div>
+      <div class="phone">
+        <p>
+          Mọi thắc mắc về quyền lợi của Thành viên thân thiết Quý khách vui lòng
+          liên hệ <span class="red">Hotline:</span> 19002628
+        </p>
       </div>
-   </div>
+    </div>
+  </div>
+</body>
 {% endblock khuyenmai %}

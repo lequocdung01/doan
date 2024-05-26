@@ -269,7 +269,15 @@ def product(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
-    product = Product.objects.all()
+    ## sap xep gia
+    sort_option = request.GET.get('sort', 'gia')
+    if sort_option == 'asc':
+        product = Product.objects.all().order_by('price')
+    elif sort_option == 'desc':
+        product = Product.objects.all().order_by('-price')
+    else:
+        product = Product.objects.all()
+    ## phan trang
     page = request.GET.get('page')
     page = page or 1
     paginator = Paginator(product, 10)  # hiện số lượng sản phẩm
@@ -300,9 +308,12 @@ def category(request):
         user_logout = "hidden"
         user_staff = "hidden"
     categories = Category.objects.filter(is_sub=False)
+    
+    #####
     active_category = request.GET.get('category','')
     if active_category:
         products = Product.objects.filter(category__slug = active_category)
+    
     context = {'categories': categories,'products':products,'active_category':active_category,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff}
     return render(request,'html/category.html', context)
 
@@ -364,7 +375,26 @@ def event(request):
     return render(request, 'html/event.html', context)
 # trang liên hệ
 def contactus(request):
-    context = {}
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
+        user_login = "hidden"
+        user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
+    else:
+        items = []
+        order = {'get_cart_item': 0, 'get_cart_total': 0}
+        cartItems = order['get_cart_item']
+        user_login = "show"
+        user_logout = "hidden"
+        user_staff = "hidden"
+    categories = Category.objects.filter(is_sub=False)
+    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
     return render(request, 'html/contactus.html', context)
 # trang đăng ký thành viên 
 def regestermember(request):
@@ -515,3 +545,41 @@ def create_product(request):
 def user(request):
     return render(request, 'html/User.html', {'user': request.user})
 
+# trang lịch sử mua hàng
+@login_required
+def history(request):
+    customer = request.user
+    completed_orders = Order.objects.filter(customer=customer, complete=True)
+    
+    # Truy xuất tất cả các sản phẩm từ các đơn hàng đã hoàn thành
+    order_items = OrderItem.objects.filter(order__in=completed_orders).select_related('product')
+    
+    # Tạo danh sách các sản phẩm đã mua với các chi tiết cần thiết
+    purchased_items = []
+    for item in order_items:
+        shipping_address = ShippingAddress.objects.filter(order=item.order).first()
+        purchased_items.append({
+            'product': item.product,
+            'quantity': item.quantity,
+            'total_price': item.get_total,
+            'date_added': shipping_address.date_added if shipping_address else None,
+        })
+    
+    context = {
+        'purchased_items': purchased_items,
+    }
+    
+    return render(request, 'html/history.html', context)
+# xu ly Review
+def Review_rate(request):
+    if request.method == "GET":
+        prod_id = request.GET.get('prod_id')
+        product = Product.objects.get(ID=prod_id)
+        comment = request.GET.get('comment')
+        rate = request.GET.get('star')
+        created_at = timezone.now()  # Lấy ngày hiện tại
+        user = request.user
+        Review(user=user, product=product, comment=comment, rate=rate, created_at=created_at).save()
+        # Sử dụng reverse để xây dựng URL của trang detail và truyền prod_id qua kwargs
+        detail_url = reverse('detail')
+        return redirect(detail_url + f'?id={prod_id}')
