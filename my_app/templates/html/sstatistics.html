@@ -1,0 +1,70 @@
+{% extends 'html/base.html' %} {% load static %} {% block sstatistics %}
+<head>
+  <link rel="stylesheet" href="{% static 'assets/history.css' %}" />
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Order Statistics</h1>
+    
+    <!-- Monthly Summary Section -->
+    <h2>Thống kê số lượng đã bán theo tháng</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Total Orders</th>
+                <th>Total Items Sold</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for month, stats in monthly_stats %}
+                <tr>
+                    <td>{{ month }}</td>
+                    <td>{{ stats.total_orders }}</td>
+                    <td>{{ stats.total_items }}</td>
+                    <td>{{ stats.total_amount }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <!-- Order Details Section -->
+    <h2>Thống kê kê chi tiết</h2>
+    {% for order in orders %}
+        <div>
+            <h2>Order ID: {{ order.order_id }}</h2>
+            <p>Customer: {{ order.customer_first_name }} {{ order.customer_last_name }} ({{ order.customer_username }})</p>
+            <p>Mobile: {{ order.mobile }}</p>
+            <p>Address: {{ order.address }}</p>
+            <p>City: {{ order.city }}</p>
+            <p>State: {{ order.state }}</p>
+            <p>Date Order: {{ order.date_order }}</p>
+            <h3>Items:</h3>
+            <ul>
+                {% for item in order.items %}
+                    <li>
+                        <img src="{{ item.product_image }}" alt="{{ item.product_name }}" style="width: 50px; height: 50px;">
+                        <span>{{ item.product_name }}</span>
+                        <span>Quantity: {{ item.quantity }}</span>
+                        <span>Price: {{ item.price }}</span>
+                        <span>Total: {{ item.total_price }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <h3>Total Amount: {{ order.total_amount }}</h3>
+        </div>
+    {% endfor %}
+</body>
+{% endblock sstatistics %}

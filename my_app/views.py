@@ -11,10 +11,67 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.urls import reverse
 from django.utils import timezone
-from django.db.models import Avg
+from django.db.models import Avg, Count, Sum, F
 from django.http import HttpResponse  # Import HttpResponse từ django.http
 from django.db import IntegrityError
+
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
+from django.shortcuts import render
+from .forms import ContactForm
+import smtplib
+from django.db.models.functions import TruncMonth
+from collections import defaultdict
 # Create your views here.
+
+# trang tuyển dụng
+def sstatistics(request):
+    orders = Order.objects.filter(complete=True).select_related('customer').prefetch_related('orderitem_set', 'shippingaddress_set')
+    order_data = []
+    monthly_stats = defaultdict(lambda: {'total_orders': 0, 'total_items': 0, 'total_amount': 0.0})
+    
+    for order in orders:
+        order_items = order.orderitem_set.all()
+        shipping_address = order.shippingaddress_set.first()
+        items_data = []
+        total_items = 0
+        total_amount = 0.0
+        for item in order_items:
+            product = item.product
+            items_data.append({
+                'product_name': product.name,
+                'product_image': product.ImageURL,
+                'quantity': item.quantity,
+                'price': item.product.price,
+                'total_price': item.get_total
+            })
+            total_items += item.quantity
+            total_amount += item.get_total
+        
+        order_data.append({
+            'order_id': order.id,
+            'customer_username': order.customer.username,
+            'customer_first_name': order.customer.first_name,
+            'customer_last_name': order.customer.last_name,
+            'date_order': order.date_order,
+            'items': items_data,
+            'total_amount': order.get_cart_total,
+            'address': shipping_address.address if shipping_address else '',
+            'city': shipping_address.city if shipping_address else '',
+            'state': shipping_address.state if shipping_address else '',
+            'mobile': shipping_address.mobile if shipping_address else '',
+        })
+        
+        month_key = order.date_order.strftime('%Y-%m')
+        monthly_stats[month_key]['total_orders'] += 1
+        monthly_stats[month_key]['total_items'] += total_items
+        monthly_stats[month_key]['total_amount'] += total_amount
+
+    context = {
+        'orders': order_data,
+        'monthly_stats': sorted(monthly_stats.items())
+    }
+    return render(request, 'html/sstatistics.html', context)
 
 # trang lịch sử mua hàng
 @login_required
@@ -113,19 +170,35 @@ def detail(request):
     }
     return render(request, 'html/detail.html', context)
 
-# xu ly Review
-def Review_rate(request):
+def review(request):
     if request.method == "GET":
         prod_id = request.GET.get('prod_id')
-        product = Product.objects.get(ID=prod_id)
         comment = request.GET.get('comment')
         rate = request.GET.get('star')
-        created_at = timezone.now()  # Lấy ngày hiện tại
+        
+        # Kiểm tra xem tất cả các giá trị cần thiết có được truyền vào không
+        if not prod_id or not comment or not rate:
+            return HttpResponse('Missing required parameters', status=400)
+        
+        # Lấy sản phẩm, nếu không tồn tại sẽ trả về 404
+        product = get_object_or_404(Product, ID=prod_id)
+        
+        # Kiểm tra xem người dùng đã đăng nhập chưa
+        if not request.user.is_authenticated:
+            return HttpResponse('User not authenticated', status=403)
+        
+        # Lấy ngày hiện tại
+        created_at = timezone.now()
         user = request.user
-        Review(user=user, product=product, comment=comment, rate=rate, created_at=created_at).save()
+        
+        # Tạo và lưu review mới
+        Review.objects.create(user=user, product=product, comment=comment, rate=rate, created_at=created_at)
+        
         # Sử dụng reverse để xây dựng URL của trang detail và truyền prod_id qua kwargs
         detail_url = reverse('detail')
         return redirect(detail_url + f'?id={prod_id}')
+    else:
+        return HttpResponse('Invalid request method', status=405)
 
 
 # 
@@ -393,8 +466,23 @@ def contactus(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+    success_message = ""
+    error_message = ""
+    
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+        send_mail(
+            name,   # Chủ đề email
+            message,                  # Nội dung email
+            settings.EMAIL_HOST_USER, # Từ email của hệ thống
+            [email],
+            fail_silently=False
+        )
+        success_message = "Bạn đã gửi thành công"
     categories = Category.objects.filter(is_sub=False)
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
+    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories,'success_message': success_message, 'error_message': error_message}
     return render(request, 'html/contactus.html', context)
 # trang đăng ký thành viên 
 def regestermember(request):
@@ -545,41 +633,3 @@ def create_product(request):
 def user(request):
     return render(request, 'html/User.html', {'user': request.user})
 
-# trang lịch sử mua hàng
-@login_required
-def history(request):
-    customer = request.user
-    completed_orders = Order.objects.filter(customer=customer, complete=True)
-    
-    # Truy xuất tất cả các sản phẩm từ các đơn hàng đã hoàn thành
-    order_items = OrderItem.objects.filter(order__in=completed_orders).select_related('product')
-    
-    # Tạo danh sách các sản phẩm đã mua với các chi tiết cần thiết
-    purchased_items = []
-    for item in order_items:
-        shipping_address = ShippingAddress.objects.filter(order=item.order).first()
-        purchased_items.append({
-            'product': item.product,
-            'quantity': item.quantity,
-            'total_price': item.get_total,
-            'date_added': shipping_address.date_added if shipping_address else None,
-        })
-    
-    context = {
-        'purchased_items': purchased_items,
-    }
-    
-    return render(request, 'html/history.html', context)
-# xu ly Review
-def Review_rate(request):
-    if request.method == "GET":
-        prod_id = request.GET.get('prod_id')
-        product = Product.objects.get(ID=prod_id)
-        comment = request.GET.get('comment')
-        rate = request.GET.get('star')
-        created_at = timezone.now()  # Lấy ngày hiện tại
-        user = request.user
-        Review(user=user, product=product, comment=comment, rate=rate, created_at=created_at).save()
-        # Sử dụng reverse để xây dựng URL của trang detail và truyền prod_id qua kwargs
-        detail_url = reverse('detail')
-        return redirect(detail_url + f'?id={prod_id}')

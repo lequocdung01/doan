@@ -145,7 +145,7 @@
       <p>Đánh giá trung bình: {{ avg_rate }}</p>
    </div>
    <div class="stars">
-      <form action="/review" method="GET">
+      <form action="{% url 'review' %}" method="GET">
          <input type="text" value="{{ product.ID }}" id="prod_id" name="prod_id">
          <div class="rating">
             <input type="radio" class="star star-5" id="star-5" name="star" value="5"/>
