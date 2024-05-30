@@ -63,9 +63,11 @@
             </div>
             <div class="login" style = "visibility: {{user_logout}} ">
                <span>{{request.user}}</span>
+               <div class="login-dropdown-content" id="logout-dropdown">
                   <a href="{% url 'user'  %}?id_user={{user.id}}">Thông tin cá nhân</a>
                   <a style="text-decoration: none" href="{% url 'history' %}">LS</a>
                   <a href="{% url 'logout' %}">Đăng Xuất</a>
+               </div>
             </div>
          </div>
          
@@ -104,11 +106,9 @@
             <div class="dropdownmenu" style = "visibility:{{user_staff}}">
                <a style="text-decoration: none" href="{% url 'create' %}" >THÊM SẢN PHẨM</a>
             </div>
-            <div class="dropdownmenu">
+            <div class="dropdownmenu" style = "visibility:{{user_staff}}">
                <a style="text-decoration: none" href="{% url 'sstatistics' %}" >THỐNG KÊ</a>
             </div>
-         </div>
-            
          </nav>
          <img id="logo" src="{% static 'images/logo/logodqb-02.png' %}" alt="logo" width="70px">
       </div>
@@ -161,9 +161,6 @@
 
    {% block history %}
    {% endblock history %}
-
-   {% block sstatistics %}
-   {% endblock sstatistics %}
 
    {% block form %}
    {% endblock form %}
