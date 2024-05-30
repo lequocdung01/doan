@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.urls import reverse
 from django.utils import timezone
-from django.db.models import Avg
+from django.db.models import Avg, Count, Sum, F
 from django.http import HttpResponse  # Import HttpResponse từ django.http
 from django.db import IntegrityError
 
@@ -20,7 +20,58 @@ from django.conf import settings
 from django.shortcuts import render
 from .forms import ContactForm
 import smtplib
+from django.db.models.functions import TruncMonth
+from collections import defaultdict
 # Create your views here.
+
+# trang tuyển dụng
+def sstatistics(request):
+    orders = Order.objects.filter(complete=True).select_related('customer').prefetch_related('orderitem_set', 'shippingaddress_set')
+    order_data = []
+    monthly_stats = defaultdict(lambda: {'total_orders': 0, 'total_items': 0, 'total_amount': 0.0})
+    
+    for order in orders:
+        order_items = order.orderitem_set.all()
+        shipping_address = order.shippingaddress_set.first()
+        items_data = []
+        total_items = 0
+        total_amount = 0.0
+        for item in order_items:
+            product = item.product
+            items_data.append({
+                'product_name': product.name,
+                'product_image': product.ImageURL,
+                'quantity': item.quantity,
+                'price': item.product.price,
+                'total_price': item.get_total
+            })
+            total_items += item.quantity
+            total_amount += item.get_total
+        
+        order_data.append({
+            'order_id': order.id,
+            'customer_username': order.customer.username,
+            'customer_first_name': order.customer.first_name,
+            'customer_last_name': order.customer.last_name,
+            'date_order': order.date_order,
+            'items': items_data,
+            'total_amount': order.get_cart_total,
+            'address': shipping_address.address if shipping_address else '',
+            'city': shipping_address.city if shipping_address else '',
+            'state': shipping_address.state if shipping_address else '',
+            'mobile': shipping_address.mobile if shipping_address else '',
+        })
+        
+        month_key = order.date_order.strftime('%Y-%m')
+        monthly_stats[month_key]['total_orders'] += 1
+        monthly_stats[month_key]['total_items'] += total_items
+        monthly_stats[month_key]['total_amount'] += total_amount
+
+    context = {
+        'orders': order_data,
+        'monthly_stats': sorted(monthly_stats.items())
+    }
+    return render(request, 'html/sstatistics.html', context)
 
 # trang lịch sử mua hàng
 @login_required
@@ -119,19 +170,35 @@ def detail(request):
     }
     return render(request, 'html/detail.html', context)
 
-# xu ly Review
-def Review_rate(request):
+def review(request):
     if request.method == "GET":
         prod_id = request.GET.get('prod_id')
-        product = Product.objects.get(ID=prod_id)
         comment = request.GET.get('comment')
         rate = request.GET.get('star')
-        created_at = timezone.now()  # Lấy ngày hiện tại
+        
+        # Kiểm tra xem tất cả các giá trị cần thiết có được truyền vào không
+        if not prod_id or not comment or not rate:
+            return HttpResponse('Missing required parameters', status=400)
+        
+        # Lấy sản phẩm, nếu không tồn tại sẽ trả về 404
+        product = get_object_or_404(Product, ID=prod_id)
+        
+        # Kiểm tra xem người dùng đã đăng nhập chưa
+        if not request.user.is_authenticated:
+            return HttpResponse('User not authenticated', status=403)
+        
+        # Lấy ngày hiện tại
+        created_at = timezone.now()
         user = request.user
-        Review(user=user, product=product, comment=comment, rate=rate, created_at=created_at).save()
+        
+        # Tạo và lưu review mới
+        Review.objects.create(user=user, product=product, comment=comment, rate=rate, created_at=created_at)
+        
         # Sử dụng reverse để xây dựng URL của trang detail và truyền prod_id qua kwargs
         detail_url = reverse('detail')
         return redirect(detail_url + f'?id={prod_id}')
+    else:
+        return HttpResponse('Invalid request method', status=405)
 
 
 # 
