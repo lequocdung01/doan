@@ -24,8 +24,27 @@ from django.db.models.functions import TruncMonth
 from collections import defaultdict
 # Create your views here.
 
-# trang tuyển dụng
+# trang thong ke
 def sstatistics(request):
+    if request.user.is_authenticated:
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
+        user_login = "hidden"
+        user_logout = "show"
+        if request.user.is_staff:
+            user_staff = "show"
+        else:
+            user_staff = "hidden"
+    else:
+        items = []
+        order = {'get_cart_item': 0, 'get_cart_total': 0}
+        cartItems = order['get_cart_item']
+        user_login = "show"
+        user_logout = "hidden"
+        user_staff = "hidden"
+    
     orders = Order.objects.filter(complete=True).select_related('customer').prefetch_related('orderitem_set', 'shippingaddress_set')
     order_data = []
     monthly_stats = defaultdict(lambda: {'total_orders': 0, 'total_items': 0, 'total_amount': 0.0})
@@ -69,7 +88,8 @@ def sstatistics(request):
 
     context = {
         'orders': order_data,
-        'monthly_stats': sorted(monthly_stats.items())
+        'monthly_stats': sorted(monthly_stats.items()),
+        'product': product,'cartItems':cartItems,'user_login':user_login, 'user_logout':user_logout,'user_staff':user_staff, 'user':request.user
     }
     return render(request, 'html/sstatistics.html', context)
 
