@@ -1,4 +1,6 @@
 .purchase-history-container {
+    top: 8rem;
+    position: relative;
     padding: 20px;
     background-color: black9f9;
     border-radius: 8px;
@@ -15,11 +17,12 @@
 .purchase-item {
     display: flex;
     align-items: center;
-    background-color: black;
+    background-color: rgb(255, 252, 252);
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 8px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid;
 }
 
 .product-image {

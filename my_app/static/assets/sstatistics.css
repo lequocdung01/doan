@@ -1,11 +1,22 @@
-body {
-    font-family: Arial, sans-serif;
+body, html {
+    height: 100%;
     margin: 0;
-    padding: 20px;
-    background-color: #f9f9f9;
+    
+  }
+.content {
+    top: 8rem;
+    position: relative;
+    display: flex;
+    height: 100vh; /* Chiều cao toàn màn hình */
 }
+.box {
+    flex: 1;
+    padding: 30px;
+  }
 h1, h2, h3 {
     color: #333;
+    left:0;
+    
 }
 table {
     width: 100%;
@@ -31,9 +42,7 @@ tr:nth-child(even) {
     margin-bottom: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-.order-details h2 {
-    margin-top: 0;
-}
+
 .order-details p {
     margin: 5px 0;
 }
@@ -54,4 +63,9 @@ tr:nth-child(even) {
 }
 .order-details li span {
     margin-right: 20px;
+}
+
+.order {
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
