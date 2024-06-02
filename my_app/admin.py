@@ -33,7 +33,7 @@ class OrderItemAdmin(admin.ModelAdmin):
 admin.site.register(OrderItem, OrderItemAdmin)
 
 class ShippingAddressAdmin(admin.ModelAdmin):
-    list_display = ('id', 'User', 'order', 'address', 'city', 'state', 'mobile', 'date_added')
+    list_display = ('id', 'User', 'order', 'name', 'address', 'city', 'state', 'mobile', 'date_added')
 
 admin.site.register(ShippingAddress, ShippingAddressAdmin)
 
