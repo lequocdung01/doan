@@ -23,23 +23,24 @@
       <p>Sắp xếp theo</p>
       <div class="content_right_category_item_button_a popular">
         <button>
-          <a href="/project/html/my%20pham/category/Pho_Bien.html">Phổ Biến</a>
+          <a href="?sort=popular">Phổ Biến</a>
         </button>
       </div>
       <div class="content_right_category_item_button_new">
         <button>
-          <a href="/project/html/my%20pham/category/Moi_Nhat.html">Mới Nhất</a>
+          <a href="?sort=new">Mới Nhất</a>
         </button>
       </div>
       <div class="content_right_category_item_button_selling">
         <button>
-          <a href="/project/html/my%20pham/category/Ban_Chay.html">Bán Chạy</a>
+          <a href="?sort=selling">Bán Chạy</a>
         </button>
       </div>
       <div class="content_right_category_item_button_price">
         <form action="" method="get">
           <select name="sort" id="select" onchange="this.form.submit()">
             <option value="gia" selected="selected">Giá</option>
+            <option value="">Toàn bộ</option>
             <option value="asc">Giá: từ thấp đến cao</option>
             <option value="desc">Giá: từ cao đến thấp</option>
           </select>
@@ -72,7 +73,7 @@
           <div class="name">{{product.name}}</div>
           <div class="price">
             <del>{{product.price}}</del>
-            <span>₫3.999.000</span>
+            <span>{{product.price}}</span>
           </div>
           <div class="racting">
             <span>

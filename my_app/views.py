@@ -10,17 +10,18 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.urls import reverse
+from datetime import datetime, timedelta
 from django.utils import timezone
 from django.db.models import Avg, Count, Sum, F
 from django.http import HttpResponse  # Import HttpResponse từ django.http
 from django.db import IntegrityError
 
-from django.core.mail import send_mail, BadHeaderError
+# from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
 from django.shortcuts import render
-from .forms import ContactForm
-import smtplib
-from django.db.models.functions import TruncMonth
+# from .forms import ContactForm
+# import smtplib
+# from django.db.models.functions import TruncMonth
 from collections import defaultdict
 # Create your views here.
 
@@ -44,12 +45,40 @@ def sstatistics(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
-    
-    orders = Order.objects.filter(complete=True).select_related('customer').prefetch_related('orderitem_set', 'shippingaddress_set')
-    order_data = []
+
+    # Lấy danh sách các tháng có đơn hàng
+    orders = Order.objects.filter(complete=True).order_by('-date_order')
     monthly_stats = defaultdict(lambda: {'total_orders': 0, 'total_items': 0, 'total_amount': 0.0})
     
+    # Tạo thống kê hàng tháng
     for order in orders:
+        month_key = order.date_order.strftime('%Y-%m')
+        monthly_stats[month_key]['total_orders'] += 1
+        monthly_stats[month_key]['total_items'] += sum(item.quantity for item in order.orderitem_set.all())
+        monthly_stats[month_key]['total_amount'] += order.get_cart_total
+
+    # Nếu không có tháng nào được chọn, lấy tháng gần nhất
+    selected_month = request.GET.get('month', None)
+    if not selected_month:
+        if monthly_stats:
+            selected_month = max(monthly_stats.keys())  # Tháng gần nhất
+        else:
+            selected_month = timezone.now().strftime('%Y-%m')  # Tháng hiện tại nếu không có dữ liệu
+
+    # Xác định khoảng thời gian của tháng được chọn
+    selected_month_start = datetime.strptime(selected_month, '%Y-%m')
+    selected_month_end = (selected_month_start.replace(day=28) + timedelta(days=4)).replace(day=1)
+
+    # Lọc đơn hàng dựa trên tháng được chọn
+    filtered_orders = Order.objects.filter(
+        complete=True, 
+        date_order__gte=selected_month_start, 
+        date_order__lt=selected_month_end
+    ).select_related('customer').prefetch_related('orderitem_set', 'shippingaddress_set')
+    
+    order_data = []
+    
+    for order in filtered_orders:
         order_items = order.orderitem_set.all()
         shipping_address = order.shippingaddress_set.first()
         items_data = []
@@ -70,26 +99,25 @@ def sstatistics(request):
         order_data.append({
             'order_id': order.id,
             'customer_username': order.customer.username,
-            'customer_first_name': order.customer.first_name,
-            'customer_last_name': order.customer.last_name,
             'date_order': order.date_order,
             'items': items_data,
             'total_amount': order.get_cart_total,
+            'name': shipping_address.name if shipping_address else '',
             'address': shipping_address.address if shipping_address else '',
             'city': shipping_address.city if shipping_address else '',
             'state': shipping_address.state if shipping_address else '',
             'mobile': shipping_address.mobile if shipping_address else '',
         })
-        
-        month_key = order.date_order.strftime('%Y-%m')
-        monthly_stats[month_key]['total_orders'] += 1
-        monthly_stats[month_key]['total_items'] += total_items
-        monthly_stats[month_key]['total_amount'] += total_amount
 
     context = {
         'orders': order_data,
         'monthly_stats': sorted(monthly_stats.items()),
-        'product': product,'cartItems':cartItems,'user_login':user_login, 'user_logout':user_logout,'user_staff':user_staff, 'user':request.user
+        'cartItems': cartItems,
+        'user_login': user_login,
+        'user_logout': user_logout,
+        'user_staff': user_staff,
+        'user': request.user,
+        'selected_month': selected_month
     }
     return render(request, 'html/sstatistics.html', context)
 
@@ -272,12 +300,12 @@ def delivery(request):
 @login_required
 def checkout(request):
     if request.method == 'POST':
-        customer_name = request.POST.get('customerName')
+        name = request.POST.get('name')
         mobile = request.POST.get('mobile')
         city = request.POST.get('city')
         address = request.POST.get('address')
 
-        if not all([customer_name, mobile, city, address]):
+        if not all([name, mobile, city, address]):
             return HttpResponse("Vui lòng điền đầy đủ thông tin.", status=400)
 
         customer = request.user
@@ -286,6 +314,7 @@ def checkout(request):
         shipping_address = ShippingAddress(
             User=customer,
             order=order,
+            name=name,
             address=address,
             city=city,
             state=city,  # Giả sử state = city nếu không có trường state trong form
@@ -344,6 +373,8 @@ def payment(request):
 
 # trang sản phẩm
 def product(request):
+    from django.db.models import Sum  # Import Sum for aggregation
+    
     if request.user.is_authenticated:
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -362,23 +393,41 @@ def product(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
-    ## sap xep gia
+    
+    # Get sort option from query parameters
     sort_option = request.GET.get('sort', 'gia')
+    
     if sort_option == 'asc':
-        product = Product.objects.all().order_by('price')
+        products = Product.objects.all().order_by('price')
     elif sort_option == 'desc':
-        product = Product.objects.all().order_by('-price')
+        products = Product.objects.all().order_by('-price')
+    elif sort_option == 'new':
+        products = Product.objects.all().order_by('-ID')
+    elif sort_option == 'selling':
+        # Annotate each product with the total quantity sold
+        products = Product.objects.annotate(total_sold=Sum('orderitem__quantity')).order_by('-total_sold')
     else:
-        product = Product.objects.all()
-    ## phan trang
-    page = request.GET.get('page')
-    page = page or 1
-    paginator = Paginator(product, 10)  # hiện số lượng sản phẩm
+        products = Product.objects.all()
+    
+    # Pagination
+    page = request.GET.get('page', 1)
+    paginator = Paginator(products, 10)  # Display 10 products per page
     paged_products = paginator.get_page(page)
-    page_obj = product.count()
+    
     categories = Category.objects.filter(is_sub=False)
-    context = {'categories': categories,'product': paged_products, 'page_obj': page_obj,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff}
+    
+    context = {
+        'categories': categories,
+        'product': paged_products,
+        'user_login': user_login,
+        'user_logout': user_logout,
+        'cartItems': cartItems,
+        'user_staff': user_staff
+    }
+    
     return render(request, 'html/product.html', context=context)
+
+
 
 # Tran san pham
 def category(request):
@@ -616,14 +665,18 @@ def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request,username=username,password=password)
+        
+        user = authenticate(request, username=username, password=password)
+        
         if user is not None:
-            login(request,user)
+            login(request, user)
             return redirect('home')
         else:
-            messages.info(request,message='Tên Đăng Nhập Hoặc Mật Khẩu Không Đúng!')
-    context = {}
-    return render(request,'html/loginPage.html',context)
+            if not MyUser.objects.filter(username=username).exists():
+                messages.error(request, 'Tên đăng nhập không tồn tại!')
+            else:
+                messages.error(request, 'Mật khẩu không đúng!')
+    return render(request, 'html/loginPage.html')
 # trang dang xuat
 def logoutPage(request):
     logout(request)
@@ -651,5 +704,8 @@ def create_product(request):
 
 @login_required
 def user(request):
-    return render(request, 'html/User.html', {'user': request.user})
+    Customer = User.objects.all()
+    return render(request, 'html/User.html', {'Customer': Customer})
 
+
+    

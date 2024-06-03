@@ -7,7 +7,6 @@ body, html {
     top: 8rem;
     position: relative;
     display: flex;
-    height: 100vh; /* Chiều cao toàn màn hình */
 }
 .box {
     flex: 1;
