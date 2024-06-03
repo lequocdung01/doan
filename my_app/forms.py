@@ -11,16 +11,20 @@ class ProductForm(forms.ModelForm):
 
 
 class UserCreationForm(forms.ModelForm):
+    """A form for creating new users. Includes all the required
+    fields, plus a repeated password."""
+
     password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Password confirmation", widget=forms.PasswordInput)
-    username = forms.CharField(label="Username", widget=forms.TextInput)
-    
+    password2 = forms.CharField(
+        label="Password confirmation", widget=forms.PasswordInput
+    )
 
     class Meta:
         model = MyUser
-        fields = ["email", "username"]
+        fields = ["email","username", "date_of_birth"]
 
     def clean_password2(self):
+        # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
@@ -28,6 +32,7 @@ class UserCreationForm(forms.ModelForm):
         return password2
 
     def save(self, commit=True):
+        # Save the provided password in hashed format
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         if commit:
@@ -45,13 +50,13 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ["email", "password", "date_of_birth", "username", "firstname", "lastname", "gender","address", "phone", "is_active", "is_admin"]
+        fields = ["email","username", "password", "date_of_birth", "is_active", "is_admin"]
 
-class MyUserForm(forms.ModelForm):
-    gender = forms.CharField(max_length=10, widget=forms.RadioSelect(choices=MyUser.GENDER_CHOICES))
-    class Meta:
-        model = MyUser
-        fields = ['date_of_birth', 'gender', 'address', 'phone', 'firstname', 'lastname']
+# class MyUserForm(forms.ModelForm):
+#     gender = forms.CharField(max_length=10, widget=forms.RadioSelect(choices=MyUser.GENDER_CHOICES))
+#     class Meta:
+#         model = MyUser
+#         fields = ['date_of_birth', 'gender', 'address', 'phone', 'firstname', 'lastname']
         
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)

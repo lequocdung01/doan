@@ -64,7 +64,7 @@
             <div class="login" style = "visibility: {{user_logout}} ">
                <span>{{request.user}}</span>
                <div class="login-dropdown-content" id="logout-dropdown">
-                  <a href="{% url 'user'  %}?id_user={{user.id}}">Thông tin cá nhân</a>
+                  <a href="{% url 'user'  %}">Thông tin cá nhân</a>
                   <a style="text-decoration: none" href="{% url 'history' %}">LS</a>
                   <a href="{% url 'logout' %}">Đăng Xuất</a>
                </div>
@@ -168,6 +168,9 @@
    {% block sstatistics %}
    {% endblock sstatistics %}
    
+   {% block User %}
+   {% endblock User %}
+
    <footer id="footer">
       <div class="footer-follow-us">
          <p class="footer-follow-us-content">Kết nối với chúng tôi trên mạng xã hội:</p>

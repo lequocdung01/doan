@@ -665,14 +665,18 @@ def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request,username=username,password=password)
+        
+        user = authenticate(request, username=username, password=password)
+        
         if user is not None:
-            login(request,user)
+            login(request, user)
             return redirect('home')
         else:
-            messages.info(request,message='Tên Đăng Nhập Hoặc Mật Khẩu Không Đúng!')
-    context = {}
-    return render(request,'html/loginPage.html',context)
+            if not MyUser.objects.filter(username=username).exists():
+                messages.error(request, 'Tên đăng nhập không tồn tại!')
+            else:
+                messages.error(request, 'Mật khẩu không đúng!')
+    return render(request, 'html/loginPage.html')
 # trang dang xuat
 def logoutPage(request):
     logout(request)
@@ -700,5 +704,8 @@ def create_product(request):
 
 @login_required
 def user(request):
-    return render(request, 'html/User.html', {'user': request.user})
+    Customer = User.objects.all()
+    return render(request, 'html/User.html', {'Customer': Customer})
 
+
+    

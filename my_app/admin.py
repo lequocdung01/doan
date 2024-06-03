@@ -38,16 +38,18 @@ class ShippingAddressAdmin(admin.ModelAdmin):
 admin.site.register(ShippingAddress, ShippingAddressAdmin)
 
 class UserAdmin(BaseUserAdmin):
-    
-    
+    # The forms to add and change user instances
+    form = UserChangeForm
+    add_form = UserCreationForm
+
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ["id", "username","email", "date_of_birth", "gender","address", "phone", "firstname", "lastname", "is_admin"]
+    list_display = ["email", "username", "date_of_birth", "is_admin"]
     list_filter = ["is_admin"]
     fieldsets = [
-        (None, {"fields": ["username", "password", "email","gender"]}),
-        ("Personal info", {"fields": ["date_of_birth","address", "phone", "firstname", "lastname"]}),
+        (None, {"fields": ["email", "password"]}),
+        ("Personal info", {"fields": ["date_of_birth","username"]}),
         ("Permissions", {"fields": ["is_admin"]}),
     ]
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -57,16 +59,13 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ["wide"],
-                "fields": ["username", "password1", "password2", "email", "date_of_birth","gender", "address", "phone", "firstname", "lastname"],
+                "fields": ["email","username", "date_of_birth", "password1", "password2"],
             },
         ),
     ]
     search_fields = ["email"]
-    ordering = ["id"]
-
-    filter_horizontal = ()
-    list_filter = ()
-    fieldsets = ()
+    ordering = ["email"]
+    filter_horizontal = []
 
 
 # Now register the new UserAdmin...
