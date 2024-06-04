@@ -28,16 +28,17 @@ from collections import defaultdict
 # trang thong ke
 def sstatistics(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -45,6 +46,7 @@ def sstatistics(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
 
     # Lấy danh sách các tháng có đơn hàng
     orders = Order.objects.filter(complete=True).order_by('-date_order')
@@ -109,7 +111,9 @@ def sstatistics(request):
             'mobile': shipping_address.mobile if shipping_address else '',
         })
 
-    context = {
+    categories = Category.objects.filter(is_sub=False)
+    context.update({
+        'categories': categories,
         'orders': order_data,
         'monthly_stats': sorted(monthly_stats.items()),
         'cartItems': cartItems,
@@ -117,49 +121,45 @@ def sstatistics(request):
         'user_logout': user_logout,
         'user_staff': user_staff,
         'user': request.user,
-        'selected_month': selected_month
-    }
+        'selected_month': selected_month,
+        'product': product,
+        'cartItems': cartItems,
+        'user_login': user_login,
+        'user_logout': user_logout,
+        'user_staff': user_staff,
+    })
     return render(request, 'html/sstatistics.html', context)
 
 # trang lịch sử mua hàng
 @login_required
 def history(request):
-    customer = request.user
-    completed_orders = Order.objects.filter(customer=customer, complete=True)
-    
-    # Truy xuất tất cả các sản phẩm từ các đơn hàng đã hoàn thành
-    order_items = OrderItem.objects.filter(order__in=completed_orders).select_related('product')
-    
-    # Tạo danh sách các sản phẩm đã mua với các chi tiết cần thiết
-    purchased_items = []
-    for item in order_items:
-        shipping_address = ShippingAddress.objects.filter(order=item.order).first()
-        purchased_items.append({
-            'product': item.product,
-            'quantity': item.quantity,
-            'total_price': item.get_total,
-            'date_added': shipping_address.date_added if shipping_address else None,
-        })
-    
-    context = {
-        'purchased_items': purchased_items,
-    }
-    
-    return render(request, 'html/history.html', context)
-
-# trang chu
-def get_my_app(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
+        completed_orders = Order.objects.filter(customer=customer, complete=True)
+        
+        # Truy xuất tất cả các sản phẩm từ các đơn hàng đã hoàn thành
+        order_items = OrderItem.objects.filter(order__in=completed_orders).select_related('product')
+        
+        # Tạo danh sách các sản phẩm đã mua với các chi tiết cần thiết
+        purchased_items = []
+        for item in order_items:
+            shipping_address = ShippingAddress.objects.filter(order=item.order).first()
+            purchased_items.append({
+                'product': item.product,
+                'quantity': item.quantity,
+                'total_price': item.get_total,
+                'date_added': shipping_address.date_added if shipping_address else None,
+            })
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -167,7 +167,43 @@ def get_my_app(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
+
     
+    
+    context.update({
+        'product': product,
+        'cartItems': cartItems,
+        'user_login': user_login,
+        'user_logout': user_logout,
+        'user_staff': user_staff,
+        'purchased_items': purchased_items,
+    })
+    return render(request, 'html/history.html', context)
+
+# trang chu
+def get_my_app(request):
+    if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
+        user_login = "hidden"
+        user_logout = "show"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
+    else:
+        items = []
+        order = {'get_cart_item': 0, 'get_cart_total': 0}
+        cartItems = order['get_cart_item']
+        user_login = "show"
+        user_logout = "hidden"
+        user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
+
     product = Product.objects.all()
     page = request.GET.get('page')
     page = page or 1
@@ -175,21 +211,35 @@ def get_my_app(request):
     paged_products = paginator.get_page(page)
     page_obj = product.count()
     categories = Category.objects.filter(is_sub=False)
-    context = {'categories': categories,'product': product,'cartItems':cartItems,'user_login':user_login, 'user_logout':user_logout,'paged_products':paged_products,'page_obj':page_obj,'user_staff':user_staff, 'user':request.user}
-    return render(request,'html/home.html',context)
+
+    # Cập nhật context với các giá trị chung
+    context.update({
+        'categories': categories,
+        'product': product,
+        'cartItems': cartItems,
+        'user_login': user_login,
+        'user_logout': user_logout,
+        'paged_products': paged_products,
+        'page_obj': page_obj,
+        'user_staff': user_staff,
+    })
+
+    return render(request, 'html/home.html', context)
+
 # chi tiết sản phẩm
 def detail(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -197,6 +247,7 @@ def detail(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     prod_id = request.GET.get('id', '')
     product = Product.objects.get(ID=prod_id)
     
@@ -207,15 +258,19 @@ def detail(request):
     products = Product.objects.filter(ID=prod_id)
     categories = Category.objects.filter(is_sub=False)
     context = {
+        
+    }
+    context.update({
         'categories': categories,
-        'products': products,
+        'product': product,
+        'cartItems': cartItems,
         'user_login': user_login,
         'user_logout': user_logout,
-        'cartItems': cartItems,
         'user_staff': user_staff,
+        'products': products,
         'avg_rate': avg_rate,  # Truyền giá trị trung bình rate vào context
         'reviews': reviews,
-    }
+    })
     return render(request, 'html/detail.html', context)
 
 def review(request):
@@ -252,40 +307,17 @@ def review(request):
 # 
 def cart(request):
     if request.user.is_authenticated:
-        customer = request.user
-        order, created = Order.objects.get_or_create(customer = customer,complete = False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_item
-        user_login = "hidden"
-        user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
-    else:
-        items = []
-        order = {'get_cart_item':0,'get_cart_total':0}
-        cartItems = order['get_cart_item']
-        user_login = "show"
-        user_logout = "hidden"
-        user_staff = "hidden"
-    categories = Category.objects.filter(is_sub=False)
-    context={'items':items, 'order':order, 'user_login':user_login, 'user_logout':user_logout,"cartItems":cartItems,'user_staff':user_staff,'categories':categories}
-    return render(request, 'html/cart.html', context)
-
-#Thanh toan
-def delivery(request):
-    if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -293,8 +325,47 @@ def delivery(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     categories = Category.objects.filter(is_sub=False)
-    context = {'items': items, 'order': order, 'user_login':user_login, 'user_logout':user_logout,"cartItems":cartItems,'user_staff':user_staff,"categories":categories}
+    context.update ({
+        'items':items, 
+        'order':order, 
+        'user_login':user_login, 
+        'user_logout':user_logout,
+        "cartItems":cartItems,
+        'user_staff':user_staff,
+        'categories':categories,
+        'product': product,
+        'cartItems': cartItems,
+        'cartItems': cartItems,
+    })
+    
+    return render(request, 'html/cart.html', context)
+
+#Thanh toan
+def delivery(request):
+    if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
+        user_login = "hidden"
+        user_logout = "show"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
+    else:
+        items = []
+        order = {'get_cart_item': 0, 'get_cart_total': 0}
+        cartItems = order['get_cart_item']
+        user_login = "show"
+        user_logout = "hidden"
+        user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
+    categories = Category.objects.filter(is_sub=False)
+    context.update ({'items': items, 'order': order, 'user_login':user_login, 'user_logout':user_logout,"cartItems":cartItems,'user_staff':user_staff,"categories":categories})
     return render(request, 'html/delivery.html', context)
 
 @login_required
@@ -350,16 +421,17 @@ def updateItem(request):
 #Thanh toan
 def payment(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -367,8 +439,9 @@ def payment(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     categories = Category.objects.filter(is_sub=False)
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
+    context.update({'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories})
     return render(request, 'html/payment.html', context)
 
 # trang sản phẩm
@@ -376,16 +449,17 @@ def product(request):
     from django.db.models import Sum  # Import Sum for aggregation
     
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -393,6 +467,7 @@ def product(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     
     # Get sort option from query parameters
     sort_option = request.GET.get('sort', 'gia')
@@ -416,14 +491,14 @@ def product(request):
     
     categories = Category.objects.filter(is_sub=False)
     
-    context = {
+    context.update ({
         'categories': categories,
         'product': paged_products,
         'user_login': user_login,
         'user_logout': user_logout,
         'cartItems': cartItems,
         'user_staff': user_staff
-    }
+    })
     
     return render(request, 'html/product.html', context=context)
 
@@ -432,16 +507,17 @@ def product(request):
 # Tran san pham
 def category(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -449,6 +525,7 @@ def category(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     categories = Category.objects.filter(is_sub=False)
     
     #####
@@ -456,22 +533,23 @@ def category(request):
     if active_category:
         products = Product.objects.filter(category__slug = active_category)
     
-    context = {'categories': categories,'products':products,'active_category':active_category,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff}
+    context.update({'categories': categories,'products':products,'active_category':active_category,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff})
     return render(request,'html/category.html', context)
 
 # trang tìm kiếm
 def search(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -479,6 +557,7 @@ def search(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     categories = Category.objects.filter(is_sub=False)
     active_category = request.GET.get('category','')
     searched = None
@@ -487,23 +566,24 @@ def search(request):
         searched = request.POST["searched"]
         keys = Product.objects.filter(name__contains = searched)
 
-    context = {"searched":searched, "keys":keys, "categories": categories, 'active_category':active_category,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff }
+    context.update ({"searched":searched, "keys":keys, "categories": categories, 'active_category':active_category,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff })
     
     return render(request, 'html/search.html', context)
 
 # trang sự kiện
 def event(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -511,23 +591,25 @@ def event(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     product = Product.objects.all()
     categories = Category.objects.filter(is_sub=False)
-    context = {'product': product,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
+    context.update ({'product': product,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories})
     return render(request, 'html/event.html', context)
 # trang liên hệ
 def contactus(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -535,6 +617,7 @@ def contactus(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     success_message = ""
     error_message = ""
     
@@ -551,25 +634,53 @@ def contactus(request):
         )
         success_message = "Bạn đã gửi thành công"
     categories = Category.objects.filter(is_sub=False)
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories,'success_message': success_message, 'error_message': error_message}
+    context.update ({'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories,'success_message': success_message, 'error_message': error_message})
     return render(request, 'html/contactus.html', context)
 # trang đăng ký thành viên 
 def regestermember(request):
-    context = {}
+    if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
+        user_login = "hidden"
+        user_logout = "show"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
+    else:
+        items = []
+        order = {'get_cart_item': 0, 'get_cart_total': 0}
+        cartItems = order['get_cart_item']
+        user_login = "show"
+        user_logout = "hidden"
+        user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
+
+    context.update({
+        'product': product,
+        'cartItems': cartItems,
+        'user_login': user_login,
+        'user_logout': user_logout,
+        'user_staff': user_staff,
+    })
     return render(request, 'html/regestermember.html', context)
 # trang khuyến mãi
 def memberkhuyenmai(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -577,22 +688,24 @@ def memberkhuyenmai(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     categories = Category.objects.filter(is_sub=False)
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
+    context.update ({'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories})
     return render(request, 'html/memberkhuyenmai.html', context)
 # trang giới thiệu
 def introduce(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -600,22 +713,24 @@ def introduce(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     categories = Category.objects.filter(is_sub=False)
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
+    context.update ({'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories})
     return render(request, 'html/introduce.html', context)
 # trang tuyển dụng
 def TuyenDung(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -623,22 +738,24 @@ def TuyenDung(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     categories = Category.objects.filter(is_sub=False)
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
+    context.update ({'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories})
     return render(request, 'html/TuyenDung.html', context)
 # trang địa chỉ
 def location(request):
     if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
         user_login = "hidden"
         user_logout = "show"
-        if request.user.is_staff:
-            user_staff = "show"
-        else:
-            user_staff = "hidden"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
     else:
         items = []
         order = {'get_cart_item': 0, 'get_cart_total': 0}
@@ -646,8 +763,9 @@ def location(request):
         user_login = "show"
         user_logout = "hidden"
         user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
     categories = Category.objects.filter(is_sub=False)
-    context = {'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories}
+    context.update ({'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'user_staff':user_staff,'categories':categories})
     return render(request, 'html/location.html', context)
 # trang đăng ký
 def register(request):
@@ -672,7 +790,7 @@ def loginPage(request):
             login(request, user)
             return redirect('home')
         else:
-            if not MyUser.objects.filter(username=username).exists():
+            if not User.objects.filter(username=username).exists():
                 messages.error(request, 'Tên đăng nhập không tồn tại!')
             else:
                 messages.error(request, 'Mật khẩu không đúng!')
@@ -685,6 +803,7 @@ def logoutPage(request):
 
 def create_product(request):
     if request.user.is_staff:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -697,15 +816,24 @@ def create_product(request):
             if form.is_valid():
                 form.save()
         categories = Category.objects.filter(is_sub=False)
-        context = {"form":form,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'categories':categories}
+        context = {"form":form,'user_login':user_login, 'user_logout':user_logout,'cartItems':cartItems,'categories':categories, 'user_profile':user_profile}
         return render(request,'html/create_product.html',context)
     else:
         return redirect('home')
 
 @login_required
 def user(request):
-    Customer = User.objects.all()
-    return render(request, 'html/User.html', {'Customer': Customer})
+    user_profile = UserProfile.objects.get_or_create(user=request.user)
+    
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('user')
+    else:
+        form = UserProfileForm(instance=user_profile)
+    
+    return render(request, 'html/User.html', {'form': form, 'user': request.user})
 
 
     

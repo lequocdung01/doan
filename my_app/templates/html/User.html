@@ -6,63 +6,44 @@
   <div id="content">
     <h2>Thông tin người dùng</h2>
     <br />
-    {% for Customer in Customer %}
-    <form method="POST">
+
+    <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-group">
-        <label for="id_firtsname">First Name:</label><br />
-        <input
-          type="text"
-          id="id_firtsname"
-          name="firtsname"
-          class="form-control"
-        />
+        <label for="id_firstname">First Name:</label>
+        {{ form.firstname }}
       </div>
       <div class="form-group">
-        <label for="id_lastname">Last Name: {{Customer.first_name}}</label
-        ><br />
-        <input
-          type="text"
-          id="id_lastname"
-          name="lastname"
-          class="form-control"
-          value="{{user.id}}"
-        />
+        <label for="id_lastname">Last Name:</label>
+        {{ form.lastname }}
       </div>
       <div class="form-group">
-        <label for="id_date_of_birth">Date of Birth:</label><br />
-        <input
-          type="date"
-          id="id_date_of_birth"
-          name="date_of_birth"
-          required
-        />
+        <label for="id_address">Address:</label>
+        {{ form.address }}
       </div>
       <div class="form-group">
-        <label for="id_gender">Gender:</label><br />
-        <input type="radio" id="id_gender_male" name="gender" value="male" />
-        <label for="id_gender_male">Male</label>
-        <input
-          type="radio"
-          id="id_gender_female"
-          name="gender"
-          value="female"
-        />
-        <label for="id_gender_female">Female</label>
+        <label for="id_phone">Phone:</label>
+        {{ form.phone }}
       </div>
       <div class="form-group">
-        <label for="id_address">Address:</label><br />
-        <textarea name="address" id="id_address" class="form-control">
-        {{ Customer.address }}</textarea
-        >
+        <label for="id_birth_date">Birth Date:</label>
+        {{ form.birth_date }}
       </div>
       <div class="form-group">
-        <label for="id_phone">Phone:</label><br />
-        <input type="tel" id="id_phone" name="phone" class="form-control" />
+        <label for="id_profile_picture">Profile Picture:</label>
+        {{ form.profile_picture }}
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    {% endfor %}
+    {% if user.userprofile.profile_picture %}
+    <div>
+      <img
+        src="{{ user.userprofile.profile_picture.url }}"
+        alt="Profile Picture"
+        style="max-width: 200px"
+      />
+    </div>
+    {% endif %}
   </div>
 </body>
 {% endblock form %}
