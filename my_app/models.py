@@ -103,6 +103,16 @@ class CreateUserForm(UserCreationForm):
         fields = ['username','email','password1','password2']
 
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    firstname = models.TextField(blank=True)
+    lastname = models.TextField(blank=True)
+    address = models.TextField(blank=True)
+    phone = models.CharField(max_length=10, null=True, blank=True, validators=[validators.RegexValidator(r'^[0-9]*$', 'Phone number must be numeric')])
+    birth_date = models.DateField(null=True, blank=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
 
+    def __str__(self):
+        return self.user.username
 
 
