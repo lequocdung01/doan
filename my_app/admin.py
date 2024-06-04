@@ -36,3 +36,8 @@ class ShippingAddressAdmin(admin.ModelAdmin):
     list_display = ('id', 'User', 'order', 'name', 'address', 'city', 'state', 'mobile', 'date_added')
 
 admin.site.register(ShippingAddress, ShippingAddressAdmin)
+
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'firstname', 'lastname', 'address', 'phone', 'birth_date') 
+
+admin.site.register(UserProfile, UserProfileAdmin)
