@@ -62,8 +62,10 @@
                <span><a href="{% url 'login' %}"> <i>&nbsp;</i> Đăng nhập</a></span>
             </div>
             <div class="login" style = "visibility: {{user_logout}} ">
-               {% if user_profile %}
+               {% if user_profile and user_profile.profile_picture %}
                   <img src="{{ user_profile.profile_picture.url }}" class="profile-picture" alt="Profile Picture" class="profile-picture">
+               {% else %}
+                  <img src="static\images\logo\logodqb-02.png" class="profile-picture" alt="Default Profile Picture" class="profile-picture">
                {% endif %}
                <span>{{request.user}}</span>
                <div class="login-dropdown-content" id="logout-dropdown">

@@ -4,10 +4,19 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 from .models import UserProfile
 class ProductForm(forms.ModelForm):
-
     class Meta:
         model = Product
-        fields = ['ID','category','name','price','categy','sell','image','sale']
+        fields = ['ID', 'category', 'name', 'price', 'categy', 'sell', 'image', 'sale']
+        widgets = {
+            'ID': forms.NumberInput(attrs={'class': 'input'}),
+            'category': forms.Select(attrs={'class': 'input'}),
+            'name': forms.TextInput(attrs={'class': 'input'}),
+            'price': forms.NumberInput(attrs={'class': 'input'}),
+            'categy': forms.TextInput(attrs={'class': 'input'}),
+            'sell': forms.NumberInput(attrs={'class': 'input'}),
+            'image': forms.ClearableFileInput(attrs={'class': 'input'}),
+            'sale': forms.NumberInput(attrs={'class': 'input'}),
+        }
 
         
 class ContactForm(forms.Form):

@@ -1,92 +1,46 @@
-{% extends 'html/base.html' %}
-{% load static %}
-{% block form %}
+{% extends 'html/base.html' %} {% load static %} {% block form %}
 <head>
-   <link rel="stylesheet" href="{% static 'assets/DangKyTuyenDung.css' %}" />
+  <link rel="stylesheet" href="{% static 'assets/create.css' %}" />
 </head>
 <div id="content">
-        
   <div>
-      <div>
-          <h2>Thêm sản phẩm</h2>
-          <form method = "POST" action="" >
-            {% csrf_token %}
-              <table align="center" id="myfont" align="left">
-                  <tr>
-                      <td>
-                          
-                          <label for="id_ID">ID sản phẩm:</label>
-                          <input type="number" name="ID" required="" id="id_ID" class="input">
-                          
-                      </td>
-                  </tr>
-                  <tr>
-                    <td>
-                        <label for="id_category">Loại sản phẩm:</label>
-                        <select name="category" required="" id="id_category" multiple="" class="input">
-                          <option value="1">Đồ chơi</option>
-                        
-                          <option value="2">Mỹ phẩm</option>
-                        
-                          <option value="3">Khác</option>
-                        
-                          <option value="4">Thực phẩm</option>
-                        
-                          <option value="5">Đồ gia dụng</option>
-                        
-                          <option value="6">Quần Áo</option>
-                        
-                        </select>
-                    </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <label for="id_name">Tên sản phẩm:</label>
-                          <input type="text" name="name" maxlength="200" required="" id="id_name" class="input">
-                      </td>
-                      
-                  </tr>
-                  <tr>
-                      <td>
-                          <label for="id_price">Giá sản phẩm:</label>
-                          <input type="number" name="price" step="any" required="" id="id_price" class="input">
-                      </td>
-                  </tr>
-                  <tr>
-                    <td>
-                        <label for="id_sell">Loại sản phẩm:</label>
-                        <input type="text" name="categy" maxlength="200" required="" id="id_categy" class="input">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                        <label for="id_sell">Số lượng sản phẩm đã bán:</label>
-                        <input type="number" name="sell" required="" id="id_sell" class="input">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <label class="col-md-4 control-label" for="filebutton">Ảnh sản phẩm</label>
-                      <input type="file" name="image" accept="image/*" id="id_image">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                        <label for="id_sale">Giảm giá:</label>
-                        <input type="number" name="sale" required="" id="id_sale" class="input">
-                    </td>
-                  </tr>
-                  
-                  
-              </table> 
-              <div class="DangKy">
-                <button id="button" type="submit">
-                    Thêm sản phẩm
-                </button>
-              </div>
-          </form>
-      </div>
+    <div>
+      <h2>Thêm sản phẩm</h2>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center" id="myfont">
+          <tr>
+            <td>{{ form.ID.label_tag }} {{ form.ID }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.category.label_tag }} {{ form.category }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.name.label_tag }} {{ form.name }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.price.label_tag }} {{ form.price }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.categy.label_tag }} {{ form.categy }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.sell.label_tag }} {{ form.sell }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.image.label_tag }} {{ form.image }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.sale.label_tag }} {{ form.sale }}</td>
+          </tr>
+        </table>
+        <div class="DangKy">
+          <button id="button" type="submit" class="btn-primary">
+            Thêm sản phẩm
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-  
 </div>
 {% endblock form %}

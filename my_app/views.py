@@ -28,7 +28,7 @@ from collections import defaultdict
 # trang thong ke
 def sstatistics(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -134,7 +134,7 @@ def sstatistics(request):
 @login_required
 def history(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -184,7 +184,7 @@ def history(request):
 # trang chu
 def get_my_app(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -229,7 +229,7 @@ def get_my_app(request):
 # chi tiết sản phẩm
 def detail(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -307,7 +307,7 @@ def review(request):
 # 
 def cart(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -345,7 +345,7 @@ def cart(request):
 #Thanh toan
 def delivery(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -421,7 +421,7 @@ def updateItem(request):
 #Thanh toan
 def payment(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -449,7 +449,7 @@ def product(request):
     from django.db.models import Sum  # Import Sum for aggregation
     
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -507,7 +507,7 @@ def product(request):
 # Tran san pham
 def category(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -539,7 +539,7 @@ def category(request):
 # trang tìm kiếm
 def search(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -573,7 +573,7 @@ def search(request):
 # trang sự kiện
 def event(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -599,7 +599,7 @@ def event(request):
 # trang liên hệ
 def contactus(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -639,7 +639,7 @@ def contactus(request):
 # trang đăng ký thành viên 
 def regestermember(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -670,7 +670,7 @@ def regestermember(request):
 # trang khuyến mãi
 def memberkhuyenmai(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -695,7 +695,7 @@ def memberkhuyenmai(request):
 # trang giới thiệu
 def introduce(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -720,7 +720,7 @@ def introduce(request):
 # trang tuyển dụng
 def TuyenDung(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -745,7 +745,7 @@ def TuyenDung(request):
 # trang địa chỉ
 def location(request):
     if request.user.is_authenticated:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -803,13 +803,13 @@ def logoutPage(request):
 
 def create_product(request):
     if request.user.is_staff:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_item
-        user_login = "hidden"
-        user_logout = "show"
+        user_login = "show"
+        user_logout = "hidden"
         form = ProductForm()
         if request.method == "POST":
             form = ProductForm(request.POST)

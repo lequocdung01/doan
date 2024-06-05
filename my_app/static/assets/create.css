@@ -1,0 +1,47 @@
+
+/* content */
+#content {
+    position: relative;
+    top: 10rem;
+    width: 700px;
+    margin: auto;
+    line-height: 50px;
+    text-align: left;
+    margin-left: 400px;
+    margin-right: 400px;
+    font-size: 25px;
+    border: 1px solid rgb(33, 32, 32);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+}
+#content h2 {
+    color: rgb(237, 29, 29);
+    font-weight: 600;
+    text-transform:uppercase;
+    font-size: 30px;
+}
+#content form {
+    width: 600px;
+    padding-left: 50px;
+}
+.input {
+    width: 400px;
+    height: 30px;
+    display: block;
+    margin-bottom: 10px; /* Điều chỉnh khoảng cách giữa các phần tử */
+}
+#id_address {
+    width: 725px;
+    height: 150px;
+}
+.btn-primary {
+    width: 300px;
+    height: 70px;
+    text-align: center;
+    background-color: rgb(237, 102, 29);
+    color: white;
+    font-size: 20px;
+    margin-top: 30px;
+    border-radius: 28px;
+}
