@@ -804,7 +804,7 @@ def logoutPage(request):
 
 def create_product(request):
     if request.user.is_staff:
-        user_profile, created = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
