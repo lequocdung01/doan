@@ -803,7 +803,7 @@ def logoutPage(request):
 
 def create_product(request):
     if request.user.is_staff:
-        user_profile = UserProfile.objects.get(user=request.user)
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -823,6 +823,8 @@ def create_product(request):
 
 @login_required
 def user(request):
+    
+    user_profile = UserProfile.objects.get(user=request.user)
     
     user_profile = UserProfile.objects.get(user=request.user)
     
