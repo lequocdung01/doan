@@ -29,6 +29,7 @@ from collections import defaultdict
 def sstatistics(request):
     if request.user.is_authenticated:
         user_profile = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -803,7 +804,7 @@ def logoutPage(request):
 
 def create_product(request):
     if request.user.is_staff:
-        user_profile = UserProfile.objects.get(user=request.user)
+        user_profile, created = UserProfile.objects.get(user=request.user)
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
@@ -826,6 +827,8 @@ def user(request):
     
     user_profile = UserProfile.objects.get(user=request.user)
     
+    user_profile = UserProfile.objects.get(user=request.user)
+    
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
@@ -838,3 +841,57 @@ def user(request):
 
 
     
+def Product_Manager(request):
+    if request.user.is_authenticated:
+        user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+        customer = request.user
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_item
+        user_login = "hidden"
+        user_logout = "show"
+        user_staff = "show" if request.user.is_staff else "hidden"
+        context = {
+            'user_profile': user_profile,  # Chỉ thêm vào context khi người dùng đã đăng nhập
+        }
+        
+    else:
+        items = []
+        order = {'get_cart_item': 0, 'get_cart_total': 0}
+        cartItems = order['get_cart_item']
+        user_login = "show"
+        user_logout = "hidden"
+        user_staff = "hidden"
+        context = {}  # Không thêm user_profile vào context khi người dùng chưa đăng nhập
+
+    if request.method == 'POST' and 'delete_product' in request.POST:
+        product_id = request.POST.get('product_id')
+        product_to_delete = get_object_or_404(Product, pk=product_id)
+        product_to_delete.delete()
+        return redirect('management')
+
+    count_product = Product.objects.count()
+    product = Product.objects.all()
+    
+    context.update({
+        'product': product,
+        'cartItems': cartItems,
+        'user_login': user_login,
+        'user_logout': user_logout,
+        'user_staff': user_staff,
+        'count_product': count_product,
+    })
+    return render(request, 'html/Product_Management.html', context)
+
+
+def edit_product(request):
+    product_id = request.GET.get('id')
+    product = get_object_or_404(Product, ID=product_id)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('management')  # Redirect to the product management page or any other page
+    else:
+        form = ProductForm(instance=product)
+    return render(request, 'html/edit_product.html', {'form': form})

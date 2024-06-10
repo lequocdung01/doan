@@ -1,0 +1,46 @@
+{% extends 'html/base.html' %} {% load static %} {% block form %}
+<head>
+  <link rel="stylesheet" href="{% static 'assets/create.css' %}" />
+</head>
+<div id="content">
+  <div>
+    <div>
+      <h2>Sửa thông tin sản phẩm</h2>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center" id="myfont">
+          <tr>
+            <td>{{ form.ID.label_tag }} {{ form.ID }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.category.label_tag }} {{ form.category }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.name.label_tag }} {{ form.name }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.price.label_tag }} {{ form.price }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.categy.label_tag }} {{ form.categy }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.sell.label_tag }} {{ form.sell }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.image.label_tag }} {{ form.image }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.sale.label_tag }} {{ form.sale }}</td>
+          </tr>
+        </table>
+        <div class="DangKy">
+          <button id="button" type="submit" class="btn-primary">
+            Thêm sản phẩm
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock form %}

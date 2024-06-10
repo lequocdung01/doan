@@ -21,10 +21,12 @@ urlpatterns = [
     path('search/',views.search, name='search'),
     path('login/',views.loginPage, name='login'),
     path('logout/',views.logoutPage, name='logout'),
-    path('create/',views.create_product,name='create'),
+    path('management/create/',views.create_product,name='create'),
     path('user/',views.user,name='user'),
     path('review/', views.review, name='review'),
     path('history/',views.history,name='history'),
     path('checkout/',views.checkout,name='checkout'),
     path('sstatistics/',views.sstatistics,name='sstatistics'),
+    path('management/',views.Product_Manager,name='management'),
+    path('management/edit/',views.edit_product,name='edit'),
 ]

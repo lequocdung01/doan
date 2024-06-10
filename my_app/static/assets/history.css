@@ -60,3 +60,122 @@
     color: black;
     font-size: 16px;
 }
+
+.purchase-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.product-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.edit-button,
+.delete-button {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+    background-color: #e2e6ea;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: #fff;
+    border-color: #ff4d4d;
+}
+
+.delete-button:hover {
+    background-color: #ff1a1a;
+    border-color: #ff1a1a;
+}
+
+.add-product-button-container {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.add-product-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.add-product-button:hover {
+    background-color: #218838;
+}
+
+.purchase-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.product-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.edit-button,
+.delete-button {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+    background-color: #e2e6ea;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: #fff;
+    border-color: #ff4d4d;
+}
+
+.delete-button:hover {
+    background-color: #ff1a1a;
+    border-color: #ff1a1a;
+}
+
+.product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.product-details {
+    margin-left: 120px;
+}
+
+.product-name,
+.product-quantity,
+.product-price {
+    margin: 5px 0;
+}
