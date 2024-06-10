@@ -62,8 +62,10 @@
                <span><a href="{% url 'login' %}"> <i>&nbsp;</i> Đăng nhập</a></span>
             </div>
             <div class="login" style = "visibility: {{user_logout}} ">
-               {% if user_profile %}
+               {% if user_profile and user_profile.profile_picture %}
                   <img src="{{ user_profile.profile_picture.url }}" class="profile-picture" alt="Profile Picture" class="profile-picture">
+               {% else %}
+                  <img src="static\images\logo\logodqb-02.png" class="profile-picture" alt="Default Profile Picture" class="profile-picture">
                {% endif %}
                <span>{{request.user}}</span>
                <div class="login-dropdown-content" id="logout-dropdown">
@@ -107,7 +109,7 @@
                <a style="text-decoration: none" href="{% url 'location' %}" >HỆ THỐNG CỬA HÀNG</a>
             </div>
             <div class="dropdownmenu" style = "visibility:{{user_staff}}">
-               <a style="text-decoration: none" href="{% url 'create' %}" >THÊM SẢN PHẨM</a>
+               <a style="text-decoration: none" href="{% url 'create' %}" >QUẢN LÝ SẢN PHẨM</a>
             </div>
             <div class="dropdownmenu" style = "visibility:{{user_staff}}">
                <a style="text-decoration: none" href="{% url 'sstatistics' %}" >THỐNG KÊ</a>
@@ -173,6 +175,9 @@
    
    {% block User %}
    {% endblock User %}
+
+   {% block management %}
+   {% endblock management %}
 
    <footer id="footer">
       <div class="footer-follow-us">

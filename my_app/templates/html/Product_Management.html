@@ -1,0 +1,52 @@
+{% extends 'html/base.html' %} {% load static %} {% block history %}
+<head>
+  <link rel="stylesheet" href="{% static 'assets/history.css' %}" />
+  <script>
+    function confirmDelete() {
+      return confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?");
+    }
+  </script>
+</head>
+<body>
+  <div class="purchase-history-container">
+    <div class="add-product-button-container">
+      <a href="{% url 'create' %}" class="add-product-button">Thêm sản phẩm</a>
+    </div>
+    {% if count_product %}
+    <ul class="purchase-history-list">
+      {% for item in product %}
+      <li class="purchase-item">
+        <div class="product-actions">
+          <a href="{% url 'edit' %}?id={{item.ID}}" class="edit-button">Sửa</a>
+          <form
+            action=""
+            method="POST"
+            class="delete-form"
+            onsubmit="return confirmDelete();"
+          >
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ item.ID }}" />
+            <button type="submit" name="delete_product" class="delete-button">
+              Xóa
+            </button>
+          </form>
+        </div>
+        <img
+          src="{{ item.ImageURL }}"
+          alt="{{ item.name }}"
+          class="product-image"
+        />
+        <div class="product-details">
+          <p class="product-name">Sản phẩm: {{ item.name }}</p>
+          <p class="product-quantity">Loại sản phẩm: {{ item.categy }}</p>
+          <p class="product-price">Giá: {{ item.price }} VND</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-purchases">Bạn chưa mua sản phẩm nào.</p>
+    {% endif %}
+  </div>
+</body>
+{% endblock history %}
