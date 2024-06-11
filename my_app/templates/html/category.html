@@ -28,22 +28,23 @@
       </div>
       <div class="content_right_category_item_button_new">
         <button>
-          <a href="/project/html/my%20pham/category/Moi_Nhat.html">Mới Nhất</a>
+          <a href="{% url 'category' %}?category={{ active_category }}&sort=new">Mới Nhất</a>
         </button>
       </div>
       <div class="content_right_category_item_button_selling">
         <button>
-          <a href="/project/html/my%20pham/category/Ban_Chay.html">Bán Chạy</a>
+          <a href="{% url 'category' %}?category={{ active_category }}&sort=selling">Bán Chạy</a>
         </button>
       </div>
       <div class="content_right_category_item_button_price">
-        <form action="" method="get">
-          <select name="sort" id="select" onchange="this.form.submit()">
-            <option value="gia" selected="selected">Giá</option>
-            <option value="asc">Giá: từ thấp đến cao</option>
-            <option value="desc">Giá: từ cao đến thấp</option>
+        <form method="get" action="" >
+          <input type="hidden" name="category" value="{{ active_category }}">
+          <select name="sort" onchange="this.form.submit()" id="select">
+              <option value="gia" {% if sort_option == "gia" %}selected{% endif %}>Giá</option>
+              <option value="asc" {% if sort_option == "asc" %}selected{% endif %}>Giá: từ thấp đến cao</option>
+              <option value="desc" {% if sort_option == "desc" %}selected{% endif %}>Giá: từ cao đến thấp</option>
           </select>
-        </form>
+      </form>
       </div>
     </div>
 
@@ -52,7 +53,7 @@
       <div class="content_right_item">
         <div class="content_right_item_header">
           <img
-            src="{{ product.ImageURL }}"
+            src="{{product.ImageURL}}"
             alt=""
             class="content_right_item_header_img"
           />
@@ -71,15 +72,15 @@
           <div class="name">{{product.name}}</div>
           <div class="price">
             <del>{{product.price}}</del>
-            <span>₫3.599.000</span>
+            <span>{{product.price}}</span>
           </div>
           <div class="racting">
             <span>
               <i class="fa-solid fa-star"></i>
               <i class="fa-solid fa-star"></i>
               <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
               <i class="fa-solid fa-star-half-stroke"></i>
-              <i class="fa-regular fa-star"></i>
             </span>
             Đã bán {{product.sell}}
           </div>

@@ -337,11 +337,32 @@ def category(request):
     context = get_common_context(request)
     
     active_category = request.GET.get('category', '')
+    sort_option = request.GET.get('sort', 'gia')
+    
     if active_category:
         products = Product.objects.filter(category__slug=active_category)
-        context.update({'products': products, 'active_category': active_category})
-    
+        
+        if sort_option == 'asc':
+            products = products.order_by('price')
+        elif sort_option == 'desc':
+            products = products.order_by('-price')
+        elif sort_option == 'new':
+            products = products.order_by('-ID')
+        elif sort_option == 'selling':
+            products = products.annotate(total_sold=Sum('orderitem__quantity')).order_by('-total_sold')
+
+        page = request.GET.get('page', 1)
+        paginator = Paginator(products, 10)
+        paged_products = paginator.get_page(page)
+
+        context.update({
+            'products': paged_products,
+            'active_category': active_category,
+            'sort_option': sort_option
+        })
+
     return render(request, 'html/category.html', context)
+
 
 
 # trang tìm kiếm
