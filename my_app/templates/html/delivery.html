@@ -1,89 +1,155 @@
-{% extends 'html/base.html' %}
-{% load static %}
-{% block delivery_content %}
+{% extends 'html/base.html' %} {% load static %} {% block delivery_content %}
 <head>
-    <link rel="stylesheet" href="{% static 'assets/delivery.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/delivery.css' %}" />
 </head>
 <!---delivery -->
 <section class="delivery-cart">
-    <div class="container">
-        <div class="delivery-top-wrap">
-            <div class="delivery-top">
-                <div class="delivery-top-delivery delivery-top-item">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-                <div class="delivery-top-adress delivery-top-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="delivery-top-payment delivery-top-item">
-                    <i class="fas fa-money-check-alt"></i>
-                </div>
-            </div>
+  <div class="container">
+    <div class="delivery-top-wrap">
+      <div class="delivery-top">
+        <div class="delivery-top-delivery delivery-top-item">
+          <i class="fas fa-shopping-cart"></i>
         </div>
-    </div>
-    <div class="container">
-        <div class="delivery-content row">
-            <div class="delivery-content-left">
-                <form action="{% url 'checkout' %}" method="POST">
-                    {% csrf_token %}
-                    <p>Vui lòng chọn địa chỉ giao hàng</p>
-                    <div class="delivery-content-left-input-top row">
-                        <div class="delivery-content-left-input-top-item">
-                            <label for="name">Họ tên<span style="color:red">*</span></label>
-                            <input type="text" name="name" id="name">
-                        </div>
-                        <div class="delivery-content-left-input-top-item">
-                            <label for="mobile">Điện thoại<span style="color:red">*</span></label>
-                            <input type="text" name="mobile" id="mobile">
-                        </div>
-                        <div class="delivery-content-left-input-top-item">
-                            <label for="city">Tỉnh/tp<span style="color:red">*</span></label>
-                            <input type="text" name="city" id="city">
-                        </div>
-                    </div>
-                    <div class="delivery-content-left-input-bottom">
-                        <label for="address">Địa chỉ<span style="color:red">*</span></label>
-                        <input type="text" name="address" id="address">
-                    </div>
-                    <div class="delivery-content-left-button row">
-                        <a href="javascript:history.back()"><span>&#171;</span><p>Quay lại giỏ hàng</p></a>
-                        <button type="submit" style="font-weight: bold;">THANH TOÁN VÀ GIAO HÀNG</button>
-                    </div>
-                </form>
-                
-            </div>
-            <div class="delivery-content-right">
-                <table>
-                    <tr>
-                        <th>Tên sản phẩm</th>
-                        <th>Giảm giá</th>
-                        <th>Số lượng</th>
-                        <th>Thành tiền</th>
-                    </tr>
-                    {% for item in items %}
-                    <tr>
-                        <td>{{item.product.name}}</td>
-                        <td>{{item.product.sale}}%</td>
-                        <td>1</td>
-                        <td><p>{{item.product.price}}<sup>đ</sup></p></td>
-                    </tr>
-                    {% endfor %}
-                    <tr>
-                        <td style="font-weight: bold;" colspan="2">Tổng</td>
-                        <td>{{order.get_cart_item}}</td>
-                        <td style="font-weight: bold;"><p>{{order.get_cart_total}}<sup>đ</sup></p></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold;" colspan="3">Thuế VAT</td>
-                        <td style="font-weight: bold;"><p>60.000<sup>đ</sup></p></td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight: bold;" colspan="3">Tổng tiền hàng</td>
-                        <td style="font-weight: bold;"><p>790.000<sup>đ</sup></p></td>
-                    </tr>
-                </table>
-            </div>
+        <div class="delivery-top-adress delivery-top-item">
+          <i class="fas fa-map-marker-alt"></i>
         </div>
+        <div class="delivery-top-payment delivery-top-item">
+          <i class="fas fa-money-check-alt"></i>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="container">
+    <div class="delivery-content row">
+      <div class="delivery-content-left">
+        <form id="deliveryForm" action="{% url 'checkout' %}" method="POST">
+          {% csrf_token %}
+          <p>Vui lòng chọn địa chỉ giao hàng</p>
+          <div class="delivery-content-left-input-top row">
+            <div class="delivery-content-left-input-top-item">
+              <label for="name">Họ tên<span style="color: red">*</span></label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value="{{user_profile.lastname}} {{user_profile.firstname}}"
+              />
+            </div>
+            <div class="delivery-content-left-input-top-item">
+              <label for="mobile"
+                >Điện thoại<span style="color: red">*</span></label
+              >
+              <input
+                type="text"
+                name="mobile"
+                id="mobile"
+                value="{{user_profile.phone}}"
+              />
+            </div>
+            <div class="delivery-content-left-input-top-item">
+              <label for="city">Tỉnh/tp<span style="color: red">*</span></label>
+              <input type="text" name="city" id="city" />
+            </div>
+          </div>
+          <div class="delivery-content-left-input-bottom">
+            <label for="address"
+              >Địa chỉ<span style="color: red">*</span></label
+            >
+            <input
+              type="text"
+              name="address"
+              id="address"
+              value="{{user_profile.address}}"
+            />
+          </div>
+          <div class="delivery-content-left-button row">
+            <a href="javascript:history.back()"
+              ><span>&#171;</span>
+              <p>Quay lại giỏ hàng</p></a
+            >
+            <button type="submit" style="font-weight: bold">
+              THANH TOÁN VÀ GIAO HÀNG
+            </button>
+          </div>
+        </form>
+        <div id="successMessage" style="display: none">
+          <h1>Thanh toán thành công!</h1>
+          <p>Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đang được xử lý.</p>
+          <a href="{% url 'home' %}">Quay lại trang chủ</a><br />
+        </div>
+      </div>
+      <div class="delivery-content-right">
+        <table>
+          <tr>
+            <th>Tên sản phẩm</th>
+            <th>Giảm giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+          </tr>
+          {% for item in items %}
+          <tr>
+            <td>{{item.product.name}}</td>
+            <td>{{item.product.sale}}%</td>
+            <td>{{item.quantity}}</td>
+            <td>
+              <p>{{item.product.price}}<sup>đ</sup></p>
+            </td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td style="font-weight: bold" colspan="2">Tổng</td>
+            <td>{{order.get_cart_item}}</td>
+            <td style="font-weight: bold">
+              <p>{{order.get_cart_total}}<sup>đ</sup></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold" colspan="3">Thuế VAT</td>
+            <td style="font-weight: bold">
+              <p>60.000<sup>đ</sup></p>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold" colspan="3">Tổng tiền hàng</td>
+            <td style="font-weight: bold">
+              <p>790.000<sup>đ</sup></p>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </section>
+
+<script>
+  document
+    .getElementById("deliveryForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault(); // Prevent the form from submitting the traditional way
+
+      const formData = new FormData(this); // Create a FormData object from the form
+
+      fetch(this.action, {
+        method: this.method,
+        body: formData,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            document.getElementById("deliveryForm").style.display = "none";
+            document.getElementById("successMessage").style.display = "block";
+          } else {
+            alert("Có lỗi xảy ra khi thanh toán. Vui lòng thử lại.");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Có lỗi xảy ra khi thanh toán. Vui lòng thử lại.");
+        });
+    });
+</script>
+
 {% endblock delivery_content %}
