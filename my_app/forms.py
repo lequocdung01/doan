@@ -9,7 +9,7 @@ class ProductForm(forms.ModelForm):
         fields = ['ID', 'category', 'name', 'price', 'categy', 'sell', 'image', 'sale']
         widgets = {
             'ID': forms.NumberInput(attrs={'class': 'input'}),
-            'category': forms.Select(attrs={'class': 'input'}),
+            'category': forms.SelectMultiple(attrs={'class': 'input'}),
             'name': forms.TextInput(attrs={'class': 'input'}),
             'price': forms.NumberInput(attrs={'class': 'input'}),
             'categy': forms.TextInput(attrs={'class': 'input'}),
