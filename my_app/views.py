@@ -539,6 +539,7 @@ def Product_Manager(request):
 
 # trang sua thong tin san pham
 def edit_product(request):
+    context = get_common_context(request)
     product_id = request.GET.get('id')
     product = get_object_or_404(Product, ID=product_id)
     if request.method == 'POST':
@@ -548,4 +549,8 @@ def edit_product(request):
             return redirect('management')  # Redirect to the product management page or any other page
     else:
         form = ProductForm(instance=product)
-    return render(request, 'html/edit_product.html', {'form': form})
+
+    context.update({
+        'form': form,
+    })
+    return render(request, 'html/edit_product.html', context)
